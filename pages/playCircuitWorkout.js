@@ -1,19 +1,21 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
-import { Dimensions, SafeAreaView, StyleSheet, TouchableOpacity, View } from "react-native";
-import { selectDraftWorkoutById } from "../../features/creator/draftWorkoutsSlice";
-import VideoLoadingIndicator from "../../components/modals/VideoLoadingIndicator";
-import WIntervalModal from "../../components/modals/workouts/WIntervalModal";
-import WPauseModal from "../../components/modals/workouts/WPauseModal";
-import WorkoutCompletedModal from "../../components/modals/workouts/WorkoutCompletedModal";
-import workoutsConstants from "../../utils/workouts-utils/workoutsConstants";
+import { Dimensions, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native-web";
+import {useSelector} from "react-redux";
+import VideoLoadingIndicator from "../src/components/modals/VideoLoadingIndicator";
+import WIntervalModal from "../src/components/modals/workout/IntervalModal";
+import WPauseModal from "../src/components/modals/workout/PauseModal";
+import WorkoutCompletedModal from "../src/components/modals/workout/WorkoutCompletedModal";
+import workoutsConstants from "../src/utils/workout/workoutsConstants";
+import {Video} from "expo-av";
+import {selectWorkout} from "../src/features/CreatorProfileSlice";
 
 const REPS = "Reps";
 const SECS = "Secs";
 
 const PlayCircuitWorkout = props => {
 
-    const workoutFromStore = useSelector(state => selectDraftWorkoutById(state, props.route.params.payload.id));
+    const workoutFromStore = useSelector(selectWorkout)
 
     const [workout, setWorkout] = useState(null);
 
@@ -25,7 +27,7 @@ const PlayCircuitWorkout = props => {
 
     const [exerciseIndex, setExerciseIndex] = useState(0);
 
-    const [showIntervalModal, setShowIntervalModal] = useState('PLAY');
+    const [showIntervalModal, setShowIntervalModal] = useState(true);
 
     const [intervalModalDescription, setIntervalModalDescription] = useState("Workout Starting");
 
@@ -41,8 +43,8 @@ const PlayCircuitWorkout = props => {
      * Load Workout from either Store or from navigation
      */
     useEffect(() => {
-        const workout = workoutFromStore ? workoutFromStore : props.route.params.payload.workout;
-        loadWorkout(workout);
+        loadWorkout(workoutFromStore);
+        setIsLoading(false)
     }, []);
 
     /**
@@ -50,6 +52,7 @@ const PlayCircuitWorkout = props => {
      * @param workout
      */
     const loadWorkout = (workout) => {
+        console.log(workout)
         let rounds = new Array(workout.rounds);
         for (let i = 0; i < rounds.length; i++) {
             rounds[i] = Array.from(workout.workoutFits.items).sort((a, b) => a.index - b.index);
@@ -91,7 +94,7 @@ const PlayCircuitWorkout = props => {
         const nextExerciseIndex = exerciseIndex + 1;
 
         if(!isPlayMode()) {
-            if (nextExerciseIndex < props.route.params.payload.workout.workoutFits.items.length) {
+            if (nextExerciseIndex < workoutFromStore.workoutFits.items.length) {
                 setExerciseIndex(nextExerciseIndex);
                 setExerciseDuration(getWorkoutFit().repsOrTimeValue);
             }
@@ -157,7 +160,7 @@ const PlayCircuitWorkout = props => {
      * Check if workout is in play mode
      * @returns {boolean}
      */
-    const isPlayMode = () => props.route.params.payload.mode === workoutsConstants.playMode.PLAY
+    const isPlayMode = () => true
 
     if (!workout) {
         return <View />;
@@ -170,13 +173,6 @@ const PlayCircuitWorkout = props => {
         if(isPlayMode()) {
             pauseWorkout();
         }
-        props.navigation
-            .navigate(navigationConstants.navigation.screens.FITS_PREVIEW_SCREEN, {
-                payload: {
-                    fit: getWorkoutFit().fit,
-                    mode: "PREVIEW",
-                },
-            });
     };
 
     /**
@@ -194,42 +190,43 @@ const PlayCircuitWorkout = props => {
                         uri: "https://" + getWorkoutFit().fit.videoUrls[0],
                     }}
                     resizeMode="contain"
-                    muted={true}
-                    repeat={true}
+                    shouldPlay={true}
+                    isLooping={true}
+                    isMuted={true}
                     onLoad={() => setIsLoading(false)}
                 />
                 <View style={styles.navBarStyle}>
                     <TouchableOpacity style={styles.btnStyle} onPress={navigateBack}>
-                        <Entypo name="cross" size={24} color="#fafafa" />
+                        {/*<Entypo name="cross" size={24} color="#fafafa" />*/}
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btnStyle} onPress={navigateToFitPreview}>
-                        <Entypo name="info" size={20} color="white" />
+                        {/*<Entypo name="info" size={20} color="white" />*/}
                     </TouchableOpacity>
                 </View>
             </View>
             {!paused ? (
                 <View style={styles.controlBtnsContainer}>
                     <TouchableOpacity onPress={seekBackward}>
-                        <Title>Prev</Title>
+                        <Text>Prev</Text>
                     </TouchableOpacity>
                     {isPlayMode() ?
                         <TouchableOpacity style={styles.pauseBtn} onPress={pauseWorkout}>
-                            <MaterialCommunityIcons
-                                name="pause"
-                                size={28}
-                                color="#282828"
-                            />
+                            {/*<Entypo*/}
+                            {/*    name="controller-pause"*/}
+                            {/*    size={28}*/}
+                            {/*    color="#282828"*/}
+                            {/*/>*/}
                         </TouchableOpacity> : <View style={styles.noPauseBtn}/>}
                     <TouchableOpacity onPress={seekForward}>
-                        <Title>Next</Title>
+                        <Text>Next</Text>
                     </TouchableOpacity>
                 </View>
             ) : null}
             <View style={styles.infoContainer}>
-                <Title style={styles.workoutFitTitle}>{getWorkoutFit().fit.title}</Title>
-                {getWorkoutFit().repsOrTime === SECS && <Title>{exerciseDuration / 1000}s</Title>}
-                {getWorkoutFit().repsOrTime === REPS && <Title>{getWorkoutFit().repsOrTimeValue} Reps</Title>}
-                {isPlayMode() && <Title style={styles.fontSmall}>Round {roundsIndex + 1} of {workout.rounds}</Title>}
+                <Text style={styles.workoutFitTitle}>{getWorkoutFit().fit.title}</Text>
+                {getWorkoutFit().repsOrTime === SECS && <Text>{exerciseDuration / 1000}s</Text>}
+                {getWorkoutFit().repsOrTime === REPS && <Text>{getWorkoutFit().repsOrTimeValue} Reps</Text>}
+                {isPlayMode() && <Text style={styles.fontSmall}>Round {roundsIndex + 1} of {workout.rounds}</Text>}
             </View>
             {paused ?
                 <WPauseModal
@@ -244,8 +241,7 @@ const PlayCircuitWorkout = props => {
                     onFinish={() => setShowIntervalModal(false)} /> : null}
             {showWorkoutCompletedModal ?
                 <WorkoutCompletedModal
-                    navigateToWorkoutPreview={navigateBack}
-                    startTime={props.route.params.payload.startTime}/> : null}
+                    navigateToWorkoutPreview={navigateBack}/> : null}
         </SafeAreaView>
     );
 };
@@ -325,4 +321,4 @@ const styles = StyleSheet.create({
         fontSize: 15,
     }
 });
-export default PlayCircuitWorkoutScreen;
+export default PlayCircuitWorkout;

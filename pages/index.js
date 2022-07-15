@@ -1,7 +1,8 @@
 // @generated: @expo/next-adapter@2.1.52
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Video, AVPlaybackStatus } from 'expo-av';
+import { StyleSheet, Text, View } from 'react-native-web';
+import { Video } from 'expo-av';
+
 
 export default function App() {
   return (
