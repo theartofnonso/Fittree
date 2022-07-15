@@ -2,7 +2,10 @@
 // Learn more: https://docs.expo.io/guides/using-nextjs/
 
 const { withExpo } = require('@expo/next-adapter');
+const withFonts = require('next-fonts');
 
-module.exports = withExpo({
-  projectRoot: __dirname,
-});
+module.exports = withExpo(
+  withFonts({
+    projectRoot: __dirname
+  })
+);

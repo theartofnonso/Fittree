@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
 import {Dimensions, StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
+import Entypo from "react-native-vector-icons/Entypo";
 
 const IntervalModal = props => {
 
@@ -24,7 +25,7 @@ const IntervalModal = props => {
         {props.description} in {intervalTime / 1000}s
       </Text>
       <TouchableOpacity onPress={props.close} style={styles.btnStyle}>
-        {/*<Entypo name="cross" size={40} color="#fafafa" />*/}
+        <Entypo name="cross" size={40} color="#fafafa" />
       </TouchableOpacity>
     </View>
   );

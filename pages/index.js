@@ -2,6 +2,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native-web';
 import { Video } from 'expo-av';
+import {Entypo} from "@expo/vector-icons";
 
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
           shouldPlay={true}
           isMuted={true}
       />
+        <Entypo name="chevron-left" size={24} color="#282828" />
     </View>
   );
 }

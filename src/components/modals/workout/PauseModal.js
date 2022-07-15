@@ -1,16 +1,17 @@
 /* eslint-disable */
 import React from "react";
 import { Dimensions, StyleSheet, TouchableOpacity, View } from "react-native-web";
+import Entypo from "react-native-vector-icons/Entypo";
 
 const PauseModal = props => {
 
   return (
     <View style={styles.backdropStyle}>
       <TouchableOpacity onPress={props.play}>
-        {/*<Entypo name="controller-play" size={50} color="white" />*/}
+        <Entypo name="controller-play" size={50} color="white" />
       </TouchableOpacity>
       <TouchableOpacity onPress={props.close} style={styles.btnStyle}>
-        {/*<Entypo name="cross" size={40} color="#fafafa" />*/}
+        <Entypo name="cross" size={40} color="#fafafa" />
       </TouchableOpacity>
     </View>
   );

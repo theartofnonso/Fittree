@@ -9,6 +9,7 @@ import WorkoutCompletedModal from "../src/components/modals/workout/WorkoutCompl
 import workoutsConstants from "../src/utils/workout/workoutsConstants";
 import {Video} from "expo-av";
 import {selectWorkout} from "../src/features/CreatorProfileSlice";
+import Entypo from "react-native-vector-icons/Entypo";
 
 const REPS = "Reps";
 const SECS = "Secs";
@@ -197,10 +198,10 @@ const PlayCircuitWorkout = props => {
                 />
                 <View style={styles.navBarStyle}>
                     <TouchableOpacity style={styles.btnStyle} onPress={navigateBack}>
-                        {/*<Entypo name="cross" size={24} color="#fafafa" />*/}
+                        <Entypo name="cross" size={24} color="#fafafa" />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btnStyle} onPress={navigateToFitPreview}>
-                        {/*<Entypo name="info" size={20} color="white" />*/}
+                        <Entypo name="info" size={20} color="white" />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -211,11 +212,11 @@ const PlayCircuitWorkout = props => {
                     </TouchableOpacity>
                     {isPlayMode() ?
                         <TouchableOpacity style={styles.pauseBtn} onPress={pauseWorkout}>
-                            {/*<Entypo*/}
-                            {/*    name="controller-pause"*/}
-                            {/*    size={28}*/}
-                            {/*    color="#282828"*/}
-                            {/*/>*/}
+                            <Entypo
+                                name="controller-paus"
+                                size={28}
+                                color="#282828"
+                            />
                         </TouchableOpacity> : <View style={styles.noPauseBtn}/>}
                     <TouchableOpacity onPress={seekForward}>
                         <Text>Next</Text>
