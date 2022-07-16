@@ -1,7 +1,7 @@
 /* eslint-disable */
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-//import {API, graphqlOperation} from "aws-amplify";
-//import * as queries from "../graphql/queries";
+import {API, graphqlOperation} from "aws-amplify";
+import * as queries from "../graphql/queries";
 
 const initialState = {
     profile: null,
@@ -16,32 +16,34 @@ const creatorProfileSlice = createSlice({
             state.currentWorkout = action.payload;
         },
     },
-    // extraReducers: builder => {
-    //     builder
-    //         .addCase(fetchCreatorProfile.fulfilled, (state, action) => {
-    //             state.profile = action.payload;
-    //         });
-    // },
+    extraReducers: builder => {
+        builder
+            .addCase(fetchCreatorProfile.fulfilled, (state, action) => {
+                state.profile = action.payload;
+            });
+    },
 });
 
 /**
  * Get the creator's data
  * @type {AsyncThunk<unknown, void, {}>}
  */
-// export const fetchCreatorProfile = createAsyncThunk("creatorProfile/get", async payload => {
-//     const {username} = payload;
-//     const response = await API.graphql(graphqlOperation(queries.listCreators, {
-//                 filter: {
-//                     preferred_username: {
-//                         eq: username.trim(),
-//                     },
-//                 },
-//             },
-//         ),
-//     )
-//     const creators = response.data.listCreators.items
-//     return creators.length > 0 ? creators[0] : null
-// });
+export const fetchCreatorProfile = createAsyncThunk("creatorProfile/get", async payload => {
+    const {username} = payload;
+    console.log(username)
+    const response = await API.graphql(graphqlOperation(queries.listCreators, {
+                filter: {
+                    preferred_username: {
+                        eq: username.trim(),
+                    },
+                },
+            },
+        ),
+    ).catch(err => console.log(err))
+    console.log(response)
+    const creators = response.data.listCreators.items
+    return creators.length > 0 ? creators[0] : null
+});
 
 export const selectCreator = state => state.creatorProfile.profile;
 

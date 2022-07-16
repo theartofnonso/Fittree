@@ -69,11 +69,11 @@ const CreatorProfile = () => {
                         </View>
                     </View>
 
-                    {workouts.length > 0 ?
+                    {profile.liveWorkouts.items.length > 0 ?
                         <FlatList
                             showsVerticalScrollIndicator={false}
                             keyExtractor={workout => workout.id}
-                            data={workouts}
+                            data={profile.liveWorkouts.items}
                             renderItem={data => {
                                 return (
                                     <TouchableOpacity activeOpacity={0.8}>

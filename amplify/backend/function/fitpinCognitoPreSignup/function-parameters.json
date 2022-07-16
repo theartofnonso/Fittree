@@ -1,0 +1,17 @@
+{
+  "trigger": true,
+  "modules": [
+    "custom"
+  ],
+  "parentResource": "fitpinCognito",
+  "functionName": "fitpinCognitoPreSignup",
+  "resourceName": "fitpinCognitoPreSignup",
+  "parentStack": "auth",
+  "triggerEnvs": [],
+  "triggerDir": "/Users/nonsobiose/.npm-global/lib/node_modules/@aws-amplify/cli/node_modules/@aws-amplify/amplify-category-auth/provider-utils/awscloudformation/triggers/PreSignup",
+  "triggerTemplate": "PreSignup.json.ejs",
+  "triggerEventPath": "PreSignup.event.json",
+  "roleName": "fitpinCognitoPreSignup",
+  "skipEdit": true,
+  "enableCors": false
+}

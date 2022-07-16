@@ -1,0 +1,14 @@
+{
+  "resourceName": "fitpinS3",
+  "policyUUID": "0b095ce2",
+  "bucketName": "fitpincreators",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

@@ -1,8 +1,6 @@
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import {Caption, Headline} from 'react-native-paper';
-
+import {Image, StyleSheet, Text, View} from 'react-native-web';
+//import LinearGradient from "react-native-linear-gradient";
 const WorkoutCard = props => {
   return (
     <View style={styles.card}>
@@ -10,41 +8,40 @@ const WorkoutCard = props => {
         style={styles.thumbnail}
         source={{
           uri: 'https://' + props.workout.thumbnailUrl,
-          cache: 'force-cache',
         }}
       />
-      <LinearGradient
-        colors={['transparent', '#000000']}
-        style={styles.overlay}
-      />
+      {/*<LinearGradient*/}
+      {/*  colors={['transparent', '#000000']}*/}
+      {/*  style={styles.overlay}*/}
+      {/*/>*/}
       <View style={styles.textContainer}>
-        <Headline style={[styles.text, styles.textBig]}>
+        <Text style={[styles.text, styles.textBig]}>
           {props.workout.title}
-        </Headline>
-        <Caption style={[styles.text, styles.intensityLevel]}>
+        </Text>
+        <Text style={[styles.text, styles.intensityLevel]}>
           {props.workout.intensityLevel}
-        </Caption>
+        </Text>
         <View style={{flexDirection: 'row'}}>
           {props.workout.equipments.length > 0 ? (
-            <Caption style={styles.text}>
+            <Text style={styles.text}>
               {props.workout.equipments.slice(0, 3).join(' ')}
-            </Caption>
+            </Text>
           ) : null}
           {props.workout.equipments.length > 3 ? (
-            <Caption style={styles.text}>{'. . .'}</Caption>
+            <Text style={styles.text}>{'. . .'}</Text>
           ) : null}
         </View>
         <View style={styles.bottomCardSection}>
           <View style={styles.chipsContainer}>
             {props.workout.bodyParts.slice(0, 3).map((bodyPart, index) => {
               return (
-                <Caption key={index} style={styles.chipBtnText}>
+                <Text key={index} style={styles.chipBtnText}>
                   {bodyPart}
-                </Caption>
+                </Text>
               );
             })}
             {props.workout.bodyParts.length > 3 ? (
-              <Caption style={styles.text}>{'. . .'}</Caption>
+              <Text style={styles.text}>{'. . .'}</Text>
             ) : null}
           </View>
         </View>

@@ -1,0 +1,17 @@
+{
+  "trigger": true,
+  "modules": [
+    "boilerplate-verify"
+  ],
+  "parentResource": "fitpinCognito",
+  "functionName": "fitpinCognitoVerifyAuthChallengeResponse",
+  "resourceName": "fitpinCognitoVerifyAuthChallengeResponse",
+  "parentStack": "auth",
+  "triggerEnvs": [],
+  "triggerDir": "/Users/nonsobiose/.npm-global/lib/node_modules/@aws-amplify/cli/node_modules/@aws-amplify/amplify-category-auth/provider-utils/awscloudformation/triggers/VerifyAuthChallengeResponse",
+  "triggerTemplate": "VerifyAuthChallengeResponse.json.ejs",
+  "triggerEventPath": "VerifyAuthChallengeResponse.event.json",
+  "roleName": "fitpinCognitoVerifyAuthChallengeResponse",
+  "skipEdit": true,
+  "enableCors": false
+}
