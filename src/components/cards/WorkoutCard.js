@@ -1,12 +1,12 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native-web';
 //import LinearGradient from "react-native-linear-gradient";
-const WorkoutCard = props => {
+const WorkoutCard = ({workout}) => {
   return (
     <View style={styles.card}>
       <img
         src={
-        'https://' + props.workout.thumbnailUrl
+        'https://' + workout.thumbnailUrl
         }
        alt='Hello'/>
       {/*<LinearGradient*/}
@@ -15,31 +15,31 @@ const WorkoutCard = props => {
       {/*/>*/}
       <View style={styles.textContainer}>
         <Text style={[styles.text, styles.textBig]}>
-          {props.workout.title}
+          {workout.title}
         </Text>
         <Text style={[styles.text, styles.intensityLevel]}>
-          {props.workout.intensityLevel}
+          {workout.intensityLevel}
         </Text>
         <View style={{flexDirection: 'row'}}>
-          {props.workout.equipments.length > 0 ? (
+          {workout.equipments.length > 0 ? (
             <Text style={styles.text}>
-              {props.workout.equipments.slice(0, 3).join(' ')}
+              {workout.equipments.slice(0, 3).join(' ')}
             </Text>
           ) : null}
-          {props.workout.equipments.length > 3 ? (
+          {workout.equipments.length > 3 ? (
             <Text style={styles.text}>{'. . .'}</Text>
           ) : null}
         </View>
         <View style={styles.bottomCardSection}>
           <View style={styles.chipsContainer}>
-            {props.workout.bodyParts.slice(0, 3).map((bodyPart, index) => {
+            {workout.bodyParts.slice(0, 3).map((bodyPart, index) => {
               return (
                 <Text key={index} style={styles.chipBtnText}>
                   {bodyPart}
                 </Text>
               );
             })}
-            {props.workout.bodyParts.length > 3 ? (
+            {workout.bodyParts.length > 3 ? (
               <Text style={styles.text}>{'. . .'}</Text>
             ) : null}
           </View>

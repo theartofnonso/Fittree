@@ -79,15 +79,15 @@ const CreatorProfile = () => {
                         </View>
                     </View>
 
-                    {profile.liveWorkouts.items.length > 0 ?
+                    {profile.workouts.items.length > 0 ?
                         <FlatList
                             showsVerticalScrollIndicator={false}
                             keyExtractor={workout => workout.id}
-                            data={profile.liveWorkouts.items}
+                            data={profile.workouts.items}
                             renderItem={data => {
                                 return (
-                                    <TouchableOpacity activeOpacity={0.8} onPress={() => setCurrentWorkout(data.item.workout)}>
-                                        <WorkoutCard workout={data.item.workout}/>
+                                    <TouchableOpacity activeOpacity={0.8} onPress={() => setCurrentWorkout(data.item)}>
+                                        <WorkoutCard workout={data.item}/>
                                     </TouchableOpacity>
                                 );
                             }}
