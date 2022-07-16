@@ -3,20 +3,16 @@ import React from "react";
 import {Dimensions, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
 import Entypo from "react-native-vector-icons/Entypo";
 import workoutsConstants from "../../../utils/workout/workoutsConstants";
-import {useDispatch} from "react-redux";
-import WorkoutCardBig from "./WorkoutCardBig";
-import WorkoutFitCard from "./WorkoutFitCard";
-import {workoutAdded} from "../../../features/CreatorProfileSlice";
+import WorkoutCardBig from "../../cards/WorkoutCardBig";
+import WorkoutExerciseCard from "../../cards/WorkoutExerciseCard";
 
-const PreviewWorkout = ({workout}) => {
-
-    const dispatch = useDispatch();
+const PreviewWorkout = ({workout, play}) => {
 
     /**
      * Play the appropriate workout
      */
     const playWorkout = () => {
-        dispatch(workoutAdded({...workout}))
+        play()
     };
 
     /**
@@ -73,12 +69,12 @@ const PreviewWorkout = ({workout}) => {
                     <Text style={styles.description}>{workout.description}</Text>
                     <Text>{displayRestInterval()}</Text>
                     {sortedWorkoutFits.map((workoutFit, i) =>
-                        <WorkoutFitCard workoutFit={workoutFit}/>)}
+                        <WorkoutExerciseCard key={i} workoutFit={workoutFit}/>)}
                 </ScrollView>
                 <TouchableOpacity
                     style={styles.startWorkoutBtn}
                     onPress={playWorkout}>
-                    <Text style={{fontWeight: "bold"}}>Start Workout</Text>}
+                    <Text style={{fontWeight: "bold"}}>Start Workout</Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>

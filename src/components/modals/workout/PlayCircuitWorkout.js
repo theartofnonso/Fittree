@@ -1,13 +1,13 @@
 /* eslint-disable */
-import React, { useEffect, useState } from "react";
-import { Dimensions, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native-web";
+import React, {useEffect, useState} from "react";
+import {Dimensions, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
 import {useSelector} from "react-redux";
-import VideoLoadingIndicator from "../src/components/modals/VideoLoadingIndicator";
-import WIntervalModal from "../src/components/modals/workout/IntervalModal";
-import WPauseModal from "../src/components/modals/workout/PauseModal";
-import WorkoutCompletedModal from "../src/components/modals/workout/WorkoutCompletedModal";
+import VideoLoadingIndicator from "../VideoLoadingIndicator";
+import WIntervalModal from "./IntervalModal";
+import WPauseModal from "./PauseModal";
+import WorkoutCompletedModal from "./WorkoutCompletedModal";
 import {Video} from "expo-av";
-import {selectWorkout} from "../src/features/CreatorProfileSlice";
+import {selectWorkout} from "../../../features/CreatorProfileSlice";
 import Entypo from "react-native-vector-icons/Entypo";
 
 const REPS = "Reps";
@@ -65,13 +65,13 @@ const PlayCircuitWorkout = props => {
     useEffect(() => {
         let intervalId = null;
 
-        if(showIntervalModal) return
+        if (showIntervalModal) return
 
         if (!paused) {
             intervalId = setInterval(() => {
-                if(exerciseDuration === 0) {
+                if (exerciseDuration === 0) {
                     clearInterval(intervalId);
-                    if(isPlayMode()) {
+                    if (isPlayMode()) {
                         seekForward();
                     }
                 } else {
@@ -92,7 +92,7 @@ const PlayCircuitWorkout = props => {
         const nextRoundsIndex = roundsIndex + 1;
         const nextExerciseIndex = exerciseIndex + 1;
 
-        if(!isPlayMode()) {
+        if (!isPlayMode()) {
             if (nextExerciseIndex < workoutFromStore.workoutFits.items.length) {
                 setExerciseIndex(nextExerciseIndex);
                 setExerciseDuration(getWorkoutFit().repsOrTimeValue);
@@ -162,14 +162,14 @@ const PlayCircuitWorkout = props => {
     const isPlayMode = () => true
 
     if (!workout) {
-        return <View />;
+        return <View/>;
     }
 
     /**
      * Navigate to Fit
      */
     const navigateToFitPreview = () => {
-        if(isPlayMode()) {
+        if (isPlayMode()) {
             pauseWorkout();
         }
     };
@@ -182,7 +182,7 @@ const PlayCircuitWorkout = props => {
     return (
         <SafeAreaView style={styles.root}>
             <View style={styles.videoContainer}>
-                {isLoading && <VideoLoadingIndicator />}
+                {isLoading && <VideoLoadingIndicator/>}
                 <Video
                     style={styles.video}
                     source={{
@@ -196,10 +196,10 @@ const PlayCircuitWorkout = props => {
                 />
                 <View style={styles.navBarStyle}>
                     <TouchableOpacity style={styles.btnStyle} onPress={navigateBack}>
-                        <Entypo name="cross" size={24} color="#fafafa" />
+                        <Entypo name="cross" size={24} color="#fafafa"/>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btnStyle} onPress={navigateToFitPreview}>
-                        <Entypo name="info" size={20} color="white" />
+                        <Entypo name="info" size={20} color="white"/>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -237,10 +237,12 @@ const PlayCircuitWorkout = props => {
                     description={intervalModalDescription}
                     intervalTime={intervalModalTime}
                     close={navigateBack}
-                    onFinish={() => setShowIntervalModal(false)} /> : null}
+                    onFinish={() => setShowIntervalModal(false)}/> : null}
             {showWorkoutCompletedModal ?
                 <WorkoutCompletedModal
-                    navigateToWorkoutPreview={navigateBack}/> : null}
+                    navigateToWorkoutPreview={navigateBack} close={() => {
+                    setShowWorkoutCompletedModal(false)
+                    props.end()}}/> : null}
         </SafeAreaView>
     );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native-web';
 //import LinearGradient from 'react-native-linear-gradient';
-import workoutsConstants from '../../../utils/workout/workoutsConstants';
+import workoutsConstants from '../../utils/workout/workoutsConstants';
 
 const WorkoutCardBig = props => {
   return (

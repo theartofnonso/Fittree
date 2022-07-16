@@ -5,6 +5,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {Dimensions, FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
 import Entypo from "react-native-vector-icons/Entypo";
+import PreviewWorkout from "../src/components/modals/workout/PreviewWorkout";
+import PlayCircuitWorkout from "../src/components/modals/workout/PlayCircuitWorkout";
 
 const CreatorProfile = () => {
 
@@ -19,6 +21,15 @@ const CreatorProfile = () => {
     const profile = useSelector(selectCreator)
 
     const [currentWorkout, setCurrentWorkout] = useState(null)
+
+    const [shouldPlayWorkout, setShouldPlayWorkout] = useState(false)
+
+    /**
+     * Play workout
+     */
+    const togglePlayWorkout = (shouldPlay) => {
+        setShouldPlayWorkout(shouldPlay)
+    }
 
     /**
      * Retrieve creator's profile
@@ -87,6 +98,14 @@ const CreatorProfile = () => {
                             </Text>
                         </View>}
                 </View>
+                {currentWorkout && !shouldPlayWorkout?
+                    <PreviewWorkout
+                        workout={currentWorkout}
+                        play={() => togglePlayWorkout(true)}/> : null}
+                {currentWorkout && shouldPlayWorkout ?
+                    <PlayCircuitWorkout
+                        workout={currentWorkout}
+                        end={() => togglePlayWorkout(false)}/> : null}
             </SafeAreaView>
         );
     }

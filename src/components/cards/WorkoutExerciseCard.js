@@ -2,9 +2,9 @@
 import React from "react";
 import {StyleSheet, Text, View} from "react-native-web";
 import {Video} from "expo-av";
-import workoutsConstants from "../../../utils/workout/workoutsConstants";
+import workoutsConstants from "../../utils/workout/workoutsConstants";
 
-const WorkoutFitCard = props => {
+const WorkoutExerciseCard = props => {
 
   /**
    * Helper function to display appropriate RepsOrTimeValue
@@ -83,4 +83,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WorkoutFitCard;
+export default WorkoutExerciseCard;
