@@ -30,7 +30,6 @@ const creatorProfileSlice = createSlice({
  */
 export const fetchCreatorProfile = createAsyncThunk("creatorProfile/get", async payload => {
     const {username} = payload;
-    console.log(username)
     const response = await API.graphql(graphqlOperation(queries.listCreators, {
                 filter: {
                     preferred_username: {
@@ -39,8 +38,7 @@ export const fetchCreatorProfile = createAsyncThunk("creatorProfile/get", async 
                 },
             },
         ),
-    ).catch(err => console.log(err))
-    console.log(response)
+    )
     const creators = response.data.listCreators.items
     return creators.length > 0 ? creators[0] : null
 });
