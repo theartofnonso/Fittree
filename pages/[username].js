@@ -1,11 +1,10 @@
 import {useRouter} from "next/router";
 import React, {useEffect, useState} from "react";
-import {fetchCreatorProfile, selectCreator, workoutAdded} from "../src/features/CreatorProfileSlice";
+import {fetchCreatorProfile, selectCreator} from "../src/features/CreatorProfileSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {Dimensions, FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
 import Entypo from "react-native-vector-icons/Entypo";
-
 
 const CreatorProfile = () => {
 
@@ -76,7 +75,7 @@ const CreatorProfile = () => {
                             data={profile.liveWorkouts.items}
                             renderItem={data => {
                                 return (
-                                    <TouchableOpacity activeOpacity={0.8}>
+                                    <TouchableOpacity activeOpacity={0.8} onPress={() => setCurrentWorkout(data.item.workout)}>
                                         <WorkoutCard workout={data.item.workout}/>
                                     </TouchableOpacity>
                                 );

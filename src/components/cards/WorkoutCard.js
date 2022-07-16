@@ -4,12 +4,11 @@ import {Image, StyleSheet, Text, View} from 'react-native-web';
 const WorkoutCard = props => {
   return (
     <View style={styles.card}>
-      <Image
-        style={styles.thumbnail}
-        source={{
-          uri: 'https://' + props.workout.thumbnailUrl,
-        }}
-      />
+      <img
+        src={
+        'https://' + props.workout.thumbnailUrl
+        }
+       alt='Hello'/>
       {/*<LinearGradient*/}
       {/*  colors={['transparent', '#000000']}*/}
       {/*  style={styles.overlay}*/}

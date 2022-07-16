@@ -6,7 +6,6 @@ import VideoLoadingIndicator from "../src/components/modals/VideoLoadingIndicato
 import WIntervalModal from "../src/components/modals/workout/IntervalModal";
 import WPauseModal from "../src/components/modals/workout/PauseModal";
 import WorkoutCompletedModal from "../src/components/modals/workout/WorkoutCompletedModal";
-import workoutsConstants from "../src/utils/workout/workoutsConstants";
 import {Video} from "expo-av";
 import {selectWorkout} from "../src/features/CreatorProfileSlice";
 import Entypo from "react-native-vector-icons/Entypo";
@@ -53,7 +52,6 @@ const PlayCircuitWorkout = props => {
      * @param workout
      */
     const loadWorkout = (workout) => {
-        console.log(workout)
         let rounds = new Array(workout.rounds);
         for (let i = 0; i < rounds.length; i++) {
             rounds[i] = Array.from(workout.workoutFits.items).sort((a, b) => a.index - b.index);
