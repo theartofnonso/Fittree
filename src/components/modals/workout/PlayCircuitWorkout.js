@@ -1,21 +1,17 @@
 /* eslint-disable */
 import React, {useEffect, useState} from "react";
 import {Dimensions, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
-import {useSelector} from "react-redux";
 import VideoLoadingIndicator from "../VideoLoadingIndicator";
 import WIntervalModal from "./IntervalModal";
 import WPauseModal from "./PauseModal";
 import WorkoutCompletedModal from "./WorkoutCompletedModal";
 import {Video} from "expo-av";
-import {selectWorkout} from "../../../features/CreatorProfileSlice";
 import Entypo from "react-native-vector-icons/Entypo";
 
 const REPS = "Reps";
 const SECS = "Secs";
 
 const PlayCircuitWorkout = props => {
-
-    const workoutFromStore = useSelector(selectWorkout)
 
     const [workout, setWorkout] = useState(null);
 
@@ -43,7 +39,7 @@ const PlayCircuitWorkout = props => {
      * Load Workout from either Store or from navigation
      */
     useEffect(() => {
-        loadWorkout(workoutFromStore);
+        loadWorkout(props.workout);
         setIsLoading(false)
     }, []);
 
@@ -177,7 +173,10 @@ const PlayCircuitWorkout = props => {
     /**
      * Get the workoutFit
      */
-    const getWorkoutFit = () => rounds[roundsIndex][exerciseIndex];
+    const getWorkoutFit = () => {
+        console.log(rounds[roundsIndex][exerciseIndex])
+        return rounds[roundsIndex][exerciseIndex];
+    }
 
     return (
         <SafeAreaView style={styles.root}>

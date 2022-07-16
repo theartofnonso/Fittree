@@ -1,6 +1,6 @@
 import {useRouter} from "next/router";
 import React, {useEffect, useState} from "react";
-import {fetchCreatorProfile, selectCreator} from "../src/features/CreatorProfileSlice";
+import {fetchCreatorProfile, selectCreator, selectWorkouts} from "../src/features/CreatorProfileSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {Dimensions, FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
@@ -19,6 +19,8 @@ const CreatorProfile = () => {
     const dispatch = useDispatch();
 
     const profile = useSelector(selectCreator)
+
+    const workouts = useSelector(selectWorkouts)
 
     const [currentWorkout, setCurrentWorkout] = useState(null)
 
@@ -79,11 +81,11 @@ const CreatorProfile = () => {
                         </View>
                     </View>
 
-                    {profile.workouts.items.length > 0 ?
+                    {workouts.length > 0 ?
                         <FlatList
                             showsVerticalScrollIndicator={false}
                             keyExtractor={workout => workout.id}
-                            data={profile.workouts.items}
+                            data={workouts}
                             renderItem={data => {
                                 return (
                                     <TouchableOpacity activeOpacity={0.8} onPress={() => setCurrentWorkout(data.item)}>
