@@ -2,13 +2,18 @@ import {useRouter} from "next/router";
 import React, {useEffect, useState} from "react";
 import {fetchCreatorProfile, selectCreator, selectWorkouts} from "../src/features/CreatorProfileSlice";
 import {useDispatch, useSelector} from "react-redux";
-import {Dimensions, FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
+import {useWindowDimensions, FlatList, StyleSheet, Text, TouchableOpacity, View, Dimensions} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
 import Entypo from "react-native-vector-icons/Entypo";
 import PreviewWorkout from "../src/components/modals/workout/PreviewWorkout";
 import PlayCircuitWorkout from "../src/components/modals/workout/PlayCircuitWorkout";
 
+const NUM_OF_COLUMNS = 2;
+
 const CreatorProfile = () => {
+
+    const windowWidth = useWindowDimensions().width;
+    const windowHeight = useWindowDimensions().height;
 
     /**
      * Retrieve creator's username
@@ -32,6 +37,22 @@ const CreatorProfile = () => {
     const togglePlayWorkout = (shouldPlay) => {
         setShouldPlayWorkout(shouldPlay)
     }
+
+    /**
+     * Calculate the size of each view
+     * @param data
+     * @param numColumns
+     * @returns {*}
+     */
+    const formatData = (data, numColumns) => {
+        const numOfRows = Math.floor(data.length / numColumns);
+        let numOfElementsLastRow = data.length - numOfRows * numColumns;
+        while (numOfElementsLastRow !== numColumns && numOfElementsLastRow !== 0) {
+            data.push({id: `blank-${numOfElementsLastRow}`, empty: true});
+            numOfElementsLastRow = numOfElementsLastRow + 1;
+        }
+        return data;
+    };
 
     /**
      * Retrieve creator's profile
@@ -65,42 +86,53 @@ const CreatorProfile = () => {
          * Loaded Creator page content
          */
         return (
-            <SafeAreaView style={styles.root}>
-                <View style={styles.container}>
-                    <View style={styles.topContainerStyle}>
-                        <View style={styles.navBarStyle}>
-                            <TouchableOpacity style={styles.btnStyle}>
-                                <Entypo name="chevron-left" size={24} color="#282828"/>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.infoStyle}>
-                            <Text style={{fontFamily: "Days One"}}>Live Workouts</Text>
-                            <Text style={{fontSize: 15}}>
-                                Find workouts that you have published
-                            </Text>
-                        </View>
-                    </View>
+            <View style={styles.root}>
 
-                    {workouts.length > 0 ?
-                        <FlatList
-                            showsVerticalScrollIndicator={false}
-                            keyExtractor={workout => workout.id}
-                            data={workouts}
-                            renderItem={data => {
-                                return (
-                                    <TouchableOpacity activeOpacity={0.8} onPress={() => setCurrentWorkout(data.item)}>
-                                        <WorkoutCard workout={data.item}/>
-                                    </TouchableOpacity>
-                                );
-                            }}
-                        /> :
-                        <View style={styles.emptyStateViewStyle}>
-                            <Text style={styles.textEmptyStateStyle}>
-                                {`${username} has no workouts yet `}
-                            </Text>
-                        </View>}
+                <View style={styles.topContainerStyle}>
+                    <View style={styles.navBarStyle}>
+                        <TouchableOpacity style={styles.btnStyle}>
+                            <Entypo name="chevron-left" size={24} color="#282828"/>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.infoStyle}>
+                        <Text style={{fontFamily: "Days One"}}>Live Workouts</Text>
+                        <Text style={{fontSize: 15}}>
+                            Find workouts that you have published
+                        </Text>
+                    </View>
                 </View>
-                {currentWorkout && !shouldPlayWorkout?
+                <View style={styles.wrapper}>
+                    {workouts.map((item, index) => {
+                        return <WorkoutCard key={index} workout={item}/>
+                    })}
+                </View>
+                {/*{workouts.length > 0 ?*/}
+                {/*    <FlatList*/}
+                {/*        showsVerticalScrollIndicator={false}*/}
+                {/*        keyExtractor={workout => workout.id}*/}
+                {/*        numColumns={NUM_OF_COLUMNS}*/}
+                {/*        data={formatData(workouts, NUM_OF_COLUMNS)}*/}
+                {/*        renderItem={({item, index}) => {*/}
+                {/*            if (item.empty) {*/}
+                {/*                return (*/}
+                {/*                    <View style={{flex: 1}}>*/}
+                {/*                        <View style={[styles.emptyWorkoutStyle]}/>*/}
+                {/*                    </View>*/}
+                {/*                );*/}
+                {/*            }*/}
+                {/*            return (*/}
+                {/*                <TouchableOpacity activeOpacity={0.8} onPress={() => setCurrentWorkout(item)}>*/}
+                {/*                    <WorkoutCard workout={item}/>*/}
+                {/*                </TouchableOpacity>*/}
+                {/*            );*/}
+                {/*        }}*/}
+                {/*    /> :*/}
+                {/*    <View style={styles.emptyStateViewStyle}>*/}
+                {/*        <Text style={styles.textEmptyStateStyle}>*/}
+                {/*            {`${username} has no workouts yet `}*/}
+                {/*        </Text>*/}
+                {/*    </View>}*/}
+                {currentWorkout && !shouldPlayWorkout ?
                     <PreviewWorkout
                         workout={currentWorkout}
                         play={() => togglePlayWorkout(true)}/> : null}
@@ -108,21 +140,17 @@ const CreatorProfile = () => {
                     <PlayCircuitWorkout
                         workout={currentWorkout}
                         end={() => togglePlayWorkout(false)}/> : null}
-            </SafeAreaView>
+            </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
     root: {
-        height: '100%',
+        backgroundColor: "white",
+        borderColor: 'red',
+        borderWidth: 3,
         width: Dimensions.get("window").width,
-        backgroundColor: "white",
-    },
-    container: {
-        flex: 1,
-        padding: 10,
-        backgroundColor: "white",
     },
     navBarStyle: {
         flexDirection: "row",
@@ -130,6 +158,13 @@ const styles = StyleSheet.create({
     },
     infoStyle: {
         flexDirection: "column",
+    },
+    wrapper: {
+        margin: '2rem',
+        display: 'grid',
+        gap: '1rem',
+        gridTemplateColumns: '1fr',
+        justifyContent: 'center'
     },
     btnStyle: {
         alignItems: "center",
@@ -154,6 +189,9 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "column",
         marginBottom: 20,
+    },
+    emptyWorkoutStyle: {
+        backgroundColor: "transparent",
     },
     errSnackbar: {
         backgroundColor: "#f54755",
