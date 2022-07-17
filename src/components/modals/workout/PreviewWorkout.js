@@ -1,12 +1,13 @@
 /* eslint-disable */
 import React from "react";
-import {Dimensions, Modal, StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
+import {Dimensions, StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
 import workoutsConstants from "../../../utils/workout/workoutsConstants";
 import WorkoutCardBig from "../../cards/WorkoutCardBig";
 import WorkoutExerciseCard from "../../cards/WorkoutExerciseCard";
 import {useMediaQuery} from "react-responsive";
+import Entypo from "react-native-vector-icons/Entypo";
 
-const PreviewWorkout = ({workout, play, visible}) => {
+const PreviewWorkout = ({workout, play, close}) => {
 
     const isBigScreen = useMediaQuery({query: '(min-width: 800px)'})
 
@@ -56,40 +57,34 @@ const PreviewWorkout = ({workout, play, visible}) => {
     };
 
     return (
-        <Modal transparent={true}>
-            <View style={styles.root}>
-
-                <View style={[isBigScreen ? styles.wrapper : styles.wrapperStack]}>
-                    {/*<View style={styles.navBarStyle}>*/}
-                    {/*    <TouchableOpacity style={styles.btnStyle} onPress={navigateBack}>*/}
-                    {/*        <Entypo name="cross" size={24} color="#282828"/>*/}
-                    {/*    </TouchableOpacity>*/}
-                    {/*</View>*/}
-                    <View>
-                        <WorkoutCardBig workout={workout}/>
-                    </View>
-                    <View style={styles.previewInfo}>
-                        <Text style={styles.description}>{workout.description}</Text>
-                        <Text>{displayRestInterval()}</Text>
-                        {sortedWorkoutFits.map((workoutFit, i) =>
-                            <WorkoutExerciseCard key={i} workoutFit={workoutFit}/>)}
-                    </View>
-
+        <View style={styles.root}>
+            <TouchableOpacity style={styles.btnStyle} onPress={() => close()}>
+                <Entypo name="cross" size={24} color="white"/>
+            </TouchableOpacity>
+            <View style={[isBigScreen ? styles.wrapper : styles.wrapperStack]}>
+                <View>
+                    <WorkoutCardBig workout={workout}/>
+                </View>
+                <View style={[isBigScreen ? styles.previewInfo : styles.previewInfoStack]}>
+                    <Text style={styles.description}>{workout.description}</Text>
+                    <Text>{displayRestInterval()}</Text>
+                    {sortedWorkoutFits.map((workoutFit, i) =>
+                        <WorkoutExerciseCard key={i} workoutFit={workoutFit}/>)}
                 </View>
 
-                <TouchableOpacity
-                    style={styles.startWorkoutBtn}
-                    onPress={playWorkout}>
-                    <Text style={{fontWeight: "bold"}}>Start Workout</Text>
-                </TouchableOpacity>
             </View>
-        </Modal>
+
+            <TouchableOpacity
+                style={styles.startWorkoutBtn}
+                onPress={playWorkout}>
+                <Text style={{fontWeight: "bold"}}>Start Workout</Text>
+            </TouchableOpacity>
+        </View>
 
     );
 };
 
 const styles = StyleSheet.create({
-
 
     root: {
         position: 'absolute',
@@ -116,27 +111,16 @@ const styles = StyleSheet.create({
     previewInfo: {
         paddingLeft: 10,
         overflow: 'scroll',
-        height: 300
     },
-    navBarStyle: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginHorizontal: 15,
-        marginBottom: 12,
-        width: "100%",
-    },
-    creatorUsername: {
-        fontFamily: "Days One",
-        marginBottom: 10,
+    previewInfoStack: {
+        paddingLeft: 10,
+        height: 300,
+        overflow: 'scroll',
     },
     btnStyle: {
-        alignItems: "center",
-        borderRadius: 15,
-        flexDirection: "column",
-        justifyContent: "center",
-        width: 40,
-        height: 40,
+        position: 'fixed',
+        top: 10,
+        right: 10,
     },
     description: {
         marginVertical: 20,

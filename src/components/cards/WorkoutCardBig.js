@@ -51,12 +51,16 @@ const styles = StyleSheet.create({
     thumbnail: {
         width: '100%',
         height: '100%',
-        resizeMode: 'cover'
+        resizeMode: 'cover',
+        borderTopLeftRadius: 8,
+        borderBottomRightRadius: 8
     },
     thumbnailSmall: {
         width: '100%',
         height: 300,
-        resizeMode: 'cover'
+        resizeMode: 'cover',
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8
     },
     overlay: {
         ...StyleSheet.absoluteFillObject,

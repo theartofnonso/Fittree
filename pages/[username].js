@@ -26,8 +26,6 @@ const CreatorProfile = () => {
 
     const [shouldPlayWorkout, setShouldPlayWorkout] = useState(false)
 
-    const [modalVisible, setModalVisible] = useState(false);
-
     /**
      * Play workout
      */
@@ -36,20 +34,11 @@ const CreatorProfile = () => {
     }
 
     /**
-     * Calculate the size of each view
-     * @param data
-     * @param numColumns
-     * @returns {*}
+     * Close the preview modal
      */
-    const formatData = (data, numColumns) => {
-        const numOfRows = Math.floor(data.length / numColumns);
-        let numOfElementsLastRow = data.length - numOfRows * numColumns;
-        while (numOfElementsLastRow !== numColumns && numOfElementsLastRow !== 0) {
-            data.push({id: `blank-${numOfElementsLastRow}`, empty: true});
-            numOfElementsLastRow = numOfElementsLastRow + 1;
-        }
-        return data;
-    };
+    const closePreview = () => {
+        setCurrentWorkout(null)
+    }
 
     /**
      * Retrieve creator's profile
@@ -136,7 +125,8 @@ const CreatorProfile = () => {
                 {currentWorkout && !shouldPlayWorkout ?
                     <PreviewWorkout
                         workout={currentWorkout}
-                        play={() => togglePlayWorkout(true)}/> : null}
+                        play={() => togglePlayWorkout(true)}
+                        close={closePreview}/> : null}
                 {currentWorkout && shouldPlayWorkout ?
                     <PlayCircuitWorkout
                         workout={currentWorkout}
