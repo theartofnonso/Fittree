@@ -57,9 +57,9 @@ const WorkoutCompletedModal = props => {
 const styles = StyleSheet.create({
   rootStyle: {
     backgroundColor: 'white',
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
     position: 'absolute',
+    width: '100%',
+    height: '100%',
   },
   container: {
     display: 'flex',

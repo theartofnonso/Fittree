@@ -1,17 +1,20 @@
 /* eslint-disable */
 import React, {useEffect, useState} from "react";
-import {Dimensions, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
+import {StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
 import VideoLoadingIndicator from "../VideoLoadingIndicator";
 import WIntervalModal from "./IntervalModal";
 import WPauseModal from "./PauseModal";
 import WorkoutCompletedModal from "./WorkoutCompletedModal";
 import {Video} from "expo-av";
 import Entypo from "react-native-vector-icons/Entypo";
+import {useMediaQuery} from "react-responsive";
 
 const REPS = "Reps";
 const SECS = "Secs";
 
 const PlayCircuitWorkout = props => {
+
+    const isBigScreen = useMediaQuery({query: '(min-width: 800px)'})
 
     const [workout, setWorkout] = useState(null);
 
@@ -174,57 +177,58 @@ const PlayCircuitWorkout = props => {
      * Get the workoutFit
      */
     const getWorkoutFit = () => {
-        console.log(rounds[roundsIndex][exerciseIndex])
         return rounds[roundsIndex][exerciseIndex];
     }
 
     return (
-        <SafeAreaView style={styles.root}>
-            <View style={styles.videoContainer}>
-                {isLoading && <VideoLoadingIndicator/>}
-                <Video
-                    style={styles.video}
-                    source={{
-                        uri: "https://" + getWorkoutFit().fit.videoUrls[0],
-                    }}
-                    resizeMode="contain"
-                    shouldPlay={true}
-                    isLooping={true}
-                    isMuted={true}
-                    onLoad={() => setIsLoading(false)}
-                />
-                <View style={styles.navBarStyle}>
-                    <TouchableOpacity style={styles.btnStyle} onPress={navigateBack}>
-                        <Entypo name="cross" size={24} color="#fafafa"/>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.btnStyle} onPress={navigateToFitPreview}>
-                        <Entypo name="info" size={20} color="white"/>
-                    </TouchableOpacity>
+        <View style={styles.root}>
+            <View style={[isBigScreen ? styles.wrapper : styles.wrapperStack]}>
+                <View style={styles.videoContainer}>
+                    {isLoading && <VideoLoadingIndicator/>}
+                    <Video
+                        style={styles.video}
+                        source={{
+                            uri: "https://" + getWorkoutFit().fit.videoUrls[0],
+                        }}
+                        resizeMode="contain"
+                        shouldPlay={true}
+                        isLooping={true}
+                        isMuted={true}
+                        onLoad={() => setIsLoading(false)}
+                    />
+                    {/*<View style={styles.navBarStyle}>*/}
+                    {/*    <TouchableOpacity style={styles.btnStyle} onPress={navigateBack}>*/}
+                    {/*        <Entypo name="cross" size={24} color="#fafafa"/>*/}
+                    {/*    </TouchableOpacity>*/}
+                    {/*    <TouchableOpacity style={styles.btnStyle} onPress={navigateToFitPreview}>*/}
+                    {/*        <Entypo name="info" size={20} color="white"/>*/}
+                    {/*    </TouchableOpacity>*/}
+                    {/*</View>*/}
+                    {!paused ? (
+                        <View style={styles.controlBtnsContainer}>
+                            <TouchableOpacity onPress={seekBackward}>
+                                <Text style={styles.textWhite}>Prev</Text>
+                            </TouchableOpacity>
+                            {isPlayMode() ?
+                                <TouchableOpacity style={styles.pauseBtn} onPress={pauseWorkout}>
+                                    <Entypo
+                                        name="controller-paus"
+                                        size={28}
+                                        color="white"
+                                    />
+                                </TouchableOpacity> : <View style={styles.noPauseBtn}/>}
+                            <TouchableOpacity onPress={seekForward}>
+                                <Text style={styles.textWhite}>Next</Text>
+                            </TouchableOpacity>
+                        </View>
+                    ) : null}
                 </View>
-            </View>
-            {!paused ? (
-                <View style={styles.controlBtnsContainer}>
-                    <TouchableOpacity onPress={seekBackward}>
-                        <Text>Prev</Text>
-                    </TouchableOpacity>
-                    {isPlayMode() ?
-                        <TouchableOpacity style={styles.pauseBtn} onPress={pauseWorkout}>
-                            <Entypo
-                                name="controller-paus"
-                                size={28}
-                                color="#282828"
-                            />
-                        </TouchableOpacity> : <View style={styles.noPauseBtn}/>}
-                    <TouchableOpacity onPress={seekForward}>
-                        <Text>Next</Text>
-                    </TouchableOpacity>
+                <View style={styles.infoContainer}>
+                    <Text style={styles.workoutFitTitle}>{getWorkoutFit().fit.title}</Text>
+                    {getWorkoutFit().repsOrTime === SECS && <Text>{exerciseDuration / 1000}s</Text>}
+                    {getWorkoutFit().repsOrTime === REPS && <Text>{getWorkoutFit().repsOrTimeValue} Reps</Text>}
+                    {isPlayMode() && <Text style={styles.fontSmall}>Round {roundsIndex + 1} of {workout.rounds}</Text>}
                 </View>
-            ) : null}
-            <View style={styles.infoContainer}>
-                <Text style={styles.workoutFitTitle}>{getWorkoutFit().fit.title}</Text>
-                {getWorkoutFit().repsOrTime === SECS && <Text>{exerciseDuration / 1000}s</Text>}
-                {getWorkoutFit().repsOrTime === REPS && <Text>{getWorkoutFit().repsOrTimeValue} Reps</Text>}
-                {isPlayMode() && <Text style={styles.fontSmall}>Round {roundsIndex + 1} of {workout.rounds}</Text>}
             </View>
             {paused ?
                 <WPauseModal
@@ -242,26 +246,45 @@ const PlayCircuitWorkout = props => {
                     navigateToWorkoutPreview={navigateBack} close={() => {
                     setShowWorkoutCompletedModal(false)
                     props.end()}}/> : null}
-        </SafeAreaView>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     root: {
-        backgroundColor: "white",
-        height: Dimensions.get("window").height,
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0,0,0,0.6)',
     },
-    navBarStyle: {
-        ...StyleSheet.absoluteFill,
-        height: 100,
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "space-between",
-        marginTop: 25,
-        marginLeft: 15,
-        width: 40,
-        borderRadius: 15,
-        backgroundColor: "rgba(0, 0, 0, 0.3)",
+    // navBarStyle: {
+    //     ...StyleSheet.absoluteFill,
+    //     height: 100,
+    //     flexDirection: "column",
+    //     alignItems: "center",
+    //     justifyContent: "space-between",
+    //     marginTop: 25,
+    //     marginLeft: 15,
+    //     width: 40,
+    //     borderRadius: 15,
+    //     backgroundColor: "rgba(0, 0, 0, 0.3)",
+    // },
+
+    wrapper: {
+        display: 'grid',
+        gridTemplateColumns: '400px 350px',
+        gridTemplateRows: 'auto',
+        backgroundColor: 'white',
+        margin: 'auto',
+        borderRadius: 8,
+    },
+    wrapperStack: {
+        display: 'grid',
+        gridTemplateColumns: '400px',
+        gridTemplateRows: 'auto',
+        backgroundColor: 'white',
+        margin: 'auto',
+        borderRadius: 8,
     },
     btnStyle: {
         alignItems: "center",
@@ -271,6 +294,8 @@ const styles = StyleSheet.create({
     },
     videoContainer: {
         height: 400,
+        flexDirection: 'row',
+        justifyContent: 'center'
     },
     video: {
         ...StyleSheet.absoluteFillObject,
@@ -284,9 +309,9 @@ const styles = StyleSheet.create({
     },
     controlBtnsContainer: {
         flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        marginVertical: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'end'
     },
     prevNextBtn: {
         alignItems: "center",
@@ -319,6 +344,9 @@ const styles = StyleSheet.create({
     },
     fontSmall: {
         fontSize: 15,
+    },
+    textWhite: {
+        color: 'white'
     }
 });
 export default PlayCircuitWorkout;

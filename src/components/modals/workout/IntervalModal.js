@@ -38,10 +38,10 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    position: "absolute",
     ...StyleSheet.absoluteFill,
-    height: Dimensions.get("window").height,
-    width: Dimensions.get("window").width,
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
   },
   textWhite: {
     color: "white",

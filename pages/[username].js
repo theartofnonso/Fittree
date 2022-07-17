@@ -108,7 +108,7 @@ const CreatorProfile = () => {
                         workout={currentWorkout}
                         play={() => togglePlayWorkout(true)}
                         close={closePreview}/> : null}
-                {currentWorkout && shouldPlayWorkout ?
+                {shouldPlayWorkout ?
                     <PlayCircuitWorkout
                         workout={currentWorkout}
                         end={() => togglePlayWorkout(false)}/> : null}
