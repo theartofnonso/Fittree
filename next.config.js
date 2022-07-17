@@ -1,9 +1,14 @@
-// @generated: @expo/next-adapter@2.1.52
-// Learn more: https://docs.expo.io/guides/using-nextjs/
-
-const { withExpo } = require('@expo/next-adapter');
+const { withExpo } = require('@expo/next-adapter')
 const withFonts = require('next-fonts')
+const withPlugins = require('next-compose-plugins')
 
-module.exports = withExpo(withFonts({
-    projectRoot: __dirname,
-}))
+const withTM = require('next-transpile-modules')([
+    // you can add other modules that need transpiling here
+])
+
+module.exports = withPlugins(
+    [withTM, withFonts, [withExpo, { projectRoot: __dirname }]],
+    {
+        // ...
+    }
+)

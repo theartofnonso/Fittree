@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   thumbnail: {
-    width: '100%',
-    height: '100%',
+    width: 200,
+    height: 200,
     borderRadius: 8,
   },
   overlay: {

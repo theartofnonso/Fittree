@@ -4,11 +4,16 @@ import {Image, StyleSheet, Text, View} from 'react-native-web';
 const WorkoutCard = ({workout}) => {
   return (
     <View style={styles.card}>
-      <img
-        src={
-        'https://' + workout.thumbnailUrl
-        }
-       alt='Hello'/>
+      {/*<img*/}
+      {/*  src={'https://' + workout.thumbnailUrl}*/}
+      {/* alt='Hello'/>*/}
+      <Image
+          style={styles.thumbnail}
+          source={{
+            uri: 'https://' + workout.thumbnailUrl,
+            cache: 'force-cache',
+          }}
+      />
       {/*<LinearGradient*/}
       {/*  colors={['transparent', '#000000']}*/}
       {/*  style={styles.overlay}*/}
@@ -57,8 +62,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   thumbnail: {
-    width: '100%',
-    height: '100%',
+    width: 200,
+    height: 200,
     borderRadius: 8,
   },
   overlay: {
