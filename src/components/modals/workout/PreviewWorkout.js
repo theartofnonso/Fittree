@@ -1,12 +1,14 @@
 /* eslint-disable */
 import React from "react";
-import {Dimensions, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
-import Entypo from "react-native-vector-icons/Entypo";
+import {Dimensions, Modal, StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
 import workoutsConstants from "../../../utils/workout/workoutsConstants";
 import WorkoutCardBig from "../../cards/WorkoutCardBig";
 import WorkoutExerciseCard from "../../cards/WorkoutExerciseCard";
+import {useMediaQuery} from "react-responsive";
 
-const PreviewWorkout = ({workout, play}) => {
+const PreviewWorkout = ({workout, play, visible}) => {
+
+    const isBigScreen = useMediaQuery({query: '(min-width: 800px)'})
 
     /**
      * Play the appropriate workout
@@ -19,7 +21,8 @@ const PreviewWorkout = ({workout, play}) => {
      * Navigate to previous screen
      * @returns {*}
      */
-    const navigateBack = () => {}
+    const navigateBack = () => {
+    }
 
     if (!workout) {
         return <View/>;
@@ -53,48 +56,67 @@ const PreviewWorkout = ({workout, play}) => {
     };
 
     return (
-        <SafeAreaView style={styles.rootStyle}>
-            <View style={styles.containerStyle}>
-                <View style={styles.navBarStyle}>
-                    <TouchableOpacity style={styles.btnStyle} onPress={navigateBack}>
-                        <Entypo name="cross" size={24} color="#282828"/>
-                    </TouchableOpacity>
+        <Modal transparent={true}>
+            <View style={styles.root}>
+
+                <View style={[isBigScreen ? styles.wrapper : styles.wrapperStack]}>
+                    {/*<View style={styles.navBarStyle}>*/}
+                    {/*    <TouchableOpacity style={styles.btnStyle} onPress={navigateBack}>*/}
+                    {/*        <Entypo name="cross" size={24} color="#282828"/>*/}
+                    {/*    </TouchableOpacity>*/}
+                    {/*</View>*/}
+                    <View>
+                        <WorkoutCardBig workout={workout}/>
+                    </View>
+                    <View style={styles.previewInfo}>
+                        <Text style={styles.description}>{workout.description}</Text>
+                        <Text>{displayRestInterval()}</Text>
+                        {sortedWorkoutFits.map((workoutFit, i) =>
+                            <WorkoutExerciseCard key={i} workoutFit={workoutFit}/>)}
+                    </View>
+
                 </View>
-                <ScrollView
-                    showsVerticalScrollIndicator={false}
-                    contentContainerStyle={styles.scrollView}
-                    style={styles.scrollView}>
-                    <Text style={styles.creatorUsername}>Created by {workout.preferred_username}</Text>
-                    <WorkoutCardBig workout={workout}/>
-                    <Text style={styles.description}>{workout.description}</Text>
-                    <Text>{displayRestInterval()}</Text>
-                    {sortedWorkoutFits.map((workoutFit, i) =>
-                        <WorkoutExerciseCard key={i} workoutFit={workoutFit}/>)}
-                </ScrollView>
+
                 <TouchableOpacity
                     style={styles.startWorkoutBtn}
                     onPress={playWorkout}>
                     <Text style={{fontWeight: "bold"}}>Start Workout</Text>
                 </TouchableOpacity>
             </View>
-        </SafeAreaView>
+        </Modal>
+
     );
 };
 
 const styles = StyleSheet.create({
-    rootStyle: {
-        position: "absolute",
-        height: Dimensions.get("window").height,
-        width: Dimensions.get("window").width,
-        backgroundColor: "white",
+
+
+    root: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0,0,0,0.6)',
     },
-    containerStyle: {
-        backgroundColor: "white",
-        padding: 10,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        height: "100%",
+    wrapper: {
+        display: 'grid',
+        gridTemplateColumns: '400px 350px',
+        gridTemplateRows: '600px',
+        backgroundColor: 'white',
+        margin: 'auto',
+        borderRadius: 8,
+    },
+    wrapperStack: {
+        display: 'grid',
+        gridTemplateColumns: '400px',
+        gridTemplateRows: 'auto',
+        backgroundColor: 'white',
+        margin: 'auto',
+        borderRadius: 8,
+    },
+    previewInfo: {
+        paddingLeft: 10,
+        overflow: 'scroll',
+        height: 300
     },
     navBarStyle: {
         flexDirection: "row",
@@ -133,8 +155,8 @@ const styles = StyleSheet.create({
         borderRadius: 8,
     },
     thumbnail: {
-        width: "100%",
-        height: "100%",
+        width: 200,
+        height: 250,
         borderRadius: 8,
     },
     overlay: {

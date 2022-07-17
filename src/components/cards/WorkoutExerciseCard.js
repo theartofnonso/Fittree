@@ -45,10 +45,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 5,
-    borderWidth: 0.5,
-    borderColor: '#d7d7d7',
-    padding: 10,
-    marginBottom: 15
+    marginTop: 10,
+    marginBottom: 10,
   },
   videoStyle: {
     height: 50,

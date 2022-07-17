@@ -2,10 +2,9 @@ import {useRouter} from "next/router";
 import React, {useEffect, useState} from "react";
 import {fetchCreatorProfile, selectCreator, selectWorkouts} from "../src/features/CreatorProfileSlice";
 import {useDispatch, useSelector} from "react-redux";
-import {StyleSheet, Text, TouchableOpacity, View, Dimensions} from "react-native-web";
+import {StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
-import Entypo from "react-native-vector-icons/Entypo";
-import { Feather } from '@expo/vector-icons';
+import {Feather} from '@expo/vector-icons';
 import PreviewWorkout from "../src/components/modals/workout/PreviewWorkout";
 import PlayCircuitWorkout from "../src/components/modals/workout/PlayCircuitWorkout";
 
@@ -26,6 +25,8 @@ const CreatorProfile = () => {
     const [currentWorkout, setCurrentWorkout] = useState(null)
 
     const [shouldPlayWorkout, setShouldPlayWorkout] = useState(false)
+
+    const [modalVisible, setModalVisible] = useState(false);
 
     /**
      * Play workout
@@ -87,7 +88,7 @@ const CreatorProfile = () => {
                 <View style={styles.topContainerStyle}>
                     <View style={styles.navBarStyle}>
                         <TouchableOpacity style={styles.btnStyle}>
-                            <Feather name="share" size={24} color="black" />
+                            <Feather name="share" size={24} color="black"/>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.infoStyle}>
@@ -99,7 +100,11 @@ const CreatorProfile = () => {
                 </View>
                 <View style={styles.wrapper}>
                     {workouts.map((item, index) => {
-                        return <WorkoutCard key={index} workout={item}/>
+                        return (
+                            <TouchableOpacity key={index} activeOpacity={0.8} onPress={() => setCurrentWorkout(item)}>
+                                <WorkoutCard workout={item}/>
+                            </TouchableOpacity>
+                        );
                     })}
                 </View>
                 {/*{workouts.length > 0 ?*/}
@@ -156,7 +161,7 @@ const styles = StyleSheet.create({
     wrapper: {
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 200px))',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     btnStyle: {
         alignItems: "center",
