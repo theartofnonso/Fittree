@@ -2,18 +2,14 @@ import {useRouter} from "next/router";
 import React, {useEffect, useState} from "react";
 import {fetchCreatorProfile, selectCreator, selectWorkouts} from "../src/features/CreatorProfileSlice";
 import {useDispatch, useSelector} from "react-redux";
-import {useWindowDimensions, FlatList, StyleSheet, Text, TouchableOpacity, View, Dimensions} from "react-native-web";
+import {StyleSheet, Text, TouchableOpacity, View, Dimensions} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
 import Entypo from "react-native-vector-icons/Entypo";
+import { Feather } from '@expo/vector-icons';
 import PreviewWorkout from "../src/components/modals/workout/PreviewWorkout";
 import PlayCircuitWorkout from "../src/components/modals/workout/PlayCircuitWorkout";
 
-const NUM_OF_COLUMNS = 2;
-
 const CreatorProfile = () => {
-
-    const windowWidth = useWindowDimensions().width;
-    const windowHeight = useWindowDimensions().height;
 
     /**
      * Retrieve creator's username
@@ -91,13 +87,13 @@ const CreatorProfile = () => {
                 <View style={styles.topContainerStyle}>
                     <View style={styles.navBarStyle}>
                         <TouchableOpacity style={styles.btnStyle}>
-                            <Entypo name="chevron-left" size={24} color="#282828"/>
+                            <Feather name="share" size={24} color="black" />
                         </TouchableOpacity>
                     </View>
                     <View style={styles.infoStyle}>
-                        <Text style={{fontFamily: "Days One"}}>Live Workouts</Text>
+                        <Text style={{fontFamily: "Days One"}}>byByJane</Text>
                         <Text style={{fontSize: 15}}>
-                            Find workouts that you have published
+                            Passionate about improving lives through fitness
                         </Text>
                     </View>
                 </View>
@@ -147,10 +143,7 @@ const CreatorProfile = () => {
 
 const styles = StyleSheet.create({
     root: {
-        backgroundColor: "white",
-        borderColor: 'red',
-        borderWidth: 3,
-        width: Dimensions.get("window").width,
+        flex: 1,
     },
     navBarStyle: {
         flexDirection: "row",
@@ -158,12 +151,11 @@ const styles = StyleSheet.create({
     },
     infoStyle: {
         flexDirection: "column",
+        alignItems: 'center'
     },
     wrapper: {
-        margin: '2rem',
         display: 'grid',
-        gap: '1rem',
-        gridTemplateColumns: '1fr',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 200px))',
         justifyContent: 'center'
     },
     btnStyle: {

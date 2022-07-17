@@ -1,5 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native-web';
+import {LinearGradient} from "expo-linear-gradient";
 
 const WorkoutCard = ({workout}) => {
     return (
@@ -11,10 +12,10 @@ const WorkoutCard = ({workout}) => {
                     cache: 'force-cache',
                 }}
             />
-            {/*<LinearGradient*/}
-            {/*  colors={['transparent', '#000000']}*/}
-            {/*  style={styles.overlay}*/}
-            {/*/>*/}
+            <LinearGradient
+              colors={['transparent', '#000000']}
+              style={styles.overlay}
+            />
             <View style={styles.textContainer}>
                 <Text style={[styles.text, styles.textBig]}>
                     {workout.title}
@@ -54,17 +55,13 @@ const WorkoutCard = ({workout}) => {
 const styles = StyleSheet.create({
     card: {
         display: 'flex',
-         borderRadius: 8,
-        // margin: 5,
-        minWidth: '28rem',
+        borderRadius: 8,
+        overflow: 'hidden',
+        margin: 5
     },
     thumbnail: {
-        // width: 200,
-        //  height: 250,
-        borderRadius: 8,
-        width: '14rem',
-        height: '11rem',
-        objectFit: 'cover'
+        width: 200,
+        height: 250,
     },
     overlay: {
         ...StyleSheet.absoluteFillObject,
