@@ -6,6 +6,7 @@ import WorkoutCardBig from "../../cards/WorkoutCardBig";
 import WorkoutExerciseCard from "../../cards/WorkoutExerciseCard";
 import {useMediaQuery} from "react-responsive";
 import Entypo from "react-native-vector-icons/Entypo";
+import {Feather} from '@expo/vector-icons';
 
 const PreviewWorkout = ({workout, play, close}) => {
 
@@ -17,13 +18,6 @@ const PreviewWorkout = ({workout, play, close}) => {
     const playWorkout = () => {
         play()
     };
-
-    /**
-     * Navigate to previous screen
-     * @returns {*}
-     */
-    const navigateBack = () => {
-    }
 
     if (!workout) {
         return <View/>;
@@ -58,7 +52,7 @@ const PreviewWorkout = ({workout, play, close}) => {
 
     return (
         <View style={styles.root}>
-            <TouchableOpacity style={styles.btnStyle} onPress={() => close()}>
+            <TouchableOpacity style={styles.closeBtnStyle} onPress={() => close()}>
                 <Entypo name="cross" size={24} color="white"/>
             </TouchableOpacity>
             <View style={[isBigScreen ? styles.wrapper : styles.wrapperStack]}>
@@ -71,14 +65,12 @@ const PreviewWorkout = ({workout, play, close}) => {
                     {sortedWorkoutFits.map((workoutFit, i) =>
                         <WorkoutExerciseCard key={i} workoutFit={workoutFit}/>)}
                 </View>
-
+                <TouchableOpacity
+                    style={styles.startWorkoutBtn}
+                    onPress={playWorkout}>
+                    <Feather name="play" size={24} color="white"/>
+                </TouchableOpacity>
             </View>
-
-            <TouchableOpacity
-                style={styles.startWorkoutBtn}
-                onPress={playWorkout}>
-                <Text style={{fontWeight: "bold"}}>Start Workout</Text>
-            </TouchableOpacity>
         </View>
 
     );
@@ -117,7 +109,7 @@ const styles = StyleSheet.create({
         height: 300,
         overflow: 'scroll',
     },
-    btnStyle: {
+    closeBtnStyle: {
         position: 'fixed',
         top: 10,
         right: 10,
@@ -126,12 +118,18 @@ const styles = StyleSheet.create({
         marginVertical: 20,
     },
     startWorkoutBtn: {
-        alignItems: "center",
-        borderRadius: 18,
-        flexDirection: "column",
-        justifyContent: "center",
-        height: 40,
-        width: "100%",
+        textAlign: "center",
+        backgroundColor: '#ef7a75',
+        borderRadius: '100%',
+        width: 50,
+        height: 50,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        right: 15,
+        bottom: 15,
+        boxShadow: '1px 1px 5px gray'
     },
     card: {
         width: "100%",
@@ -209,20 +207,6 @@ const styles = StyleSheet.create({
     },
     infoSnackbar: {
         backgroundColor: "#282828",
-    },
-    subscribeBtn: {
-        backgroundColor: "white",
-        borderRadius: 10,
-        paddingVertical: 3,
-        width: 100,
-        height: 40,
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    subscribeBtnText: {
-        fontWeight: "bold",
     },
 });
 export default PreviewWorkout;

@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         height: '100%',
         resizeMode: 'cover',
         borderTopLeftRadius: 8,
-        borderBottomRightRadius: 8
+        borderBottomLeftRadius: 8
     },
     thumbnailSmall: {
         width: '100%',

@@ -87,41 +87,22 @@ const CreatorProfile = () => {
                         </Text>
                     </View>
                 </View>
-                <View style={styles.wrapper}>
-                    {workouts.map((item, index) => {
-                        return (
-                            <TouchableOpacity key={index} activeOpacity={0.8} onPress={() => setCurrentWorkout(item)}>
-                                <WorkoutCard workout={item}/>
-                            </TouchableOpacity>
-                        );
-                    })}
-                </View>
-                {/*{workouts.length > 0 ?*/}
-                {/*    <FlatList*/}
-                {/*        showsVerticalScrollIndicator={false}*/}
-                {/*        keyExtractor={workout => workout.id}*/}
-                {/*        numColumns={NUM_OF_COLUMNS}*/}
-                {/*        data={formatData(workouts, NUM_OF_COLUMNS)}*/}
-                {/*        renderItem={({item, index}) => {*/}
-                {/*            if (item.empty) {*/}
-                {/*                return (*/}
-                {/*                    <View style={{flex: 1}}>*/}
-                {/*                        <View style={[styles.emptyWorkoutStyle]}/>*/}
-                {/*                    </View>*/}
-                {/*                );*/}
-                {/*            }*/}
-                {/*            return (*/}
-                {/*                <TouchableOpacity activeOpacity={0.8} onPress={() => setCurrentWorkout(item)}>*/}
-                {/*                    <WorkoutCard workout={item}/>*/}
-                {/*                </TouchableOpacity>*/}
-                {/*            );*/}
-                {/*        }}*/}
-                {/*    /> :*/}
-                {/*    <View style={styles.emptyStateViewStyle}>*/}
-                {/*        <Text style={styles.textEmptyStateStyle}>*/}
-                {/*            {`${username} has no workouts yet `}*/}
-                {/*        </Text>*/}
-                {/*    </View>}*/}
+                {workouts.length > 0 ?
+                    <View style={styles.wrapper}>
+                        {workouts.map((item, index) => {
+                            return (
+                                <TouchableOpacity key={index} activeOpacity={0.8}
+                                                  onPress={() => setCurrentWorkout(item)}>
+                                    <WorkoutCard workout={item}/>
+                                </TouchableOpacity>
+                            );
+                        })}
+                    </View> :
+                    <View style={styles.emptyStateViewStyle}>
+                        <Text style={styles.textEmptyStateStyle}>
+                            {`${username} has no workouts yet `}
+                        </Text>
+                    </View>}
                 {currentWorkout && !shouldPlayWorkout ?
                     <PreviewWorkout
                         workout={currentWorkout}
