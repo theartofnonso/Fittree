@@ -1,4 +1,0 @@
-{
-  "modules": "pre-signup-lambda",
-  "resourceName": "fitpinCognitoPreSignup"
-}
