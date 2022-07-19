@@ -39,7 +39,7 @@ export const fetchCreatorProfile = createAsyncThunk("creatorProfile/get", async 
                 },
             },
         ),
-    )
+    ).catch(err => console.log(err))
     const creators = response.data.listCreators.items
     return creators.length > 0 ? creators[0] : null
 });

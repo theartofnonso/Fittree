@@ -3,12 +3,16 @@
   "serviceConfiguration": {
     "apiName": "fitpinAppSync",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/Users/nonsobiose/FitPin/amplify/backend/api/fitpinAppSync/schema.graphql",
+    "gqlSchemaPath": "/Users/nonsobiose/Fittree/amplify/backend/api/fitpinAppSync/schema.graphql",
     "defaultAuthType": {
       "mode": "AMAZON_COGNITO_USER_POOLS",
       "cognitoUserPoolId": "authfitpinCognito"
     },
     "conflictResolution": {},
-    "additionalAuthTypes": []
+    "additionalAuthTypes": [
+      {
+        "mode": "AWS_IAM"
+      }
+    ]
   }
 }

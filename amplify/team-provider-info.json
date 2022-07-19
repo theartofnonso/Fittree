@@ -1,41 +1,4 @@
 {
-  "prod": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-fitpin-prod-180524-authRole",
-      "UnauthRoleArn": "arn:aws:iam::581896794579:role/amplify-fitpin-prod-180524-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::581896794579:role/amplify-fitpin-prod-180524-authRole",
-      "Region": "eu-west-2",
-      "DeploymentBucketName": "amplify-fitpin-prod-180524-deployment",
-      "UnauthRoleName": "amplify-fitpin-prod-180524-unauthRole",
-      "StackName": "amplify-fitpin-prod-180524",
-      "StackId": "arn:aws:cloudformation:eu-west-2:581896794579:stack/amplify-fitpin-prod-180524/d1a7e860-a61c-11ec-98fd-0a1cbeef9704",
-      "AmplifyAppId": "ddmyrfukjs99t",
-      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-fitpin-prod-180524-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
-    },
-    "categories": {
-      "auth": {
-        "fitpinCognito": {}
-      },
-      "function": {
-        "fitpinCognitoCreateAuthChallenge": {
-          "deploymentBucketName": "amplify-fitpin-prod-180524-deployment",
-          "s3Key": "amplify-builds/fitpinCognitoCreateAuthChallenge-5664463450385a49374c-build.zip"
-        },
-        "fitpinCognitoDefineAuthChallenge": {
-          "deploymentBucketName": "amplify-fitpin-prod-180524-deployment",
-          "s3Key": "amplify-builds/fitpinCognitoDefineAuthChallenge-41316d3975775442314e-build.zip"
-        },
-        "fitpinCognitoPreSignup": {
-          "deploymentBucketName": "amplify-fitpin-prod-180524-deployment",
-          "s3Key": "amplify-builds/fitpinCognitoPreSignup-724859305a4b54684155-build.zip"
-        },
-        "fitpinCognitoVerifyAuthChallengeResponse": {
-          "deploymentBucketName": "amplify-fitpin-prod-180524-deployment",
-          "s3Key": "amplify-builds/fitpinCognitoVerifyAuthChallengeResponse-6f74696a43446477662b-build.zip"
-        }
-      }
-    }
-  },
   "dev": {
     "awscloudformation": {
       "AuthRoleName": "amplify-fitpin-dev-174333-authRole",

@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "fitpinIdentityPool",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "fitpincc259637",
     "userPoolName": "fitpinUserPool",
     "autoVerifiedAttributes": [

@@ -96,9 +96,22 @@
               "userPoolId": "authfitpinCognito"
             }
           },
-          "additionalAuthenticationProviders": []
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ]
         }
-      }
+      },
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "fitpinCognito",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
     }
   },
   "storage": {

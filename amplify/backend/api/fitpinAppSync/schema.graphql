@@ -8,10 +8,10 @@ type Creator @model @auth(rules: [
             allow: owner,
             operations: [create, read, update, delete]
         },
-        {
-            allow: private,
+        {   allow: public,
+            provider: iam,
             operations: [read]
-        },
+        }
     ]){
     id: ID!
     cognitoId: String!
@@ -19,33 +19,7 @@ type Creator @model @auth(rules: [
     preferred_username: String!
     profile: String!
     fits: [Fit] @hasMany(indexName: "byCreator", fields: ["id"])
-    subscribers: [Subscriber] @manyToMany(relationName: "Subscriptions")
     workouts: [Workout] @hasMany(indexName: "byCreator", fields: ["id"])
-    liveWorkouts: [LiveWorkout] @hasMany(indexName: "byCreator", fields: ["id"])
-    workoutPlans: [WorkoutPlan] @hasMany(indexName: "byCreator", fields: ["id"])
-    createdAt: AWSDateTime
-    updatedAt: AWSDateTime
-    owner: String
-}
-
-# Subscribers Table
-type Subscriber @model @auth(rules: [
-        {
-            allow: owner,
-            operations: [create, read, update, delete]
-        },
-        {
-            allow: private,
-            operations: [read]
-        },
-    ]){
-    id: ID!
-    cognitoId: String!
-    username: String!
-    preferred_username: String!
-    profile: String!
-    subscriptions: [Creator] @manyToMany(relationName: "Subscriptions")
-    workouts: [SubscriberWorkout] @hasMany(indexName: "bySubscriber", fields: ["id"])
     createdAt: AWSDateTime
     updatedAt: AWSDateTime
     owner: String
@@ -60,10 +34,10 @@ type Fit @model @auth(rules: [
             allow: owner,
             operations: [create, read, update, delete]
         },
-        {
-            allow: private,
+        {   allow: public,
+            provider: iam,
             operations: [read]
-        },
+        }
     ]){
     id: ID!
     creatorId: ID! @index(name: "byCreator", sortKeyFields: ["title"])
@@ -85,10 +59,10 @@ type Workout @model @auth(rules: [
             allow: owner,
             operations: [create, read, update, delete]
         },
-        {
-            allow: private,
+        {   allow: public,
+            provider: iam,
             operations: [read]
-        },
+        }
     ]){
     id: ID!
     creatorId: ID! @index(name: "byCreator", sortKeyFields: ["title"])
@@ -111,28 +85,6 @@ type Workout @model @auth(rules: [
     owner: String
 }
 
-# Live Workout Table
-type LiveWorkout @model @auth(rules: [
-        {
-            allow: owner,
-            operations: [create, read, update, delete]
-        },
-        {
-            allow: private,
-            operations: [read]
-        },
-    ]){
-    id: ID!
-    creatorId: ID! @index(name: "byCreator", sortKeyFields: ["id"])
-    workout: Workout @hasOne
-    workoutSubscriptions: [SubscriberWorkout] @hasMany(indexName: "byLiveWorkout", fields: ["id"])
-    createdAt: AWSDateTime
-    updatedAt: AWSDateTime
-    type: String @default(value: "LiveWorkout") @index(name: "liveWorkoutsByDate", queryField: "liveWorkoutsByDate", sortKeyFields: ["createdAt"])
-    owner: String
-}
-
-
 # WorkoutFit Table
 # This is a unit of a workout
 # This shares a one-to-one relationship with a fit
@@ -142,10 +94,10 @@ type WorkoutFit @model @auth(rules: [
             allow: owner,
             operations: [create, read, update, delete]
         },
-        {
-            allow: private,
+        {   allow: public,
+            provider: iam,
             operations: [read]
-        },
+        }
     ]){
     id: ID!
     fitId: ID! @index(name: "byFit", sortKeyFields: ["id"])
@@ -159,49 +111,4 @@ type WorkoutFit @model @auth(rules: [
     updatedAt: AWSDateTime
     owner: String
 }
-
-# SubscriberWorkout Table
-type SubscriberWorkout @model @auth(rules: [
-        {
-            allow: owner,
-            operations: [create, read, update, delete]
-        },
-    ]){
-    id: ID!
-    workoutId: ID! @index(name: "byLiveWorkout", sortKeyFields: ["id"])
-    subscriberId: ID! @index(name: "bySubscriber", sortKeyFields: ["id"])
-    workout: LiveWorkout @belongsTo(fields: ["workoutId"])
-    type: String @default(value: "SubscriberWorkout") @index(name: "subscriberWorkoutsByDate", queryField: "subscriberWorkoutsByDate", sortKeyFields: ["createdAt"])
-    createdAt: AWSDateTime
-    updatedAt: AWSDateTime
-    owner: String
-}
-
-# Workout Plan Table
-type WorkoutPlan @model @auth(rules: [
-        {
-            allow: owner,
-            operations: [create, read, update, delete]
-        },
-        {
-            allow: private,
-            operations: [read]
-        },
-    ]){
-    id: ID!
-    creatorID: ID! @index(name: "byCreator", sortKeyFields: ["title"])
-    title: String!
-    description: String!
-    workoutDays: [WorkoutDay!]!
-    createdAt: AWSDateTime
-    updatedAt: AWSDateTime
-    owner: String
-}
-
-type WorkoutDay {
-    workoutId: String
-    dayOfWeek: String!
-    isRestDay: Boolean!
-}
-
 
