@@ -3,6 +3,7 @@ import {Image, StyleSheet, Text, View} from 'react-native-web';
 import {LinearGradient} from "expo-linear-gradient";
 
 const WorkoutCard = ({workout}) => {
+
     return (
         <View style={styles.card}>
             <Image
@@ -57,10 +58,9 @@ const styles = StyleSheet.create({
         display: 'flex',
         borderRadius: 8,
         overflow: 'hidden',
-        margin: 5
     },
     thumbnail: {
-        width: 200,
+        width: '100%',
         height: 250,
     },
     overlay: {

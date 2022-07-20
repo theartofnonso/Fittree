@@ -7,8 +7,11 @@ import WorkoutCard from "../src/components/cards/WorkoutCard";
 import {Feather} from '@expo/vector-icons';
 import PreviewWorkout from "../src/components/modals/workout/PreviewWorkout";
 import PlayCircuitWorkout from "../src/components/modals/workout/PlayCircuitWorkout";
+import {useMediaQuery} from "react-responsive";
 
 const CreatorProfile = () => {
+
+    const isBigScreen = useMediaQuery({query: '(min-width: 700px)'})
 
     /**
      * Retrieve creator's username
@@ -88,10 +91,10 @@ const CreatorProfile = () => {
                     </View>
                 </View>
                 {workouts.length > 0 ?
-                    <View style={styles.wrapper}>
+                    <View style={[isBigScreen ? styles.wrapper : styles.wrapperSmall]}>
                         {workouts.map((item, index) => {
                             return (
-                                <TouchableOpacity key={index} activeOpacity={0.8}
+                                <TouchableOpacity style={styles.temp} key={index} activeOpacity={0.8}
                                                   onPress={() => setCurrentWorkout(item)}>
                                     <WorkoutCard workout={item}/>
                                 </TouchableOpacity>
@@ -118,6 +121,10 @@ const CreatorProfile = () => {
 }
 
 const styles = StyleSheet.create({
+    temp: {
+      borderColor: 'orange',
+      borderWidth: 1
+    },
     root: {
         flex: 1,
     },
@@ -131,8 +138,17 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 200px))',
+        gridTemplateColumns: 'repeat(4, 1fr)',
         justifyContent: 'center',
+        gridGap: 5,
+        margin: 10
+    },
+    wrapperSmall: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        justifyContent: 'center',
+        gridGap: 2,
+        margin: 5
     },
     btnStyle: {
         alignItems: "center",
