@@ -94,7 +94,7 @@ const CreatorProfile = () => {
                     <View style={[isBigScreen ? styles.wrapper : styles.wrapperSmall]}>
                         {workouts.map((item, index) => {
                             return (
-                                <TouchableOpacity style={styles.temp} key={index} activeOpacity={0.8}
+                                <TouchableOpacity key={index} activeOpacity={0.8}
                                                   onPress={() => setCurrentWorkout(item)}>
                                     <WorkoutCard workout={item}/>
                                 </TouchableOpacity>
@@ -121,10 +121,7 @@ const CreatorProfile = () => {
 }
 
 const styles = StyleSheet.create({
-    temp: {
-      borderColor: 'orange',
-      borderWidth: 1
-    },
+
     root: {
         flex: 1,
     },

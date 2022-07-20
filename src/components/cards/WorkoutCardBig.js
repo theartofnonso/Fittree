@@ -6,21 +6,23 @@ import {useMediaQuery} from "react-responsive";
 
 const WorkoutCardBig = props => {
 
-    const isBigScreen = useMediaQuery({query: '(min-width: 800px)'})
+    const isBigScreen = useMediaQuery({query: '(min-width: 700px)'})
 
     return (
         <View style={styles.card}>
-            <Image
-                style={[isBigScreen ? styles.thumbnail : styles.thumbnailSmall]}
-                source={{
-                    uri: 'https://' + props.workout.thumbnailUrl,
-                    cache: 'force-cache',
-                }}
-            />
-            <LinearGradient
-                colors={['transparent', '#000000']}
-                style={styles.overlay}
-            />
+            <View>
+                <Image
+                    style={[isBigScreen ? styles.thumbnail : styles.thumbnailSmall]}
+                    source={{
+                        uri: 'https://' + props.workout.thumbnailUrl,
+                        cache: 'force-cache',
+                    }}
+                />
+                <LinearGradient
+                    colors={['transparent', '#000000']}
+                    style={styles.overlay}
+                />
+            </View>
             <View style={styles.textContainer}>
                 <Text style={[styles.text, styles.textBig]}>{props.workout.title}</Text>
                 <Text style={[styles.text, styles.intensityLevel]}>
@@ -50,7 +52,6 @@ const styles = StyleSheet.create({
     },
     thumbnail: {
         width: '100%',
-        height: '100%',
         resizeMode: 'cover',
         borderTopLeftRadius: 8,
         borderBottomLeftRadius: 8
@@ -68,7 +69,6 @@ const styles = StyleSheet.create({
     textContainer: {
         ...StyleSheet.absoluteFillObject,
         marginHorizontal: 10,
-        marginBottom: 10,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
@@ -101,17 +101,6 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-    },
-    liveText: {
-        color: 'black',
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
-    liveContainer: {
-        borderRadius: 3,
-        paddingHorizontal: 2,
-        width: 40,
-        backgroundColor: '#ffffffff',
     },
 });
 

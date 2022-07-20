@@ -10,7 +10,7 @@ import {Feather} from '@expo/vector-icons';
 
 const PreviewWorkout = ({workout, play, close}) => {
 
-    const isBigScreen = useMediaQuery({query: '(min-width: 800px)'})
+    const isBigScreen = useMediaQuery({query: '(min-width: 700px)'})
 
     /**
      * Play the appropriate workout
@@ -52,24 +52,24 @@ const PreviewWorkout = ({workout, play, close}) => {
 
     return (
         <View style={styles.root}>
-            <TouchableOpacity style={styles.closeBtnStyle} onPress={() => close()}>
-                <Entypo name="cross" size={24} color="white"/>
-            </TouchableOpacity>
-            <View style={[isBigScreen ? styles.wrapper : styles.wrapperStack]}>
-                <View>
-                    <WorkoutCardBig workout={workout}/>
-                </View>
-                <View style={[isBigScreen ? styles.previewInfo : styles.previewInfoStack]}>
-                    <Text style={styles.description}>{workout.description}</Text>
-                    <Text>{displayRestInterval()}</Text>
-                    {sortedWorkoutFits.map((workoutFit, i) =>
-                        <WorkoutExerciseCard key={i} workoutFit={workoutFit}/>)}
-                </View>
-                <TouchableOpacity
-                    style={styles.startWorkoutBtn}
-                    onPress={playWorkout}>
-                    <Feather name="play" size={24} color="white"/>
+            <View style={styles.container}>
+                <TouchableOpacity style={styles.closeBtnStyle} onPress={() => close()}>
+                    <Entypo name="cross" size={24} color="white"/>
                 </TouchableOpacity>
+                <View style={[isBigScreen ? styles.wrapper : styles.wrapperSmall]}>
+                    <WorkoutCardBig workout={workout}/>
+                    <View style={styles.previewInfo}>
+                        <Text style={styles.description}>{workout.description}</Text>
+                        <Text>{displayRestInterval()}</Text>
+                        {sortedWorkoutFits.map((workoutFit, i) =>
+                            <WorkoutExerciseCard key={i} workoutFit={workoutFit}/>)}
+                    </View>
+                    <TouchableOpacity
+                        style={styles.startWorkoutBtn}
+                        onPress={playWorkout}>
+                        <Feather name="play" size={24} color="white"/>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
 
@@ -80,9 +80,15 @@ const styles = StyleSheet.create({
 
     root: {
         position: 'absolute',
-        width: '100%',
-        height: '100%',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
+        overflow: 'hidden',
         backgroundColor: 'rgba(0,0,0,0.6)',
+    },
+    container: {
+        height: '100vh',
     },
     wrapper: {
         display: 'grid',
@@ -92,21 +98,17 @@ const styles = StyleSheet.create({
         margin: 'auto',
         borderRadius: 8,
     },
-    wrapperStack: {
+    wrapperSmall: {
         display: 'grid',
-        gridTemplateColumns: '400px',
-        gridTemplateRows: 'auto',
+        gridTemplateColumns: '300px',
+        gridTemplateRows: '2fr 1.5fr',
+        height: 500,
         backgroundColor: 'white',
-        margin: 'auto',
         borderRadius: 8,
+        margin: 'auto',
     },
     previewInfo: {
         paddingLeft: 10,
-        overflow: 'scroll',
-    },
-    previewInfoStack: {
-        paddingLeft: 10,
-        height: 300,
         overflow: 'scroll',
     },
     closeBtnStyle: {
@@ -144,15 +146,6 @@ const styles = StyleSheet.create({
     overlay: {
         ...StyleSheet.absoluteFillObject,
         borderRadius: 8,
-    },
-    textContainer: {
-        ...StyleSheet.absoluteFillObject,
-        marginHorizontal: 15,
-        marginBottom: 15,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-start",
-        justifyContent: "flex-end",
     },
     text: {
         color: "white",
