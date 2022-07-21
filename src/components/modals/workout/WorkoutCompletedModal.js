@@ -43,7 +43,7 @@ const WorkoutCompletedModal = props => {
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.btnStyle}
-          onPress={() => props.close(true)}
+          onPress={() => props.close()}
           testID="End_Workout_Btn">
           <Text style={{color: 'white', fontWeight: 'bold'}}>
             Close

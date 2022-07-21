@@ -140,6 +140,14 @@ const PlayCircuitWorkout = props => {
     const navigateBack = () => props.navigation.pop();
 
     /**
+     * Close the workout
+     */
+    const closeWorkout = () => {
+        setShowWorkoutCompletedModal(false)
+        props.end()
+    }
+
+    /**
      * Play workout
      */
     const playWorkout = () => {
@@ -182,10 +190,22 @@ const PlayCircuitWorkout = props => {
     return (
         <View style={styles.root}>
             <View style={styles.container}>
+                {isBigScreen &&
+                    <TouchableOpacity style={styles.closeBtnStyle} onPress={() => closeWorkout()}>
+                        <Entypo name="cross" size={32} color="white"/>
+                    </TouchableOpacity>
+                }
                 <View style={[isBigScreen ? styles.wrapper : styles.wrapperSmall]}>
-                    <View style={styles.videoContainer}>
+                    {!isBigScreen &&
+                        <View style={styles.navigationBar}>
+                            <TouchableOpacity onPress={() => closeWorkout()}>
+                                <Entypo name="cross" size={24} color="#282828"/>
+                            </TouchableOpacity>
+                        </View>
+                    }
+                    <View style={[isBigScreen ? styles.videoContainer : styles.videoContainerSmall]}>
                         <Video
-                            style={styles.video}
+                            style={[isBigScreen ? styles.video : styles.videoSmall]}
                             source={{
                                 uri: "https://" + getWorkoutFit().fit.videoUrls[0],
                             }}
@@ -196,37 +216,31 @@ const PlayCircuitWorkout = props => {
                             onLoad={() => setIsLoading(false)}
                         />
                     </View>
-                    <View style={styles.playInfoContainer}>
-                        {!paused ? <View style={styles.playBtnsContainer}>
+                    <View style={[isBigScreen ? styles.playInfoContainer : styles.playInfoContainerSmall]}>
+                        {!paused ? <View style={[ isBigScreen ? styles.playBtnsContainer : styles.playBtnsContainer]}>
+                            <TouchableOpacity style={styles.playBtn} onPress={pauseWorkout}>
+                                <Text>Prev</Text>
+                            </TouchableOpacity>
                             <TouchableOpacity style={styles.playBtn} onPress={seekBackward}>
                                 <Entypo
                                     name="controller-paus"
-                                    size={28}
-                                    color="#282828"
-                                />
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.playBtn} onPress={pauseWorkout}>
-                                <Entypo
-                                    name="controller-jump-to-start"
-                                    size={28}
+                                    size={24}
                                     color="#282828"
                                 />
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.playBtn} onPress={seekForward}>
-                                <Entypo
-                                    name="controller-next"
-                                    size={28}
-                                    color="#282828"
-                                />
+                                <Text>Next</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.playBtn} onPress={navigateToFitPreview}>
-                                <Entypo name="info" size={20} color="#282828"/>
-                            </TouchableOpacity>
+                            {/*<TouchableOpacity style={styles.playBtn} onPress={navigateToFitPreview}>*/}
+                            {/*    <Entypo name="info" size={20} color="#282828"/>*/}
+                            {/*</TouchableOpacity>*/}
                         </View> : null}
-                        <Text style={styles.workoutFitTitle}>{getWorkoutFit().fit.title}</Text>
-                        {getWorkoutFit().repsOrTime === SECS && <Text>{exerciseDuration / 1000}s</Text>}
-                        {getWorkoutFit().repsOrTime === REPS && <Text>{getWorkoutFit().repsOrTimeValue} Reps</Text>}
-                        <Text style={styles.fontSmall}>Round {roundsIndex + 1} of {workout.rounds}</Text>
+                        <View>
+                            <Text style={styles.workoutFitTitle}>{getWorkoutFit().fit.title}</Text>
+                            {getWorkoutFit().repsOrTime === SECS && <Text>{exerciseDuration / 1000}s</Text>}
+                            {getWorkoutFit().repsOrTime === REPS && <Text>{getWorkoutFit().repsOrTimeValue} Reps</Text>}
+                            <Text style={styles.fontSmall}>Round {roundsIndex + 1} of {workout.rounds}</Text>
+                        </View>
                     </View>
                 </View>
             </View>
@@ -243,22 +257,18 @@ const PlayCircuitWorkout = props => {
                     onFinish={() => setShowIntervalModal(false)}/> : null}
             {showWorkoutCompletedModal ?
                 <WorkoutCompletedModal
-                    navigateToWorkoutPreview={navigateBack} close={() => {
-                    setShowWorkoutCompletedModal(false)
-                    props.end()
-                }}/> : null}
+                    navigateToWorkoutPreview={navigateBack} close={closeWorkout}/> : null}
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     root: {
-        position: 'absolute',
+        position: 'fixed',
         top: 0,
         bottom: 0,
         right: 0,
         left: 0,
-        overflow: 'hidden',
         backgroundColor: 'rgba(0,0,0,0.6)',
     },
     container: {
@@ -266,20 +276,33 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         display: 'grid',
-        gridTemplateColumns: '400px 350px',
-        gridTemplateRows: '600px',
+        gridTemplateColumns: '400px 200px',
+        gridTemplateRows: '400px',
         backgroundColor: 'white',
         margin: 'auto',
         borderRadius: 8,
     },
     wrapperSmall: {
-        display: 'grid',
-        gridTemplateColumns: '300px',
-        gridTemplateRows: '1fr 1fr',
-        height: 500,
+        position: 'fixed',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
+        overflow: 'scroll',
+        padding: 8,
         backgroundColor: 'white',
-        borderRadius: 8,
-        margin: 'auto',
+    },
+    navigationBar: {
+        backgroundColor: 'white',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        paddingRight: 8
+    },
+    closeBtnStyle: {
+        position: 'fixed',
+        top: 10,
+        right: 10,
     },
     btnStyle: {
         alignItems: "center",
@@ -288,17 +311,30 @@ const styles = StyleSheet.create({
         height: 40,
     },
     videoContainer: {
+        height: '100%',
+        overflow: 'hidden',
         borderTopLeftRadius: 8,
-        borderTopRightRadius: 8,
-        height: 300,
-        overflow: 'hidden'
+        borderBottomLeftRadius: 8
+    },
+    videoContainerSmall: {
+        height: 400,
+        overflow: 'hidden',
+        backgroundColor: 'black',
+        borderRadius: 8
     },
     video: {
-        height: 300,
+
+    },
+    videoSmall: {
+        ...StyleSheet.absoluteFillObject,
     },
     playInfoContainer: {
+        padding: 10,
+        flexDirection: 'column',
+        justifyContent: 'space-between'
+    },
+    playInfoContainerSmall: {
         paddingTop: 10,
-        paddingLeft: 10
     },
     workoutFitTitle: {
         fontFamily: "Days One",
@@ -308,6 +344,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: 'center',
         marginBottom: 10
+    },
+    playBtnsContainerSmall: {
+
     },
     fontSmall: {
         fontSize: 15,

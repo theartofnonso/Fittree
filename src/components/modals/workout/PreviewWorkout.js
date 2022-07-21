@@ -53,21 +53,30 @@ const PreviewWorkout = ({workout, play, close}) => {
     return (
         <View style={styles.root}>
             <View style={styles.container}>
+                {isBigScreen &&
+                    <TouchableOpacity style={styles.closeBtnStyle} onPress={() => close()}>
+                        <Entypo name="cross" size={32} color="white"/>
+                    </TouchableOpacity>
+                }
                 <View style={[isBigScreen ? styles.wrapper : styles.wrapperSmall]}>
+                    {!isBigScreen &&
+                        <View style={styles.navigationBar}>
+                            <TouchableOpacity onPress={() => close()}>
+                                <Entypo name="cross" size={24} color="#282828"/>
+                            </TouchableOpacity>
+                        </View>
+                    }
                     <WorkoutCardBig workout={workout}/>
-                    <View style={styles.previewInfo}>
+                    <View style={[ isBigScreen ? styles.previewInfo : styles.previewInfoSmall]}>
                         <Text style={styles.description}>{workout.description}</Text>
                         <Text>{displayRestInterval()}</Text>
                         {sortedWorkoutFits.map((workoutFit, i) =>
                             <WorkoutExerciseCard key={i} workoutFit={workoutFit}/>)}
                     </View>
                     <TouchableOpacity
-                        style={[ isBigScreen ? styles.startWorkoutBtn : styles.startWorkoutBtnSmall]}
+                        style={[isBigScreen ? styles.startWorkoutBtn : styles.startWorkoutBtnSmall]}
                         onPress={playWorkout}>
                         <Feather name="play" size={24} color="white"/>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.closeBtnStyle} onPress={() => close()}>
-                        <Entypo name="cross" size={24} color="black"/>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -79,7 +88,7 @@ const PreviewWorkout = ({workout, play, close}) => {
 const styles = StyleSheet.create({
 
     root: {
-        position: 'absolute',
+        position: 'fixed',
         top: 0,
         bottom: 0,
         right: 0,
@@ -98,34 +107,36 @@ const styles = StyleSheet.create({
         borderRadius: 8,
     },
     wrapperSmall: {
-        position: 'absolute',
+        position: 'fixed',
         top: 0,
         bottom: 0,
         right: 0,
         left: 0,
+        overflow: 'scroll',
         backgroundColor: 'white',
+        padding: 8,
     },
     previewInfo: {
-        paddingLeft: 10,
+        overflow: 'scroll',
+        paddingLeft: 10
+    },
+    previewInfoSmall: {
         overflow: 'scroll',
     },
     description: {
         marginVertical: 20,
     },
-    navigationControls: {
-        border: '1px solid orange',
-        width: '100%',
+    navigationBar: {
+        backgroundColor: 'white',
         flexDirection: 'row',
-        justifyContent: 'flex-end',
-        position: 'absolute'
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        paddingRight: 8
     },
     closeBtnStyle: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'absolute',
-        right: 15,
-        top: 15,
+        position: 'fixed',
+        top: 10,
+        right: 10,
     },
     startWorkoutBtn: {
         backgroundColor: '#ef7a75',

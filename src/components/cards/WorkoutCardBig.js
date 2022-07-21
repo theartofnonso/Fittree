@@ -49,21 +49,22 @@ const WorkoutCardBig = props => {
 const styles = StyleSheet.create({
     imageContainer: {
         height: '100%',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        borderTopLeftRadius: 8,
+        borderBottomLeftRadius: 8
     },
     imageContainerSmall: {
         height: 400,
         overflow: 'hidden',
+        borderRadius: 8
     },
     thumbnail: {
         ...StyleSheet.absoluteFillObject,
         resizeMode: 'cover',
-        borderTopLeftRadius: 8,
-        borderBottomLeftRadius: 8
     },
     thumbnailSmall: {
         ...StyleSheet.absoluteFillObject,
-        resizeMode: 'cover'
+        resizeMode: 'cover',
     },
     overlay: {
         ...StyleSheet.absoluteFillObject,
