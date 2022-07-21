@@ -9,8 +9,8 @@ const WorkoutCardBig = props => {
     const isBigScreen = useMediaQuery({query: '(min-width: 700px)'})
 
     return (
-        <View style={styles.card}>
-            <View>
+        <View>
+            <View style={[isBigScreen ? styles.imageContainer : styles.imageContainerSmall]}>
                 <Image
                     style={[isBigScreen ? styles.thumbnail : styles.thumbnailSmall]}
                     source={{
@@ -47,39 +47,40 @@ const WorkoutCardBig = props => {
 };
 
 const styles = StyleSheet.create({
-    card: {
-        flex: 1,
+    imageContainer: {
+        height: '100%',
+        overflow: 'hidden'
+    },
+    imageContainerSmall: {
+        height: 400,
+        overflow: 'hidden',
     },
     thumbnail: {
-        width: '100%',
+        ...StyleSheet.absoluteFillObject,
         resizeMode: 'cover',
         borderTopLeftRadius: 8,
         borderBottomLeftRadius: 8
     },
     thumbnailSmall: {
-        width: '100%',
-        height: 300,
-        resizeMode: 'cover',
-        borderTopLeftRadius: 8,
-        borderTopRightRadius: 8
+        ...StyleSheet.absoluteFillObject,
+        resizeMode: 'cover'
     },
     overlay: {
         ...StyleSheet.absoluteFillObject,
     },
     textContainer: {
         ...StyleSheet.absoluteFillObject,
-        marginHorizontal: 10,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
         justifyContent: 'flex-end',
+        margin: 10,
     },
     text: {
         color: 'white',
     },
     intensityLevel: {
         fontFamily: 'Days One',
-        marginTop: -5,
     },
     textBig: {
         fontFamily: 'Days One',

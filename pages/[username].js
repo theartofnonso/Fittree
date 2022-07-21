@@ -1,6 +1,11 @@
 import {useRouter} from "next/router";
 import React, {useEffect, useState} from "react";
-import {fetchCreatorProfile, selectCreator, selectWorkouts} from "../src/features/CreatorProfileSlice";
+import {
+    fetchCreatorProfile,
+    selectCreator,
+    selectCreatorStatus,
+    selectWorkouts
+} from "../src/features/CreatorProfileSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
@@ -22,6 +27,8 @@ const CreatorProfile = () => {
     const dispatch = useDispatch();
 
     const profile = useSelector(selectCreator)
+
+    const status = useSelector(selectCreatorStatus)
 
     const workouts = useSelector(selectWorkouts)
 
@@ -51,23 +58,23 @@ const CreatorProfile = () => {
         dispatch(fetchCreatorProfile({username: username}));
     }, [username])
 
-    if (profile === null) {
+    if (status !== 'ready') {
         /**
-         * Creator page doesn't exist
+         * Creator page is still loading
+         */
+        return (
+            <View>
+                <Text variant='h5'>Loading creator's page</Text>
+            </View>
+        );
+    } else if (profile === null) {
+        /**
+         * Creator doesn't exist
          */
         return (
             <View>
                 <Text variant='h5'>The page you’re looking for doesn’t exist.</Text>
                 <Text>Want this to be your username? Create your Fittree now.</Text>
-            </View>
-        );
-    } else if (Object.keys(profile).length === 0) {
-        /**
-         * Loading Creator page content
-         */
-        return (
-            <View>
-                <Text>Loading</Text>
             </View>
         );
     } else {

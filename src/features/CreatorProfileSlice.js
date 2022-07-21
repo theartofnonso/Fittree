@@ -5,6 +5,7 @@ import * as queries from "../graphql/queries";
 
 const initialState = {
     profile: null,
+    status: 'loading',
     liveWorkouts: []
 };
 
@@ -20,6 +21,7 @@ const creatorProfileSlice = createSlice({
         builder
             .addCase(fetchCreatorProfile.fulfilled, (state, action) => {
                 state.profile = action.payload;
+                state.status = 'ready'
                 state.liveWorkouts = action.payload.workouts.items.filter(item => item.isLive)
             });
     },
@@ -39,12 +41,14 @@ export const fetchCreatorProfile = createAsyncThunk("creatorProfile/get", async 
                 },
             },
         ),
-    ).catch(err => console.log(err))
+    )
     const creators = response.data.listCreators.items
     return creators.length > 0 ? creators[0] : null
 });
 
 export const selectCreator = state => state.creatorProfile.profile;
+
+export const selectCreatorStatus = state => state.creatorProfile.status;
 
 export const selectWorkout = state => state.creatorProfile.currentWorkout;
 

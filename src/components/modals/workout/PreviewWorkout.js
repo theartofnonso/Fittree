@@ -53,9 +53,6 @@ const PreviewWorkout = ({workout, play, close}) => {
     return (
         <View style={styles.root}>
             <View style={styles.container}>
-                <TouchableOpacity style={styles.closeBtnStyle} onPress={() => close()}>
-                    <Entypo name="cross" size={24} color="white"/>
-                </TouchableOpacity>
                 <View style={[isBigScreen ? styles.wrapper : styles.wrapperSmall]}>
                     <WorkoutCardBig workout={workout}/>
                     <View style={styles.previewInfo}>
@@ -65,9 +62,12 @@ const PreviewWorkout = ({workout, play, close}) => {
                             <WorkoutExerciseCard key={i} workoutFit={workoutFit}/>)}
                     </View>
                     <TouchableOpacity
-                        style={styles.startWorkoutBtn}
+                        style={[ isBigScreen ? styles.startWorkoutBtn : styles.startWorkoutBtnSmall]}
                         onPress={playWorkout}>
                         <Feather name="play" size={24} color="white"/>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.closeBtnStyle} onPress={() => close()}>
+                        <Entypo name="cross" size={24} color="black"/>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
         bottom: 0,
         right: 0,
         left: 0,
-        overflow: 'hidden',
         backgroundColor: 'rgba(0,0,0,0.6)',
     },
     container: {
@@ -92,35 +91,43 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         display: 'grid',
-        gridTemplateColumns: '400px 350px',
-        gridTemplateRows: '600px',
+        gridTemplateColumns: '400px 300px',
+        gridTemplateRows: '500px',
         backgroundColor: 'white',
         margin: 'auto',
         borderRadius: 8,
     },
     wrapperSmall: {
-        display: 'grid',
-        gridTemplateColumns: '300px',
-        gridTemplateRows: '2fr 1.5fr',
-        height: 500,
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
         backgroundColor: 'white',
-        borderRadius: 8,
-        margin: 'auto',
     },
     previewInfo: {
         paddingLeft: 10,
         overflow: 'scroll',
     },
-    closeBtnStyle: {
-        position: 'fixed',
-        top: 10,
-        right: 10,
-    },
     description: {
         marginVertical: 20,
     },
+    navigationControls: {
+        border: '1px solid orange',
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        position: 'absolute'
+    },
+    closeBtnStyle: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        right: 15,
+        top: 15,
+    },
     startWorkoutBtn: {
-        textAlign: "center",
         backgroundColor: '#ef7a75',
         borderRadius: '100%',
         width: 50,
@@ -129,6 +136,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
+        right: 15,
+        bottom: 15,
+        boxShadow: '1px 1px 5px gray'
+    },
+    startWorkoutBtnSmall: {
+        backgroundColor: '#ef7a75',
+        borderRadius: '100%',
+        width: 50,
+        height: 50,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'fixed',
         right: 15,
         bottom: 15,
         boxShadow: '1px 1px 5px gray'
