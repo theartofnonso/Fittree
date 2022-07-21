@@ -1,6 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native-web';
 import {LinearGradient} from "expo-linear-gradient";
+import {Headline} from "react-native-paper";
 
 const WorkoutCard = ({workout}) => {
 
@@ -18,36 +19,12 @@ const WorkoutCard = ({workout}) => {
               style={styles.overlay}
             />
             <View style={styles.textContainer}>
-                <Text style={[styles.text, styles.textBig]}>
+                <Headline style={styles.title}>
                     {workout.title}
-                </Text>
+                </Headline>
                 <Text style={[styles.text, styles.intensityLevel]}>
                     {workout.intensityLevel}
                 </Text>
-                <View style={{flexDirection: 'row'}}>
-                    {workout.equipments.length > 0 ? (
-                        <Text style={styles.text}>
-                            {workout.equipments.slice(0, 3).join(' ')}
-                        </Text>
-                    ) : null}
-                    {workout.equipments.length > 3 ? (
-                        <Text style={styles.text}>{'. . .'}</Text>
-                    ) : null}
-                </View>
-                <View style={styles.bottomCardSection}>
-                    <View style={styles.chipsContainer}>
-                        {workout.bodyParts.slice(0, 3).map((bodyPart, index) => {
-                            return (
-                                <Text key={index} style={styles.chipBtnText}>
-                                    {bodyPart}
-                                </Text>
-                            );
-                        })}
-                        {workout.bodyParts.length > 3 ? (
-                            <Text style={styles.text}>{'. . .'}</Text>
-                        ) : null}
-                    </View>
-                </View>
             </View>
         </View>
     );
@@ -68,15 +45,17 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         ...StyleSheet.absoluteFillObject,
-        marginHorizontal: 10,
-        marginBottom: 10,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
         justifyContent: 'flex-end',
+        padding: 15
     },
     text: {
         color: 'white',
+    },
+    title: {
+        color: 'white'
     },
     intensityLevel: {
         fontFamily: 'Days One',

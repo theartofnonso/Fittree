@@ -1,5 +1,6 @@
 const { withExpo } = require('@expo/next-adapter')
 const withFonts = require('next-fonts')
+const withImages = require("next-images");
 const withPlugins = require('next-compose-plugins')
 
 const withTM = require('next-transpile-modules')([
@@ -7,7 +8,7 @@ const withTM = require('next-transpile-modules')([
 ])
 
 module.exports = withPlugins(
-    [withTM, withFonts, [withExpo, { projectRoot: __dirname }]],
+    [withTM, withFonts, withImages, [withExpo, { projectRoot: __dirname }]],
     {
         // ...
     }

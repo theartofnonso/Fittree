@@ -13,6 +13,7 @@ import {Feather} from '@expo/vector-icons';
 import PreviewWorkout from "../src/components/modals/workout/PreviewWorkout";
 import PlayCircuitWorkout from "../src/components/modals/workout/PlayCircuitWorkout";
 import {useMediaQuery} from "react-responsive";
+import {Avatar, Caption, Title} from "react-native-paper";
 
 const CreatorProfile = () => {
 
@@ -91,10 +92,14 @@ const CreatorProfile = () => {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.infoStyle}>
-                        <Text style={{fontFamily: "Days One"}}>byByJane</Text>
-                        <Text style={{fontSize: 15}}>
+                        <Avatar.Image size={96} source={{
+                            uri: 'https://' + workouts[0].thumbnailUrl,
+                            cache: 'force-cache',
+                        }}/>
+                        <Title style={{fontFamily: "Exo 2", fontWeight: "400"}}>byByJane</Title>
+                        <Caption style={{fontSize: 15, textAlign: 'center'}}>
                             Passionate about improving lives through fitness
-                        </Text>
+                        </Caption>
                     </View>
                 </View>
                 {workouts.length > 0 ?
