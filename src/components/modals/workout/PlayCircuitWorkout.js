@@ -218,10 +218,10 @@ const PlayCircuitWorkout = props => {
                     </View>
                     <View style={[isBigScreen ? styles.playInfoContainer : styles.playInfoContainerSmall]}>
                         {!paused ? <View style={[ isBigScreen ? styles.playBtnsContainer : styles.playBtnsContainer]}>
-                            <TouchableOpacity style={styles.playBtn} onPress={pauseWorkout}>
+                            <TouchableOpacity style={styles.playBtn} onPress={seekBackward}>
                                 <Text>Prev</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.playBtn} onPress={seekBackward}>
+                            <TouchableOpacity style={styles.playBtn} onPress={pauseWorkout}>
                                 <Entypo
                                     name="controller-paus"
                                     size={24}
