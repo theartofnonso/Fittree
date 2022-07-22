@@ -199,9 +199,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "flex-end",
     },
-    videoStyle: {
-        height: Dimensions.get("window").width / 2,
-    },
     workoutFitsContainer: {
         width: "100%",
         display: "flex",

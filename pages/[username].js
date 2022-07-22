@@ -93,13 +93,11 @@ const CreatorProfile = () => {
                     </View>
                     <View style={styles.infoStyle}>
                         <Avatar.Image size={96} source={{
-                            uri: 'https://' + workouts[0].thumbnailUrl,
+                            uri: 'https://' + profile.displayProfile,
                             cache: 'force-cache',
                         }}/>
-                        <Title style={{fontFamily: "Exo 2", fontWeight: "400"}}>byByJane</Title>
-                        <Caption style={{fontSize: 15, textAlign: 'center'}}>
-                            Passionate about improving lives through fitness
-                        </Caption>
+                        <Title style={{fontFamily: "Exo 2", fontWeight: "400"}}>{profile.preferred_username}</Title>
+                        <Caption style={{fontSize: 15, textAlign: 'center'}}>{profile.displayBrief}</Caption>
                     </View>
                 </View>
                 {workouts.length > 0 ?

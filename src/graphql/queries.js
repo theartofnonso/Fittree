@@ -11,6 +11,8 @@ export const listCreators = /* GraphQL */ `
         username
         preferred_username
         profile
+        displayBrief
+      displayProfile
         workouts {
           items {
             id
