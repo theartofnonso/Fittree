@@ -12,12 +12,14 @@ import WorkoutCard from "../src/components/cards/WorkoutCard";
 import {Feather} from '@expo/vector-icons';
 import PreviewWorkout from "../src/components/modals/workout/PreviewWorkout";
 import PlayCircuitWorkout from "../src/components/modals/workout/PlayCircuitWorkout";
-import {useMediaQuery} from "react-responsive";
-import {Avatar, Caption, Title} from "react-native-paper";
+import {Avatar, Caption, Searchbar, Title} from "react-native-paper";
+import {searchExerciseOrWorkout} from "../src/utils/arrUtils";
+import {Container, useMediaQuery, useTheme} from "@mui/material";
 
 const CreatorProfile = () => {
 
-    const isBigScreen = useMediaQuery({query: '(min-width: 700px)'})
+    const theme = useTheme();
+    const isBigScreen = useMediaQuery(theme.breakpoints.up('sm'));
 
     /**
      * Retrieve creator's username
@@ -33,9 +35,23 @@ const CreatorProfile = () => {
 
     const workouts = useSelector(selectWorkouts)
 
+    const [filteredWorkouts, setFilteredWorkouts] = useState(workouts);
+
     const [currentWorkout, setCurrentWorkout] = useState(null)
 
     const [shouldPlayWorkout, setShouldPlayWorkout] = useState(false)
+
+    const [searchQuery, setSearchQuery] = React.useState('');
+
+    /**
+     * Filter workouts
+     * @param query
+     */
+    const onChangeSearch = query => {
+        setSearchQuery(query);
+        const searchResult = searchExerciseOrWorkout(workouts, query)
+        setFilteredWorkouts(searchResult);
+    };
 
     /**
      * Play workout
@@ -83,8 +99,7 @@ const CreatorProfile = () => {
          * Loaded Creator page content
          */
         return (
-            <View style={styles.root}>
-
+            <Container maxWidth="md">
                 <View style={styles.topContainerStyle}>
                     <View style={styles.navBarStyle}>
                         <TouchableOpacity style={styles.btnStyle}>
@@ -100,9 +115,15 @@ const CreatorProfile = () => {
                         <Caption style={{fontSize: 15, textAlign: 'center'}}>{profile.displayBrief}</Caption>
                     </View>
                 </View>
+                <Searchbar
+                    placeholder="Search"
+                    onChangeText={onChangeSearch}
+                    value={searchQuery}
+                    style={{marginTop: 20, marginBottom: 30}}
+                />
                 {workouts.length > 0 ?
                     <View style={[isBigScreen ? styles.wrapper : styles.wrapperSmall]}>
-                        {workouts.map((item, index) => {
+                        {filteredWorkouts.map((item, index) => {
                             return (
                                 <TouchableOpacity key={index} activeOpacity={0.8}
                                                   onPress={() => setCurrentWorkout(item)}>
@@ -125,7 +146,8 @@ const CreatorProfile = () => {
                     <PlayCircuitWorkout
                         workout={currentWorkout}
                         end={() => togglePlayWorkout(false)}/> : null}
-            </View>
+            </Container>
+
         );
     }
 }
@@ -145,10 +167,10 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
+        gridTemplateColumns: 'repeat(3, 1fr)',
         justifyContent: 'center',
-        gridGap: 5,
-        margin: 10
+        gridGap: 2,
+        margin: 5
     },
     wrapperSmall: {
         display: 'grid',
