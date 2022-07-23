@@ -2,11 +2,12 @@ import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native-web';
 import workoutsConstants from '../../utils/workout/workoutsConstants';
 import {LinearGradient} from "expo-linear-gradient";
-import {useMediaQuery} from "react-responsive";
+import {useMediaQuery, useTheme} from "@mui/material";
 
 const WorkoutCardBig = props => {
 
-    const isBigScreen = useMediaQuery({query: '(min-width: 700px)'})
+    const theme = useTheme();
+    const isBigScreen = useMediaQuery(theme.breakpoints.up('sm'));
 
     return (
         <View>

@@ -5,15 +5,16 @@ import WIntervalModal from "./IntervalModal";
 import WPauseModal from "./PauseModal";
 import WorkoutCompletedModal from "./WorkoutCompletedModal";
 import Entypo from "react-native-vector-icons/Entypo";
-import {useMediaQuery} from "react-responsive";
 import {Video} from "expo-av";
+import {useMediaQuery, useTheme} from "@mui/material";
 
 const REPS = "Reps";
 const SECS = "Secs";
 
 const PlayCircuitWorkout = props => {
 
-    const isBigScreen = useMediaQuery({query: '(min-width: 700px)'})
+    const theme = useTheme();
+    const isBigScreen = useMediaQuery(theme.breakpoints.up('sm'));
 
     const [workout, setWorkout] = useState(null);
 
@@ -276,7 +277,7 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         display: 'grid',
-        gridTemplateColumns: '400px 200px',
+        gridTemplateColumns: '300px 250px',
         gridTemplateRows: '400px',
         backgroundColor: 'white',
         margin: 'auto',
@@ -311,7 +312,7 @@ const styles = StyleSheet.create({
         height: 40,
     },
     videoContainer: {
-        height: '100%',
+        height: 400,
         overflow: 'hidden',
         borderTopLeftRadius: 8,
         borderBottomLeftRadius: 8
@@ -323,7 +324,6 @@ const styles = StyleSheet.create({
         borderRadius: 8
     },
     video: {
-
     },
     videoSmall: {
         ...StyleSheet.absoluteFillObject,

@@ -10,11 +10,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
 import {Feather} from '@expo/vector-icons';
-import PreviewWorkout from "../src/components/modals/workout/PreviewWorkout";
-import PlayCircuitWorkout from "../src/components/modals/workout/PlayCircuitWorkout";
 import {Avatar, Caption, Searchbar, Title} from "react-native-paper";
 import {searchExerciseOrWorkout} from "../src/utils/arrUtils";
 import {Container, useMediaQuery, useTheme} from "@mui/material";
+import PreviewWorkout from "../src/components/modals/workout/PreviewWorkout";
+import PlayCircuitWorkout from "../src/components/modals/workout/PlayCircuitWorkout";
 
 const CreatorProfile = () => {
 
@@ -42,6 +42,15 @@ const CreatorProfile = () => {
     const [shouldPlayWorkout, setShouldPlayWorkout] = useState(false)
 
     const [searchQuery, setSearchQuery] = React.useState('');
+
+    /**
+     * Load workouts into filtered workouts
+     */
+    useEffect(() => {
+        if(workouts.length > 0) {
+            setFilteredWorkouts(workouts)
+        }
+    }, [workouts])
 
     /**
      * Filter workouts
@@ -147,7 +156,6 @@ const CreatorProfile = () => {
                         workout={currentWorkout}
                         end={() => togglePlayWorkout(false)}/> : null}
             </Container>
-
         );
     }
 }

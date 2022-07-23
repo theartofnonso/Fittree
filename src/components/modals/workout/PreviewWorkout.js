@@ -1,16 +1,17 @@
 /* eslint-disable */
 import React from "react";
-import {Dimensions, StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
+import {StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
 import workoutsConstants from "../../../utils/workout/workoutsConstants";
 import WorkoutCardBig from "../../cards/WorkoutCardBig";
 import WorkoutExerciseCard from "../../cards/WorkoutExerciseCard";
-import {useMediaQuery} from "react-responsive";
 import Entypo from "react-native-vector-icons/Entypo";
 import {Feather} from '@expo/vector-icons';
+import {useMediaQuery, useTheme} from "@mui/material";
 
-const PreviewWorkout = ({workout, play, close}) => {
+const PreviewWorkout = ({ workout, play, close}) => {
 
-    const isBigScreen = useMediaQuery({query: '(min-width: 700px)'})
+    const theme = useTheme();
+    const isBigScreen = useMediaQuery(theme.breakpoints.up('sm'));
 
     /**
      * Play the appropriate workout
@@ -100,8 +101,8 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         display: 'grid',
-        gridTemplateColumns: '400px 300px',
-        gridTemplateRows: '500px',
+        gridTemplateColumns: '300px 250px',
+        gridTemplateRows: '400px',
         backgroundColor: 'white',
         margin: 'auto',
         borderRadius: 8,
