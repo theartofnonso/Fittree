@@ -7,11 +7,12 @@ import WorkoutCompletedModal from "./WorkoutCompletedModal";
 import Entypo from "react-native-vector-icons/Entypo";
 import {Video} from "expo-av";
 import {useMediaQuery, useTheme} from "@mui/material";
+import {Title} from "react-native-paper";
 
 const REPS = "Reps";
 const SECS = "Secs";
 
-const PlayCircuitWorkout = props => {
+const PlayRepsAndSetsWorkout = props => {
 
     const theme = useTheme();
     const isBigScreen = useMediaQuery(theme.breakpoints.up('sm'));
@@ -21,9 +22,9 @@ const PlayCircuitWorkout = props => {
 
     const [exerciseDuration, setExerciseDuration] = useState(null);
 
-    const [rounds, setRounds] = useState(null);
+    const [exercises, setExercises] = useState(null);
 
-    const [roundsIndex, setRoundsIndex] = useState(0);
+    const [setIndex, setSetIndex] = useState(0);
 
     const [exerciseIndex, setExerciseIndex] = useState(0);
 
@@ -40,6 +41,20 @@ const PlayCircuitWorkout = props => {
     const [showWorkoutCompletedModal, setShowWorkoutCompletedModal] = useState(false)
 
     /**
+     * Get appropriate styling for wrapper
+     * @returns {number}
+     */
+    const getWrapperStyling = () => {
+        if(isBiggerScreen) {
+            return styles.wrapperMd
+        } else if (isBigScreen) {
+            return styles.wrapperLg
+        } else {
+            return styles.wrapperXs
+        }
+    }
+
+    /**
      * Load Workout from either Store or from navigation
      */
     useEffect(() => {
@@ -52,13 +67,21 @@ const PlayCircuitWorkout = props => {
      * @param workout
      */
     const loadWorkout = (workout) => {
-        let rounds = new Array(workout.rounds);
-        for (let i = 0; i < rounds.length; i++) {
-            rounds[i] = Array.from(workout.workoutFits.items).sort((a, b) => a.index - b.index);
+
+        let exercises = new Array(workout.workoutFits.items.length);
+        const sortedWorkoutFits = Array.from(workout.workoutFits.items).sort((a, b) => a.index - b.index);
+        for (let i = 0; i < exercises.length; i++) {
+            const exercise = sortedWorkoutFits[i]
+            const sets = new Array(exercise.sets);
+            for (let i = 0; i < sets.length; i++) {
+                sets[i] = exercise;
+            }
+            exercises[i] = sets;
         }
-        setRounds(rounds);
+        setExercises(exercises);
+
         // Set initial ExerciseDuration
-        setExerciseDuration(rounds[0][0].repsOrTimeValue)
+        setExerciseDuration(exercises[0][0].repsOrTimeValue)
         setWorkout(workout);
     };
 
@@ -85,53 +108,60 @@ const PlayCircuitWorkout = props => {
     }, [paused, showIntervalModal, exerciseDuration]);
 
     /**
-     * Seek through exercises
+     * Seek through fits
      */
     const seekForward = () => {
 
-        const nextRoundsIndex = roundsIndex + 1;
         const nextExerciseIndex = exerciseIndex + 1;
+        const nextSetIndex = setIndex + 1;
 
-        if (!isPlayMode()) {
-            if (nextExerciseIndex < workoutFromStore.workoutFits.items.length) {
+        if(!isPlayMode()) {
+            if (nextExerciseIndex < props.route.params.payload.workout.workoutFits.items.length) {
                 setExerciseIndex(nextExerciseIndex);
                 setExerciseDuration(getWorkoutFit().repsOrTimeValue);
             }
             return;
         }
 
-        if (nextExerciseIndex >= rounds[roundsIndex].length) {
-            if (nextRoundsIndex >= rounds.length) {
+        if (nextSetIndex >= exercises[exerciseIndex].length) {
+            if (nextExerciseIndex >= exercises.length) {
                 setShowWorkoutCompletedModal(true)
             } else {
-                setRoundsIndex(nextRoundsIndex);
-                setExerciseIndex(0);
-                setExerciseDuration(rounds[0][0].repsOrTimeValue);
-                setIntervalModalDescription("Next Round");
-                setIntervalModalTime(workout.roundsInterval);
+                setExerciseIndex(nextExerciseIndex);
+                setSetIndex(0);
+                setExerciseDuration(exercises[0][0].repsOrTimeValue);
+                setIntervalModalDescription("Next Exercise");
+                setIntervalModalTime(workout.exerciseInterval);
                 setShowIntervalModal(true);
             }
         } else {
-            setExerciseIndex(nextExerciseIndex);
+            setSetIndex(nextSetIndex);
             setExerciseDuration(getWorkoutFit().repsOrTimeValue);
-            setIntervalModalDescription(rounds[roundsIndex][nextExerciseIndex].fit.title);
-            setIntervalModalTime(workout.exerciseInterval);
+            setIntervalModalDescription(exercises[exerciseIndex][setIndex].fit.title);
+            setIntervalModalTime(workout.setsInterval);
             setShowIntervalModal(true);
         }
-
     };
 
     /**
      * Seek through fits
      */
     const seekBackward = () => {
-
         const prevExerciseIndex = exerciseIndex - 1;
+        const prevSetIndex = setIndex - 1;
 
-        if (prevExerciseIndex >= 0) {
-            setExerciseIndex(prevExerciseIndex);
+        if(!isPlayMode()) {
+            if (prevExerciseIndex >= 0) {
+                setExerciseIndex(prevExerciseIndex);
+            } else {
+                setExerciseIndex(0);
+            }
         } else {
-            setExerciseIndex(0);
+            if (prevSetIndex >= 0) {
+                setSetIndex(prevSetIndex);
+            } else {
+                setSetIndex(0);
+            }
         }
     };
 
@@ -185,23 +215,7 @@ const PlayCircuitWorkout = props => {
     /**
      * Get the workoutFit
      */
-    const getWorkoutFit = () => {
-        return rounds[roundsIndex][exerciseIndex];
-    }
-
-    /**
-     * Get appropriate styling for wrapper
-     * @returns {number}
-     */
-    const getWrapperStyling = () => {
-        if(isBiggerScreen) {
-            return styles.wrapperMd
-        } else if (isBigScreen) {
-            return styles.wrapperLg
-        } else {
-            return styles.wrapperXs
-        }
-    }
+    const getWorkoutFit = () => exercises[exerciseIndex][setIndex];
 
     return (
         <View style={styles.root}>
@@ -233,7 +247,7 @@ const PlayCircuitWorkout = props => {
                         />
                     </View>
                     <View style={[isBigScreen ? styles.playInfoContainer : styles.playInfoContainerSmall]}>
-                        {!paused ? <View style={[ isBigScreen ? styles.playBtnsContainer : styles.playBtnsContainerSmall]}>
+                        {!paused ? <View style={[ isBigScreen ? styles.playBtnsContainer : styles.playBtnsContainer]}>
                             <TouchableOpacity style={styles.playBtn} onPress={seekBackward}>
                                 <Text>Prev</Text>
                             </TouchableOpacity>
@@ -252,10 +266,11 @@ const PlayCircuitWorkout = props => {
                             {/*</TouchableOpacity>*/}
                         </View> : null}
                         <View>
-                            <Text style={styles.workoutFitTitle}>{getWorkoutFit().fit.title}</Text>
-                            {getWorkoutFit().repsOrTime === SECS && <Text>{exerciseDuration / 1000}s</Text>}
-                            {getWorkoutFit().repsOrTime === REPS && <Text>{getWorkoutFit().repsOrTimeValue} Reps</Text>}
-                            <Text style={styles.fontSmall}>Round {roundsIndex + 1} of {workout.rounds}</Text>
+                            <Title style={styles.workoutFitTitle}>{getWorkoutFit().fit.title}</Title>
+                            {getWorkoutFit().repsOrTime === SECS && <Title>{exerciseDuration / 1000}s</Title>}
+                            {getWorkoutFit().repsOrTime === REPS && <Title>{getWorkoutFit().repsOrTimeValue} Reps</Title>}
+                            {isPlayMode() && <Title style={styles.fontSmall}>Set {setIndex + 1} of {getWorkoutFit().sets}</Title>}
+                            {isPlayMode() && <Title style={styles.fontSmall}>Exercise {exerciseIndex + 1} of {exercises.length}</Title>}
                         </View>
                     </View>
                 </View>
@@ -387,4 +402,4 @@ const styles = StyleSheet.create({
         marginRight: 8,
     }
 });
-export default PlayCircuitWorkout;
+export default PlayRepsAndSetsWorkout;

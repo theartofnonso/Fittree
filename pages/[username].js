@@ -15,6 +15,8 @@ import {searchExerciseOrWorkout} from "../src/utils/arrUtils";
 import {Container, useMediaQuery, useTheme} from "@mui/material";
 import PreviewWorkout from "../src/components/modals/workout/PreviewWorkout";
 import PlayCircuitWorkout from "../src/components/modals/workout/PlayCircuitWorkout";
+import workoutsConstants from "../src/utils/workout/workoutsConstants";
+import PlayRepsAndSetsWorkout from "../src/components/modals/workout/PlayRepsAndSetsWorkout";
 
 const CreatorProfile = () => {
 
@@ -47,7 +49,7 @@ const CreatorProfile = () => {
      * Load workouts into filtered workouts
      */
     useEffect(() => {
-        if(workouts.length > 0) {
+        if (workouts.length > 0) {
             setFilteredWorkouts(workouts)
         }
     }, [workouts])
@@ -74,6 +76,23 @@ const CreatorProfile = () => {
      */
     const closePreview = () => {
         setCurrentWorkout(null)
+    }
+
+    /**
+     * Display appropriate workout play component
+     * @returns {JSX.Element}
+     */
+    const getWorkoutComponent = () => {
+        if (currentWorkout.type === workoutsConstants.workoutType.CIRCUIT) {
+            return <PlayCircuitWorkout
+                workout={currentWorkout}
+                end={() => togglePlayWorkout(false)}/>
+
+        } else {
+            return <PlayRepsAndSetsWorkout
+                workout={currentWorkout}
+                end={() => togglePlayWorkout(false)}/>
+        }
     }
 
     /**
@@ -151,10 +170,7 @@ const CreatorProfile = () => {
                         workout={currentWorkout}
                         play={() => togglePlayWorkout(true)}
                         close={closePreview}/> : null}
-                {shouldPlayWorkout ?
-                    <PlayCircuitWorkout
-                        workout={currentWorkout}
-                        end={() => togglePlayWorkout(false)}/> : null}
+                {shouldPlayWorkout ? getWorkoutComponent() : null}
             </Container>
         );
     }

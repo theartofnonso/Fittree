@@ -12,6 +12,7 @@ const PreviewWorkout = ({ workout, play, close}) => {
 
     const theme = useTheme();
     const isBigScreen = useMediaQuery(theme.breakpoints.up('sm'));
+    const isBiggerScreen = useMediaQuery(theme.breakpoints.up('md'));
 
     /**
      * Play the appropriate workout
@@ -51,6 +52,20 @@ const PreviewWorkout = ({ workout, play, close}) => {
 
     };
 
+    /**
+     * Get appropriate styling for wrapper
+     * @returns {number}
+     */
+    const getWrapperStyling = () => {
+        if(isBiggerScreen) {
+            return styles.wrapperMd
+        } else if (isBigScreen) {
+            return styles.wrapperLg
+        } else {
+            return styles.wrapperXs
+        }
+    }
+
     return (
         <View style={styles.root}>
             <View style={styles.container}>
@@ -59,7 +74,7 @@ const PreviewWorkout = ({ workout, play, close}) => {
                         <Entypo name="cross" size={32} color="white"/>
                     </TouchableOpacity>
                 }
-                <View style={[isBigScreen ? styles.wrapper : styles.wrapperSmall]}>
+                <View style={[getWrapperStyling()]}>
                     {!isBigScreen &&
                         <View style={styles.navigationBar}>
                             <TouchableOpacity onPress={() => close()}>
@@ -99,15 +114,7 @@ const styles = StyleSheet.create({
     container: {
         height: '100vh',
     },
-    wrapper: {
-        display: 'grid',
-        gridTemplateColumns: '300px 250px',
-        gridTemplateRows: '400px',
-        backgroundColor: 'white',
-        margin: 'auto',
-        borderRadius: 8,
-    },
-    wrapperSmall: {
+    wrapperXs: {
         position: 'fixed',
         top: 0,
         bottom: 0,
@@ -116,6 +123,22 @@ const styles = StyleSheet.create({
         overflow: 'scroll',
         backgroundColor: 'white',
         padding: 8,
+    },
+    wrapperMd: {
+        display: 'grid',
+        gridTemplateColumns: '350px 300px',
+        gridTemplateRows: '400px',
+        backgroundColor: 'white',
+        margin: 'auto',
+        borderRadius: 8,
+    },
+    wrapperLg: {
+        display: 'grid',
+        gridTemplateColumns: '300px 250px',
+        gridTemplateRows: '400px',
+        backgroundColor: 'white',
+        margin: 'auto',
+        borderRadius: 8,
     },
     previewInfo: {
         overflow: 'scroll',
