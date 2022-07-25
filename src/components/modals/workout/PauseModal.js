@@ -7,12 +7,9 @@ const PauseModal = props => {
 
   return (
     <View style={styles.root}>
-      <View>
+      <View style={styles.container}>
         <TouchableOpacity onPress={props.play}>
           <Entypo name="controller-play" size={50} color="white" />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={props.close} style={styles.btnStyle}>
-          <Entypo name="cross" size={40} color="#fafafa" />
         </TouchableOpacity>
       </View>
 
@@ -36,11 +33,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-  },
-  btnStyle: {
-    fontSize: 20,
-    position: "absolute",
-    bottom: 50,
   },
 });
 

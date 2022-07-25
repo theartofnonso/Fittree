@@ -191,16 +191,30 @@ const PlayCircuitWorkout = props => {
     }
 
     /**
-     * Get appropriate styling for wrapper
+     * Get appropriate styling for wrapper component
      * @returns {number}
      */
     const getWrapperStyling = () => {
         if(isBiggerScreen) {
-            return styles.wrapperMd
-        } else if (isBigScreen) {
             return styles.wrapperLg
+        } else if (isBigScreen) {
+            return styles.wrapperMd
         } else {
             return styles.wrapperXs
+        }
+    }
+
+    /**
+     * Get appropriate styling for video component
+     * @returns {number}
+     */
+    const getVideoStyling = () => {
+        if(isBiggerScreen) {
+            return styles.videoLg
+        } else if (isBigScreen) {
+            return styles.videoMd
+        } else {
+            return styles.videoXs
         }
     }
 
@@ -225,7 +239,7 @@ const PlayCircuitWorkout = props => {
                     }
                     <View style={[isBigScreen ? styles.videoContainer : styles.videoContainerSmall]}>
                         <Video
-                            style={[isBigScreen ? styles.video : styles.videoSmall]}
+                            style={[getVideoStyling()]}
                             source={{
                                 uri: "https://" + getWorkoutFit().fit.videoUrls[0],
                             }}
@@ -303,14 +317,15 @@ const styles = StyleSheet.create({
     },
     wrapperMd: {
         display: 'grid',
-        gridTemplateColumns: '350px 250px',
+        gridTemplateColumns: '300px 250px',
         backgroundColor: 'white',
         margin: 'auto',
         borderRadius: 8,
     },
     wrapperLg: {
         display: 'grid',
-        gridTemplateColumns: '300px 250px',
+        gridTemplateColumns: '400px 400px',
+        gridTemplateRows: '500px',
         backgroundColor: 'white',
         margin: 'auto',
         borderRadius: 8,
@@ -334,7 +349,9 @@ const styles = StyleSheet.create({
         height: 40,
     },
     videoContainer: {
-        height: 300,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
         backgroundColor: 'black',
         borderTopLeftRadius: 8,
         borderBottomLeftRadius: 8,
@@ -344,16 +361,15 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
         borderRadius: 8
     },
-    video: {
+    videoXs: {
         flex: 1,
         ...StyleSheet.absoluteFillObject,
+    },
+    videoMd: {
         borderTopLeftRadius: 8,
         borderBottomLeftRadius: 8,
     },
-    videoSmall: {
-        flex: 1,
-        ...StyleSheet.absoluteFillObject,
-    },
+    videoLg: {},
     playInfoContainer: {
         padding: 10,
         flexDirection: 'column',
@@ -369,7 +385,8 @@ const styles = StyleSheet.create({
     playBtnsContainer: {
         flexDirection: "row",
         alignItems: 'center',
-        marginBottom: 10,
+        justifyContent: 'center',
+        flex: 1
     },
     playBtnsContainerSmall: {
         flex: 1,

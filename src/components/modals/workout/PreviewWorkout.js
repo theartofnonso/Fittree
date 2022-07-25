@@ -58,9 +58,9 @@ const PreviewWorkout = ({ workout, play, close}) => {
      */
     const getWrapperStyling = () => {
         if(isBiggerScreen) {
-            return styles.wrapperMd
-        } else if (isBigScreen) {
             return styles.wrapperLg
+        } else if (isBigScreen) {
+            return styles.wrapperMd
         } else {
             return styles.wrapperXs
         }
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     },
     wrapperMd: {
         display: 'grid',
-        gridTemplateColumns: '350px 300px',
+        gridTemplateColumns: '300px 300px',
         gridTemplateRows: '400px',
         backgroundColor: 'white',
         margin: 'auto',
@@ -134,8 +134,8 @@ const styles = StyleSheet.create({
     },
     wrapperLg: {
         display: 'grid',
-        gridTemplateColumns: '300px 250px',
-        gridTemplateRows: '400px',
+        gridTemplateColumns: '400px 400px',
+        gridTemplateRows: '500px',
         backgroundColor: 'white',
         margin: 'auto',
         borderRadius: 8,
