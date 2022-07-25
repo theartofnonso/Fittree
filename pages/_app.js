@@ -5,10 +5,6 @@ import {configureFonts, Provider as PaperProvider} from 'react-native-paper';
 import store from "../store/store";
 import Head from "next/head";
 
-// const aws_exports_override = {...awsConfigs, aws_appsync_authenticationType: "AWS_IAM", ssr: true}
-// Amplify.configure(aws_exports_override);
-
-//Old approach
 Amplify.configure({...awsConfigs, ssr: true});
 
 const fontConfig = {

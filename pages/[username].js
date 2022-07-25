@@ -10,13 +10,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
 import {Feather} from '@expo/vector-icons';
-import {Avatar, Caption, Searchbar, TextInput, Title} from "react-native-paper";
+import {Avatar, Caption, TextInput, Title} from "react-native-paper";
 import {searchExerciseOrWorkout} from "../src/utils/arrUtils";
 import {Container, useMediaQuery, useTheme} from "@mui/material";
 import PreviewWorkout from "../src/components/modals/workout/PreviewWorkout";
 import PlayCircuitWorkout from "../src/components/modals/workout/PlayCircuitWorkout";
 import workoutsConstants from "../src/utils/workout/workoutsConstants";
 import PlayRepsAndSetsWorkout from "../src/components/modals/workout/PlayRepsAndSetsWorkout";
+import Favicon from "../src/components/illustrations/Favicon";
 
 const CreatorProfile = () => {
 
@@ -108,9 +109,18 @@ const CreatorProfile = () => {
          * Creator page is still loading
          */
         return (
-            <View>
-                <Text variant='h5'>Loading creator's page</Text>
-            </View>
+            <Container
+                maxWidth="md"
+                sx={{
+                    height: '100vh',
+                    display: 'flex',
+                    padding: 1,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}>
+                <Favicon/>
+            </Container>
         );
     } else if (profile === null) {
         /**
