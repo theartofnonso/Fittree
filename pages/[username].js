@@ -10,7 +10,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
 import {Feather} from '@expo/vector-icons';
-import {Avatar, Caption, Searchbar, Title} from "react-native-paper";
+import {Avatar, Caption, Searchbar, TextInput, Title} from "react-native-paper";
 import {searchExerciseOrWorkout} from "../src/utils/arrUtils";
 import {Container, useMediaQuery, useTheme} from "@mui/material";
 import PreviewWorkout from "../src/components/modals/workout/PreviewWorkout";
@@ -143,11 +143,16 @@ const CreatorProfile = () => {
                         <Caption style={{fontSize: 15, textAlign: 'center'}}>{profile.displayBrief}</Caption>
                     </View>
                 </View>
-                <Searchbar
-                    placeholder="Search"
-                    onChangeText={onChangeSearch}
+                <TextInput
+                    autoCapitalize="none"
+                    mode="outlined"
+                    autoCorrect={false}
                     value={searchQuery}
-                    style={{marginTop: 20, marginBottom: 30}}
+                    label="Search workouts"
+                    maxLength={15}
+                    style={styles.textInputStyle}
+                    outlineColor='white'
+                    onChangeText={value => onChangeSearch(value.toLowerCase())}
                 />
                 {workouts.length > 0 ?
                     <View style={[isBigScreen ? styles.wrapper : styles.wrapperSmall]}>
@@ -192,16 +197,12 @@ const styles = StyleSheet.create({
     wrapper: {
         display: 'grid',
         gridTemplateColumns: 'repeat(3, 1fr)',
-        justifyContent: 'center',
-        gridGap: 2,
-        margin: 5
+        gridGap: 8,
     },
     wrapperSmall: {
         display: 'grid',
         gridTemplateColumns: 'repeat(2, 1fr)',
-        justifyContent: 'center',
-        gridGap: 2,
-        margin: 5
+        gridGap: 8,
     },
     btnStyle: {
         alignItems: "center",
@@ -226,6 +227,12 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "column",
         marginBottom: 20,
+    },
+    textInputStyle: {
+        backgroundColor: "#f6f6f6",
+        flex: 1,
+        height: 40,
+        marginVertical: 20,
     },
     emptyWorkoutStyle: {
         backgroundColor: "transparent",

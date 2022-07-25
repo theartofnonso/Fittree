@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        paddingRight: 8
+        paddingRight: 8,
     },
     closeBtnStyle: {
         position: 'fixed',

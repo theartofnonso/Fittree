@@ -7,6 +7,7 @@ import WorkoutCompletedModal from "./WorkoutCompletedModal";
 import Entypo from "react-native-vector-icons/Entypo";
 import {Video} from "expo-av";
 import {useMediaQuery, useTheme} from "@mui/material";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const REPS = "Reps";
 const SECS = "Secs";
@@ -217,6 +218,9 @@ const PlayCircuitWorkout = props => {
                             <TouchableOpacity onPress={() => closeWorkout()}>
                                 <Entypo name="cross" size={24} color="#282828"/>
                             </TouchableOpacity>
+                            <TouchableOpacity style={styles.playBtn} onPress={navigateToFitPreview}>
+                                <Ionicons name="information-circle-sharp" size={24} color="black" />
+                            </TouchableOpacity>
                         </View>
                     }
                     <View style={[isBigScreen ? styles.videoContainer : styles.videoContainerSmall]}>
@@ -247,9 +251,6 @@ const PlayCircuitWorkout = props => {
                             <TouchableOpacity style={styles.playBtn} onPress={seekForward}>
                                 <Text>Next</Text>
                             </TouchableOpacity>
-                            {/*<TouchableOpacity style={styles.playBtn} onPress={navigateToFitPreview}>*/}
-                            {/*    <Entypo name="info" size={20} color="#282828"/>*/}
-                            {/*</TouchableOpacity>*/}
                         </View> : null}
                         <View>
                             <Text style={styles.workoutFitTitle}>{getWorkoutFit().fit.title}</Text>
@@ -317,7 +318,7 @@ const styles = StyleSheet.create({
     navigationBar: {
         backgroundColor: 'white',
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
         alignItems: 'center',
         paddingRight: 8
     },
@@ -369,7 +370,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: 'center',
         marginBottom: 10,
-        border: '1px solid red'
     },
     playBtnsContainerSmall: {
         flex: 1,

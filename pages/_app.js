@@ -50,6 +50,7 @@ const theme = {
     animation: {
         scale: 1.0,
     },
+    version: 3
 };
 
 function MyApp({Component, pageProps}) {
