@@ -127,7 +127,7 @@ const CreatorProfile = () => {
          * Loaded Creator page content
          */
         return (
-            <Container maxWidth="md">
+            <Container maxWidth="md" sx={{padding: 1}}>
                 <View style={styles.topContainerStyle}>
                     <View style={styles.navBarStyle}>
                         <TouchableOpacity style={styles.btnStyle}>
@@ -183,9 +183,6 @@ const CreatorProfile = () => {
 
 const styles = StyleSheet.create({
 
-    root: {
-        flex: 1,
-    },
     navBarStyle: {
         flexDirection: "row",
         justifyContent: "space-between",

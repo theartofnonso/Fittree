@@ -3,6 +3,7 @@ import {Amplify} from "@aws-amplify/core";
 import {Provider} from "react-redux";
 import {configureFonts, Provider as PaperProvider} from 'react-native-paper';
 import store from "../store/store";
+import Head from "next/head";
 
 // const aws_exports_override = {...awsConfigs, aws_appsync_authenticationType: "AWS_IAM", ssr: true}
 // Amplify.configure(aws_exports_override);
@@ -50,7 +51,6 @@ const theme = {
     animation: {
         scale: 1.0,
     },
-    version: 3
 };
 
 function MyApp({Component, pageProps}) {
@@ -59,11 +59,16 @@ function MyApp({Component, pageProps}) {
     //     .then(d => console.log('data: ', d))
     //     .catch(e => console.log('error: ', e))
     return (
-        <Provider store={store}>
-            <PaperProvider theme={theme}>
-                <Component {...pageProps} />
-            </PaperProvider>
-        </Provider>
+        <>
+            <Head>
+                <title>Fittree</title>
+            </Head>
+            <Provider store={store}>
+                <PaperProvider theme={theme}>
+                    <Component {...pageProps} />
+                </PaperProvider>
+            </Provider>
+        </>
     )
 }
 
