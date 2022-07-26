@@ -65,24 +65,6 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end",
         flex: 1,
     },
-    textBig: {
-        fontFamily: "Days One",
-    },
-    chip: {
-        marginRight: 8,
-        borderWidth: 1,
-        borderColor: "white",
-        borderRadius: 12,
-        color: "white",
-        paddingVertical: 2,
-        paddingHorizontal: 5,
-    },
-    chipsContainer: {
-        width: "100%",
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "flex-end",
-    },
 });
 
 export default WorkoutExerciseCard;

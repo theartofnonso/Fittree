@@ -388,10 +388,6 @@ const styles = StyleSheet.create({
     playInfoContainerSmall: {
         paddingTop: 10,
     },
-    workoutFitTitle: {
-        fontFamily: "Days One",
-        fontSize: 25,
-    },
     playBtnsContainer: {
         flexDirection: "row",
         alignItems: 'center',
@@ -403,12 +399,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    fontSmall: {
-        fontSize: 15,
-    },
-    textColor: {
-        color: '#282828'
     },
     playBtn: {
         marginRight: 8,

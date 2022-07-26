@@ -52,20 +52,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         padding: 15
     },
-    text: {
-        color: 'white',
-    },
-    title: {
-        color: 'white'
-    },
-    intensityLevel: {
-        fontFamily: 'Days One',
-        marginTop: -5,
-    },
-    textBig: {
-        fontFamily: 'Days One',
-        fontSize: 18,
-    },
     chipBtnText: {
         fontSize: 12,
         color: 'white',

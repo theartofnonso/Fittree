@@ -107,21 +107,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         margin: 10,
     },
-    text: {
-        color: 'white',
-    },
-    intensityLevel: {
-        fontFamily: 'Days One',
-    },
-    textBig: {
-        fontFamily: 'Days One',
-        fontSize: 18,
-    },
-    chipBtnText: {
-        fontSize: 12,
-        color: 'white',
-        marginRight: 8,
-    },
     chipsContainer: {
         flexGrow: 1,
         display: 'flex',

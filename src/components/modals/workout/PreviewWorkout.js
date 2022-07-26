@@ -211,27 +211,6 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         borderRadius: 8,
     },
-    text: {
-        color: "white",
-    },
-    textBig: {
-        fontFamily: "Days One",
-    },
-    chipBtn: {
-        marginRight: 8,
-        backgroundColor: "white",
-        borderRadius: 18,
-        color: "white",
-        paddingHorizontal: 8,
-    },
-    chipsContainer: {
-        flexGrow: 0,
-    },
-    chipsContents: {
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "flex-end",
-    },
     workoutFitsContainer: {
         width: "100%",
         display: "flex",
@@ -245,12 +224,6 @@ const styles = StyleSheet.create({
     },
     restInterval: {
         marginBottom: 10,
-    },
-    textBold: {
-        fontWeight: "bold",
-    },
-    textWhite: {
-        color: "white",
     },
     scrollView: {
         marginBottom: 10,
