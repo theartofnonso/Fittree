@@ -183,8 +183,10 @@ const CreatorProfile = () => {
                             uri: 'https://' + profile.displayProfile,
                             cache: 'force-cache',
                         }}/>
-                        <Title style={{fontFamily: "Exo 2", fontWeight: "400"}}>{profile.preferred_username}</Title>
-                        <Caption style={{fontSize: 15, textAlign: 'center'}}>{profile.displayBrief}</Caption>
+                        <ThemeProvider theme={theme}>
+                            <Typography variant="h6" textAlign='center'>{profile.preferred_username}</Typography>
+                            <Typography variant="body2" textAlign='center'>{profile.displayBrief}</Typography>
+                        </ThemeProvider>
                     </View>
                 </View>
                 <TextInput

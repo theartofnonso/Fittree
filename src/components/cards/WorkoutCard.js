@@ -1,9 +1,12 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native-web';
 import {LinearGradient} from "expo-linear-gradient";
-import {Headline} from "react-native-paper";
+import {createTheme, responsiveFontSizes, ThemeProvider, Typography} from "@mui/material";
 
 const WorkoutCard = ({workout}) => {
+
+    let theme = createTheme();
+    theme = responsiveFontSizes(theme);
 
     return (
         <View style={styles.card}>
@@ -19,12 +22,10 @@ const WorkoutCard = ({workout}) => {
               style={styles.overlay}
             />
             <View style={styles.textContainer}>
-                <Headline style={styles.title}>
-                    {workout.title}
-                </Headline>
-                <Text style={[styles.text, styles.intensityLevel]}>
-                    {workout.intensityLevel}
-                </Text>
+                <ThemeProvider theme={theme}>
+                    <Typography variant="h6" color='#ffffff'>{workout.title}</Typography>
+                    <Typography variant="body2" color='#ffffff'>{workout.intensityLevel}</Typography>
+                </ThemeProvider>
             </View>
         </View>
     );
