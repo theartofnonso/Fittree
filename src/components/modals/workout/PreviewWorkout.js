@@ -35,27 +35,6 @@ const PreviewWorkout = ({ workout, play, close}) => {
     const sortedWorkoutFits = Array.from(workout.workoutFits.items).sort((a, b) => a.index - b.index);
 
     /**
-     * Display information for intervals
-     * @returns {string}
-     */
-    const displayRestInterval = () => {
-        if (workout.type === workoutsConstants.workoutType.CIRCUIT) {
-            if ((workout.rounds > 1) && workout.roundsInterval > 0) {
-                return `${workout.rounds} rounds\nRest for ${workout.roundsInterval / 1000} secs after each round`;
-            }
-            return "No rest after each round";
-        }
-
-        if (workout.type === workoutsConstants.workoutType.REPS_SETS) {
-            if ((workout.workoutFits.items.length > 1) && workout.setsInterval > 0) {
-                return `Rest for ${workout.setsInterval / 1000} secs after each set`;
-            }
-            return "No rest after each set";
-        }
-
-    };
-
-    /**
      * Get appropriate styling for wrapper
      * @returns {number}
      */
@@ -91,9 +70,6 @@ const PreviewWorkout = ({ workout, play, close}) => {
                             <Typography variant="body2" sx={{ontFamily: 'Montserrat', fontWeight: 300, marginTop: 2, marginRight: 2}}>{workout.description}</Typography>
                         </ThemeProvider>
                         <View style={{marginVertical: 10}}>
-                            <ThemeProvider theme={responsiveFontTheme}>
-                                <Typography variant="body2" sx={{fontFamily: 'Montserrat', fontWeight: 500, fontSize: 10}}>{displayRestInterval()}</Typography>
-                            </ThemeProvider>
                             {sortedWorkoutFits.map((workoutFit, i) =>
                                 <WorkoutExerciseCard key={i} workoutFit={workoutFit}/>)}
                         </View>

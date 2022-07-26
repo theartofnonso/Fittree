@@ -12,7 +12,66 @@ export const listCreators = /* GraphQL */ `
         preferred_username
         profile
         displayBrief
-      displayProfile
+        displayProfile
+        fits {
+          items {
+            id
+            creatorId
+            title
+            description
+            bodyParts
+            equipments
+            videoUrls
+            workoutFits {
+              items {
+                id
+                fitId
+                workoutId
+                fit {
+                  id
+                  creatorId
+                  title
+                  description
+                  bodyParts
+                  equipments
+                  videoUrls
+                  workoutFits {
+                    items {
+                      id
+                      fitId
+                      workoutId
+                      repsOrTime
+                      repsOrTimeValue
+                      sets
+                      index
+                      createdAt
+                      updatedAt
+                      owner
+                    }
+                    nextToken
+                  }
+                  type
+                  createdAt
+                  updatedAt
+                  owner
+                }
+                repsOrTime
+                repsOrTimeValue
+                sets
+                index
+                createdAt
+                updatedAt
+                owner
+              }
+              nextToken
+            }
+            type
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         workouts {
           items {
             id
@@ -73,8 +132,10 @@ export const listCreators = /* GraphQL */ `
             }
             type
             isLive
+            duration
             createdAt
             updatedAt
+            publishedAt
             owner
           }
           nextToken

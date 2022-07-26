@@ -11,7 +11,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
 import {Feather} from '@expo/vector-icons';
 import {Avatar, TextInput} from "react-native-paper";
-import {searchExerciseOrWorkout} from "../src/utils/arrUtils";
+import {searchExerciseOrWorkout} from "../src/utils/workoutAndExerciseUtils";
 import {
     Container,
     createTheme,
@@ -212,9 +212,7 @@ const CreatorProfile = () => {
                         })}
                     </View> :
                     <View style={styles.emptyStateViewStyle}>
-                        <Text style={styles.textEmptyStateStyle}>
-                            {`${username} has no workouts yet `}
-                        </Text>
+                        <Typography variant="body2" textAlign='center' sx={{fontFamily: 'Montserrat', fontSize: 12}}>{`${username} has no workouts`}</Typography>
                     </View>}
                 {currentWorkout && !shouldPlayWorkout ?
                     <PreviewWorkout

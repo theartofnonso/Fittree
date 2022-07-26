@@ -28,7 +28,7 @@ const WorkoutCard = ({workout}) => {
                 </ThemeProvider>
             </View>
             <View style={styles.timerContainer}>
-                <Text style={styles.timerText}>20 mins</Text>
+                <Text style={styles.timerText}>{Math.round(workout.duration / 60000)} mins</Text>
             </View>
         </View>
     );
