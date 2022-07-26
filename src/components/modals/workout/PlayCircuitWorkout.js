@@ -6,7 +6,7 @@ import WPauseModal from "./PauseModal";
 import WorkoutCompletedModal from "./WorkoutCompletedModal";
 import Entypo from "react-native-vector-icons/Entypo";
 import {Video} from "expo-av";
-import {ThemeProvider, Typography, useMediaQuery, useTheme} from "@mui/material";
+import {createTheme, responsiveFontSizes, ThemeProvider, Typography, useMediaQuery, useTheme} from "@mui/material";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 const REPS = "Reps";
@@ -17,6 +17,9 @@ const PlayCircuitWorkout = props => {
     const theme = useTheme();
     const isBigScreen = useMediaQuery(theme.breakpoints.up('sm'));
     const isBiggerScreen = useMediaQuery(theme.breakpoints.up('md'));
+
+    let responsiveFontTheme = createTheme();
+    responsiveFontTheme = responsiveFontSizes(responsiveFontTheme);
 
     const [workout, setWorkout] = useState(null);
 
@@ -268,7 +271,7 @@ const PlayCircuitWorkout = props => {
                                 </TouchableOpacity>
                             </View> : null}
                         <View>
-                            <ThemeProvider theme={theme}>
+                            <ThemeProvider theme={responsiveFontTheme}>
                                 <Typography variant="h6">{getWorkoutFit().fit.title}</Typography>
                                 {
                                     getWorkoutFit().repsOrTime === REPS ?
