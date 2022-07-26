@@ -23,9 +23,12 @@ const WorkoutCard = ({workout}) => {
             />
             <View style={styles.textContainer}>
                 <ThemeProvider theme={theme}>
-                    <Typography variant="h6" color='#ffffff'>{workout.title}</Typography>
-                    <Typography variant="body2" color='#ffffff'>{workout.intensityLevel}</Typography>
+                    <Typography variant="h6" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 900}}>{workout.title}</Typography>
+                    <Typography variant="body2" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 500, fontSize: 10}}>{workout.intensityLevel}</Typography>
                 </ThemeProvider>
+            </View>
+            <View style={styles.timerContainer}>
+                <Text style={styles.timerText}>20 mins</Text>
             </View>
         </View>
     );
@@ -69,16 +72,24 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
-    liveText: {
-        color: 'black',
-        fontWeight: 'bold',
+    timerText: {
+        color: 'white',
+        fontWeight: 300,
         textAlign: 'center',
+        fontFamily: 'Montserrat',
+        fontSize: 10
     },
-    liveContainer: {
-        borderRadius: 3,
-        paddingHorizontal: 2,
-        width: 40,
-        backgroundColor: '#ffffffff',
+    timerContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        backgroundColor: '#ef7a75',
+        position: 'absolute',
+        right: 10,
+        top: 10
     },
 });
 

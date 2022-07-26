@@ -1,7 +1,6 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, TouchableOpacity, View,} from 'react-native';
 //import {convertMilliseconds} from '../../../utils/utils';
-import {Text} from "react-native-web";
 import {createTheme, responsiveFontSizes, ThemeProvider, Typography} from "@mui/material";
 
 const WorkoutCompletedModal = props => {
@@ -32,17 +31,23 @@ const WorkoutCompletedModal = props => {
         <SafeAreaView style={styles.rootStyle}>
             <View style={styles.container}>
                 <ThemeProvider theme={responsiveFontTheme}>
-                    <Typography variant="h6"> Workout Completed</Typography>
-                    <Typography variant="body2"> It took you {calculateWorkoutDuration()}</Typography>
+                    <Typography variant="h6" sx={{
+                        fontFamily: 'Montserrat',
+                        fontWeight: 700
+                    }}> Workout Completed</Typography>
+                    <Typography variant="body2" sx={{
+                        fontFamily: 'Montserrat',
+                        fontWeight: 500
+                    }}> It took you {calculateWorkoutDuration()}</Typography>
                 </ThemeProvider>
                 <TouchableOpacity
                     activeOpacity={0.5}
                     style={styles.btnStyle}
                     onPress={() => props.close()}
                     testID="End_Workout_Btn">
-                    <Text style={{color: 'white', fontWeight: 'bold'}}>
+                    <Typography style={{color: 'white', fontFamily: 'Montserrat', fontWeight: 'bold'}}>
                         Close
-                    </Text>
+                    </Typography>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
@@ -65,7 +70,7 @@ const styles = StyleSheet.create({
     },
     btnStyle: {
         alignItems: 'center',
-        backgroundColor: '#282828',
+        backgroundColor: '#ef7a75',
         borderRadius: 8,
         flexDirection: 'row',
         justifyContent: 'center',

@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, {useEffect, useState} from "react";
-import {StyleSheet, Text, View} from "react-native-web";
+import {StyleSheet, View} from "react-native-web";
+import {Typography} from "@mui/material";
 
 const IntervalModal = props => {
 
@@ -21,9 +22,9 @@ const IntervalModal = props => {
     return (
         <View style={styles.root}>
             <View style={styles.container}>
-                <Text style={styles.textWhite}>
+                <Typography variant="body2" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 500}}>
                     {props.description} in {intervalTime / 1000}s
-                </Text>
+                </Typography>
             </View>
         </View>
     );
@@ -45,9 +46,6 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-    },
-    textWhite: {
-        color: "white",
     },
     btnStyle: {
         fontSize: 20,

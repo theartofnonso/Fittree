@@ -1,3 +1,5 @@
+import '../styles/styles.css'
+
 import awsConfigs from '../src/aws-exports';
 import {Amplify} from "@aws-amplify/core";
 import {Provider} from "react-redux";
@@ -10,19 +12,19 @@ Amplify.configure({...awsConfigs, ssr: true});
 const fontConfig = {
     web: {
         regular: {
-            fontFamily: "Exo 2",
+            fontFamily: "Montserrat",
             fontWeight: "400",
         },
         medium: {
-            fontFamily: "Exo 2",
+            fontFamily: "Montserrat",
             fontWeight: "500",
         },
         light: {
-            fontFamily: "Exo 2",
+            fontFamily: "Montserrat",
             fontWeight: "300",
         },
         thin: {
-            fontFamily: "Exo 2",
+            fontFamily: "Montserrat",
             fontWeight: "100",
         },
     },

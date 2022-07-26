@@ -34,8 +34,8 @@ const WorkoutExerciseCard = props => {
             />
             <View style={styles.textContainer}>
                 <ThemeProvider theme={theme}>
-                    <Typography variant="body1">{props.workoutFit.fit.title}</Typography>
-                    <Typography variant="body2">{displayRepsOrTime()}{props.workoutFit.sets > 0 && ` x ${props.workoutFit.sets} Set(s)`}</Typography>
+                    <Typography variant="body1" sx={{fontFamily: 'Montserrat', fontWeight: 500, fontSize: 12}}>{props.workoutFit.fit.title}</Typography>
+                    <Typography variant="body2" sx={{fontFamily: 'Montserrat', fontWeight: 300, fontSize: 12}}>{displayRepsOrTime()}{props.workoutFit.sets > 0 && ` x ${props.workoutFit.sets} Set(s)`}</Typography>
                 </ThemeProvider>
             </View>
         </View>

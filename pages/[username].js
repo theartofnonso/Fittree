@@ -10,7 +10,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
 import {Feather} from '@expo/vector-icons';
-import {Avatar, Caption, TextInput, Title} from "react-native-paper";
+import {Avatar, TextInput} from "react-native-paper";
 import {searchExerciseOrWorkout} from "../src/utils/arrUtils";
 import {
     Container,
@@ -184,8 +184,8 @@ const CreatorProfile = () => {
                             cache: 'force-cache',
                         }}/>
                         <ThemeProvider theme={theme}>
-                            <Typography variant="h6" textAlign='center'>{profile.preferred_username}</Typography>
-                            <Typography variant="body2" textAlign='center'>{profile.displayBrief}</Typography>
+                            <Typography variant="h6" textAlign='center' sx={{fontFamily: 'Montserrat', fontWeight: 500}}>{profile.preferred_username}</Typography>
+                            <Typography variant="body2" textAlign='center' sx={{fontFamily: 'Montserrat', fontSize: 12}}>{profile.displayBrief}</Typography>
                         </ThemeProvider>
                     </View>
                 </View>

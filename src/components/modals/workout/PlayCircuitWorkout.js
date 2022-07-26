@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, {useEffect, useState} from "react";
-import {StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
+import {StyleSheet, TouchableOpacity, View} from "react-native-web";
 import WIntervalModal from "./IntervalModal";
 import WPauseModal from "./PauseModal";
 import WorkoutCompletedModal from "./WorkoutCompletedModal";
@@ -257,7 +257,8 @@ const PlayCircuitWorkout = props => {
                         {!paused ?
                             <View style={[isBigScreen ? styles.playBtnsContainer : styles.playBtnsContainerSmall]}>
                                 <TouchableOpacity style={styles.playBtn} onPress={seekBackward}>
-                                    <Text>Prev</Text>
+                                    <Typography variant="body2"
+                                                sx={{fontFamily: 'Montserrat', fontWeight: 500}}>Prev</Typography>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.playBtn} onPress={pauseWorkout}>
                                     <Entypo
@@ -267,19 +268,30 @@ const PlayCircuitWorkout = props => {
                                     />
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.playBtn} onPress={seekForward}>
-                                    <Text>Next</Text>
+                                    <Typography variant="body2"
+                                                sx={{fontFamily: 'Montserrat', fontWeight: 500}}>Next</Typography>
                                 </TouchableOpacity>
                             </View> : null}
                         <View>
                             <ThemeProvider theme={responsiveFontTheme}>
-                                <Typography variant="h6">{getWorkoutFit().fit.title}</Typography>
-                                {
-                                    getWorkoutFit().repsOrTime === REPS ?
-                                        <Typography
-                                            variant="body2">{getWorkoutFit().repsOrTimeValue} Reps</Typography> :
-                                        <Typography variant="body2">{exerciseDuration / 1000}s</Typography>
+                                <Typography variant="h6" sx={{
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: 900
+                                }}>{getWorkoutFit().fit.title}</Typography>
+                                <Typography variant="body2" sx={{
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: 500
+                                }}>Round {roundsIndex + 1} of {workout.rounds}</Typography>
+                                {getWorkoutFit().repsOrTime === REPS ?
+                                    <Typography variant="body2" sx={{
+                                        fontFamily: 'Montserrat',
+                                        fontWeight: 500
+                                    }}>{getWorkoutFit().repsOrTimeValue} Reps</Typography> :
+                                    <Typography variant="body2" sx={{
+                                        fontFamily: 'Montserrat',
+                                        fontWeight: 500
+                                    }}>{exerciseDuration / 1000}s</Typography>
                                 }
-                                <Typography variant="body2">Round {roundsIndex + 1} of {workout.rounds}</Typography>
                             </ThemeProvider>
                         </View>
                     </View>

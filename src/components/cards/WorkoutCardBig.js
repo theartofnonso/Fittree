@@ -29,13 +29,13 @@ const WorkoutCardBig = props => {
             </View>
             <View style={styles.textContainer}>
                 <ThemeProvider theme={responsiveFontTheme}>
-                    <Typography variant="h6" color='#ffffff'>{props.workout.title}</Typography>
-                    <Typography variant="body2" color='#ffffff'>
+                    <Typography variant="h6" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 900}}>{props.workout.title}</Typography>
+                    <Typography variant="body2" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 500, fontSize: 10, marginVertical: 1}}>
                         {props.workout.intensityLevel}{' '}
                         {props.workout.type === workoutsConstants.workoutType.CIRCUIT ? `| ${props.workout.rounds} Round(s)` : null}
                     </Typography>
                 </ThemeProvider>
-                <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+                <View style={{flexDirection: 'row', flexWrap: 'wrap', marginVertical: 1}}>
                     {props.workout.equipments.map((equipment, index) => {
                         return (
                             <View key={index}>
@@ -46,14 +46,15 @@ const WorkoutCardBig = props => {
                                         sx={{
                                             fontSize: 10,
                                             marginRight: 0.5,
+                                            fontFamily: 'Montserrat',
+                                            fontWeight: 500,
                                         }}>{equipment}</Typography>
                                 </ThemeProvider>
                             </View>
                         );
                     })}
                 </View>
-                <View style={styles.bottomCardSection}>
-                    <View style={styles.chipsContainer}>
+                <View style={{flexDirection: 'row', flexWrap: 'wrap', marginVertical: 1}}>
                         {props.workout.bodyParts.map((bodyPart, index) => {
                             return (
                                 <View key={index}>
@@ -64,13 +65,17 @@ const WorkoutCardBig = props => {
                                             sx={{
                                                 fontSize: 10,
                                                 marginRight: 0.5,
+                                                fontFamily: 'Montserrat',
+                                                fontWeight: 500,
                                             }}>{bodyPart}</Typography>
                                     </ThemeProvider>
                                 </View>
                             )
                         })}
-                    </View>
                 </View>
+            </View>
+            <View style={styles.timerContainer}>
+                <Text style={styles.timerText}>20 mins</Text>
             </View>
         </View>
     );
@@ -100,24 +105,32 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
     },
     textContainer: {
-        ...StyleSheet.absoluteFillObject,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
-        justifyContent: 'flex-end',
-        margin: 10,
+        justifyContent: 'space-evenly',
+        position: 'absolute',
+        bottom: 10,
+        left: 10,
     },
-    chipsContainer: {
-        flexGrow: 1,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-        flex: 1,
+    timerText: {
+        color: 'white',
+        fontWeight: 300,
+        textAlign: 'center',
+        fontFamily: 'Montserrat',
+        fontSize: 10
     },
-    bottomCardSection: {
+    timerContainer: {
         display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        backgroundColor: '#ef7a75',
+        position: 'absolute',
+        right: 10,
+        top: 10
     },
 });
 

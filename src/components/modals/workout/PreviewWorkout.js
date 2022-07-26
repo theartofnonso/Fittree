@@ -88,11 +88,11 @@ const PreviewWorkout = ({ workout, play, close}) => {
                     <WorkoutCardBig workout={workout}/>
                     <View style={[ isBigScreen ? styles.previewInfo : styles.previewInfoSmall]}>
                         <ThemeProvider theme={responsiveFontTheme}>
-                            <Typography variant="body2" sx={{marginTop: 2, marginRight: 2}}>{workout.description}</Typography>
+                            <Typography variant="body2" sx={{ontFamily: 'Montserrat', fontWeight: 300, marginTop: 2, marginRight: 2}}>{workout.description}</Typography>
                         </ThemeProvider>
                         <View style={{marginVertical: 10}}>
                             <ThemeProvider theme={responsiveFontTheme}>
-                                <Typography variant="body2" fontSize={10}>{displayRestInterval()}</Typography>
+                                <Typography variant="body2" sx={{fontFamily: 'Montserrat', fontWeight: 500, fontSize: 10}}>{displayRestInterval()}</Typography>
                             </ThemeProvider>
                             {sortedWorkoutFits.map((workoutFit, i) =>
                                 <WorkoutExerciseCard key={i} workoutFit={workoutFit}/>)}
