@@ -12,7 +12,7 @@ import WorkoutCard from "../src/components/cards/WorkoutCard";
 import {Feather} from '@expo/vector-icons';
 import {Avatar, Caption, TextInput, Title} from "react-native-paper";
 import {searchExerciseOrWorkout} from "../src/utils/arrUtils";
-import {Container, useMediaQuery, useTheme} from "@mui/material";
+import {Container, Divider, useMediaQuery, useTheme} from "@mui/material";
 import PreviewWorkout from "../src/components/modals/workout/PreviewWorkout";
 import PlayCircuitWorkout from "../src/components/modals/workout/PlayCircuitWorkout";
 import workoutsConstants from "../src/utils/workout/workoutsConstants";
@@ -127,10 +127,20 @@ const CreatorProfile = () => {
          * Creator doesn't exist
          */
         return (
-            <View>
-                <Text variant='h5'>The page you’re looking for doesn’t exist.</Text>
-                <Text>Want this to be your username? Create your Fittree now.</Text>
-            </View>
+            <Container
+                maxWidth="md"
+                sx={{
+                    height: '100vh',
+                    display: 'flex',
+                    padding: 1,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}>
+                <Favicon/>
+                <Divider orientation='vertical' sx={{height: 80, marginRight: 2}}/>
+                <Text>{username} doesn't seem to have a Fittree acccount</Text>
+            </Container>
         );
     } else {
         /**
