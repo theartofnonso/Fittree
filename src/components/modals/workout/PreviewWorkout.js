@@ -6,13 +6,16 @@ import WorkoutCardBig from "../../cards/WorkoutCardBig";
 import WorkoutExerciseCard from "../../cards/WorkoutExerciseCard";
 import Entypo from "react-native-vector-icons/Entypo";
 import {Feather} from '@expo/vector-icons';
-import {useMediaQuery, useTheme} from "@mui/material";
+import {createTheme, responsiveFontSizes, ThemeProvider, Typography, useMediaQuery, useTheme} from "@mui/material";
 
 const PreviewWorkout = ({ workout, play, close}) => {
 
     const theme = useTheme();
     const isBigScreen = useMediaQuery(theme.breakpoints.up('sm'));
     const isBiggerScreen = useMediaQuery(theme.breakpoints.up('md'));
+
+    let responsiveFontTheme = createTheme();
+    responsiveFontTheme = responsiveFontSizes(responsiveFontTheme);
 
     /**
      * Play the appropriate workout
@@ -84,10 +87,16 @@ const PreviewWorkout = ({ workout, play, close}) => {
                     }
                     <WorkoutCardBig workout={workout}/>
                     <View style={[ isBigScreen ? styles.previewInfo : styles.previewInfoSmall]}>
-                        <Text style={styles.description}>{workout.description}</Text>
-                        <Text>{displayRestInterval()}</Text>
-                        {sortedWorkoutFits.map((workoutFit, i) =>
-                            <WorkoutExerciseCard key={i} workoutFit={workoutFit}/>)}
+                        <ThemeProvider theme={responsiveFontTheme}>
+                            <Typography variant="body2" sx={{marginTop: 2, marginRight: 2}}>{workout.description}</Typography>
+                        </ThemeProvider>
+                        <View style={{marginVertical: 10}}>
+                            <ThemeProvider theme={responsiveFontTheme}>
+                                <Typography variant="body2" fontSize={10}>{displayRestInterval()}</Typography>
+                            </ThemeProvider>
+                            {sortedWorkoutFits.map((workoutFit, i) =>
+                                <WorkoutExerciseCard key={i} workoutFit={workoutFit}/>)}
+                        </View>
                     </View>
                     <TouchableOpacity
                         style={[isBigScreen ? styles.startWorkoutBtn : styles.startWorkoutBtnSmall]}

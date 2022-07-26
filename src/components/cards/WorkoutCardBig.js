@@ -2,12 +2,15 @@ import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native-web';
 import workoutsConstants from '../../utils/workout/workoutsConstants';
 import {LinearGradient} from "expo-linear-gradient";
-import {useMediaQuery, useTheme} from "@mui/material";
+import {createTheme, responsiveFontSizes, ThemeProvider, Typography, useMediaQuery, useTheme} from "@mui/material";
 
 const WorkoutCardBig = props => {
 
     const theme = useTheme();
     const isBigScreen = useMediaQuery(theme.breakpoints.up('sm'));
+
+    let responsiveFontTheme = createTheme();
+    responsiveFontTheme = responsiveFontSizes(responsiveFontTheme);
 
     return (
         <View>
@@ -25,20 +28,46 @@ const WorkoutCardBig = props => {
                 />
             </View>
             <View style={styles.textContainer}>
-                <Text style={[styles.text, styles.textBig]}>{props.workout.title}</Text>
-                <Text style={[styles.text, styles.intensityLevel]}>
-                    {props.workout.intensityLevel}{' '}
-                    {props.workoutType === workoutsConstants.workoutType.CIRCUIT ? `|" ${props.workout.rounds} Round(s)` : null}
-                </Text>
+                <ThemeProvider theme={responsiveFontTheme}>
+                    <Typography variant="h6" color='#ffffff'>{props.workout.title}</Typography>
+                    <Typography variant="body2" color='#ffffff'>
+                        {props.workout.intensityLevel}{' '}
+                        {props.workout.type === workoutsConstants.workoutType.CIRCUIT ? `| ${props.workout.rounds} Round(s)` : null}
+                    </Typography>
+                </ThemeProvider>
                 <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
                     {props.workout.equipments.map((equipment, index) => {
-                        return (<Text key={index} style={styles.chipBtnText}>{equipment}</Text>);
+                        return (
+                            <View key={index}>
+                                <ThemeProvider theme={responsiveFontTheme}>
+                                    <Typography
+                                        variant="body2"
+                                        color='#ffffff'
+                                        sx={{
+                                            fontSize: 10,
+                                            marginRight: 0.5,
+                                        }}>{equipment}</Typography>
+                                </ThemeProvider>
+                            </View>
+                        );
                     })}
                 </View>
                 <View style={styles.bottomCardSection}>
                     <View style={styles.chipsContainer}>
                         {props.workout.bodyParts.map((bodyPart, index) => {
-                            return (<Text key={index} style={styles.chipBtnText}>{bodyPart}</Text>);
+                            return (
+                                <View key={index}>
+                                    <ThemeProvider theme={responsiveFontTheme}>
+                                        <Typography
+                                            variant="body2"
+                                            color='#ffffff'
+                                            sx={{
+                                                fontSize: 10,
+                                                marginRight: 0.5,
+                                            }}>{bodyPart}</Typography>
+                                    </ThemeProvider>
+                                </View>
+                            )
                         })}
                     </View>
                 </View>

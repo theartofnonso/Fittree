@@ -6,7 +6,7 @@ import WPauseModal from "./PauseModal";
 import WorkoutCompletedModal from "./WorkoutCompletedModal";
 import Entypo from "react-native-vector-icons/Entypo";
 import {Video} from "expo-av";
-import {useMediaQuery, useTheme} from "@mui/material";
+import {ThemeProvider, Typography, useMediaQuery, useTheme} from "@mui/material";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 const REPS = "Reps";
@@ -195,7 +195,7 @@ const PlayCircuitWorkout = props => {
      * @returns {number}
      */
     const getWrapperStyling = () => {
-        if(isBiggerScreen) {
+        if (isBiggerScreen) {
             return styles.wrapperLg
         } else if (isBigScreen) {
             return styles.wrapperMd
@@ -209,7 +209,7 @@ const PlayCircuitWorkout = props => {
      * @returns {number}
      */
     const getVideoStyling = () => {
-        if(isBiggerScreen) {
+        if (isBiggerScreen) {
             return styles.videoLg
         } else if (isBigScreen) {
             return styles.videoMd
@@ -233,7 +233,7 @@ const PlayCircuitWorkout = props => {
                                 <Entypo name="cross" size={24} color="#282828"/>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.playBtn} onPress={navigateToFitPreview}>
-                                <Ionicons name="information-circle-sharp" size={24} color="black" />
+                                <Ionicons name="information-circle-sharp" size={24} color="black"/>
                             </TouchableOpacity>
                         </View>
                     }
@@ -251,26 +251,33 @@ const PlayCircuitWorkout = props => {
                         />
                     </View>
                     <View style={[isBigScreen ? styles.playInfoContainer : styles.playInfoContainerSmall]}>
-                        {!paused ? <View style={[ isBigScreen ? styles.playBtnsContainer : styles.playBtnsContainerSmall]}>
-                            <TouchableOpacity style={styles.playBtn} onPress={seekBackward}>
-                                <Text>Prev</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.playBtn} onPress={pauseWorkout}>
-                                <Entypo
-                                    name="controller-paus"
-                                    size={24}
-                                    color="#282828"
-                                />
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.playBtn} onPress={seekForward}>
-                                <Text>Next</Text>
-                            </TouchableOpacity>
-                        </View> : null}
+                        {!paused ?
+                            <View style={[isBigScreen ? styles.playBtnsContainer : styles.playBtnsContainerSmall]}>
+                                <TouchableOpacity style={styles.playBtn} onPress={seekBackward}>
+                                    <Text>Prev</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.playBtn} onPress={pauseWorkout}>
+                                    <Entypo
+                                        name="controller-paus"
+                                        size={24}
+                                        color="#282828"
+                                    />
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.playBtn} onPress={seekForward}>
+                                    <Text>Next</Text>
+                                </TouchableOpacity>
+                            </View> : null}
                         <View>
-                            <Text style={styles.workoutFitTitle}>{getWorkoutFit().fit.title}</Text>
-                            {getWorkoutFit().repsOrTime === SECS && <Text>{exerciseDuration / 1000}s</Text>}
-                            {getWorkoutFit().repsOrTime === REPS && <Text>{getWorkoutFit().repsOrTimeValue} Reps</Text>}
-                            <Text style={styles.fontSmall}>Round {roundsIndex + 1} of {workout.rounds}</Text>
+                            <ThemeProvider theme={theme}>
+                                <Typography variant="h6">{getWorkoutFit().fit.title}</Typography>
+                                {
+                                    getWorkoutFit().repsOrTime === REPS ?
+                                        <Typography
+                                            variant="body2">{getWorkoutFit().repsOrTimeValue} Reps</Typography> :
+                                        <Typography variant="body2">{exerciseDuration / 1000}s</Typography>
+                                }
+                                <Typography variant="body2">Round {roundsIndex + 1} of {workout.rounds}</Typography>
+                            </ThemeProvider>
                         </View>
                     </View>
                 </View>

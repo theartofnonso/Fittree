@@ -34,8 +34,8 @@ const CreatorProfile = () => {
     const theme = useTheme();
     const isBigScreen = useMediaQuery(theme.breakpoints.up('sm'));
 
-    let themee = createTheme();
-    themee = responsiveFontSizes(themee);
+    let responsiveFontTheme = createTheme();
+    responsiveFontTheme = responsiveFontSizes(responsiveFontTheme);
 
     /**
      * Retrieve creator's username
@@ -153,7 +153,7 @@ const CreatorProfile = () => {
                 <Favicon/>
                 <Divider orientation='vertical' sx={{height: 80, marginRight: 2.5}}/>
 
-                <ThemeProvider theme={themee}>
+                <ThemeProvider theme={responsiveFontTheme}>
                     <Typography variant="h6">
                         {username} doesn't seem to have an account
                         <br/>
