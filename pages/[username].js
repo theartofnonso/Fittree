@@ -12,7 +12,7 @@ import WorkoutCard from "../src/components/cards/WorkoutCard";
 import {Feather} from '@expo/vector-icons';
 import {Avatar, Caption, TextInput, Title} from "react-native-paper";
 import {searchExerciseOrWorkout} from "../src/utils/arrUtils";
-import {Container, Divider, useMediaQuery, useTheme} from "@mui/material";
+import {Container, Divider, Link, useMediaQuery, useTheme} from "@mui/material";
 import PreviewWorkout from "../src/components/modals/workout/PreviewWorkout";
 import PlayCircuitWorkout from "../src/components/modals/workout/PlayCircuitWorkout";
 import workoutsConstants from "../src/utils/workout/workoutsConstants";
@@ -138,8 +138,11 @@ const CreatorProfile = () => {
                     justifyContent: 'center',
                 }}>
                 <Favicon/>
-                <Divider orientation='vertical' sx={{height: 80, marginRight: 2}}/>
-                <Text>{username} doesn't seem to have a Fittree acccount</Text>
+                <Divider orientation='vertical' sx={{height: 80, marginRight: 2.5}}/>
+                <View>
+                    <Text style={{marginVertical: 3}}>{username} doesn't seem to have a Fittree account</Text>
+                    <Text style={{marginVertical: 3}}>You can claim it <Link href='#' color='#000000' sx={{fontWeight: 'bold'}}>here</Link> </Text>
+                </View>
             </Container>
         );
     } else {
