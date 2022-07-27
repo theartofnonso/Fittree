@@ -13,7 +13,7 @@ export const listCreators = /* GraphQL */ `
         profile
         displayBrief
         displayProfile
-        fits {
+        exercises {
           items {
             id
             creatorId
@@ -22,12 +22,12 @@ export const listCreators = /* GraphQL */ `
             bodyParts
             equipments
             videoUrls
-            workoutFits {
+            workoutExercises {
               items {
                 id
-                fitId
+                exerciseId
                 workoutId
-                fit {
+                exercise {
                   id
                   creatorId
                   title
@@ -35,10 +35,10 @@ export const listCreators = /* GraphQL */ `
                   bodyParts
                   equipments
                   videoUrls
-                  workoutFits {
+                  workoutExercises {
                     items {
                       id
-                      fitId
+                      exerciseId
                       workoutId
                       repsOrTime
                       repsOrTimeValue
@@ -87,12 +87,12 @@ export const listCreators = /* GraphQL */ `
             exerciseInterval
             setsInterval
             thumbnailUrl
-            workoutFits {
+            workoutExercises {
               items {
                 id
-                fitId
+                exerciseId
                 workoutId
-                fit {
+                exercise {
                   id
                   creatorId
                   title
@@ -100,10 +100,10 @@ export const listCreators = /* GraphQL */ `
                   bodyParts
                   equipments
                   videoUrls
-                  workoutFits {
+                  workoutExercises {
                     items {
                       id
-                      fitId
+                      exerciseId
                       workoutId
                       repsOrTime
                       repsOrTimeValue

@@ -12,6 +12,8 @@ const WorkoutCardBig = props => {
     let responsiveFontTheme = createTheme();
     responsiveFontTheme = responsiveFontSizes(responsiveFontTheme);
 
+    console.log(props.workout)
+
     return (
         <View>
             <View style={[isBigScreen ? styles.imageContainer : styles.imageContainerSmall]}>

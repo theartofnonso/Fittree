@@ -58,7 +58,7 @@ const PlayCircuitWorkout = props => {
     const loadWorkout = (workout) => {
         let rounds = new Array(workout.rounds);
         for (let i = 0; i < rounds.length; i++) {
-            rounds[i] = Array.from(workout.workoutFits.items).sort((a, b) => a.index - b.index);
+            rounds[i] = Array.from(workout.workoutExercises.items).sort((a, b) => a.index - b.index);
         }
         setRounds(rounds);
         // Set initial ExerciseDuration
@@ -97,7 +97,7 @@ const PlayCircuitWorkout = props => {
         const nextExerciseIndex = exerciseIndex + 1;
 
         if (!isPlayMode()) {
-            if (nextExerciseIndex < workoutFromStore.workoutFits.items.length) {
+            if (nextExerciseIndex < workoutFromStore.workoutExercises.items.length) {
                 setExerciseIndex(nextExerciseIndex);
                 setExerciseDuration(getWorkoutFit().repsOrTimeValue);
             }
@@ -118,7 +118,7 @@ const PlayCircuitWorkout = props => {
         } else {
             setExerciseIndex(nextExerciseIndex);
             setExerciseDuration(getWorkoutFit().repsOrTimeValue);
-            setIntervalModalDescription(rounds[roundsIndex][nextExerciseIndex].fit.title);
+            setIntervalModalDescription(rounds[roundsIndex][nextExerciseIndex].exercise.title);
             setIntervalModalTime(workout.exerciseInterval);
             setShowIntervalModal(true);
         }
@@ -187,7 +187,7 @@ const PlayCircuitWorkout = props => {
     };
 
     /**
-     * Get the workoutFit
+     * Get the workoutExercise
      */
     const getWorkoutFit = () => {
         return rounds[roundsIndex][exerciseIndex];
@@ -244,7 +244,7 @@ const PlayCircuitWorkout = props => {
                         <Video
                             style={[getVideoStyling()]}
                             source={{
-                                uri: "https://" + getWorkoutFit().fit.videoUrls[0],
+                                uri: "https://" + getWorkoutFit().exercise.videoUrls[0],
                             }}
                             resizeMode="contain"
                             shouldPlay={true}
@@ -277,7 +277,7 @@ const PlayCircuitWorkout = props => {
                                 <Typography variant="h6" sx={{
                                     fontFamily: 'Montserrat',
                                     fontWeight: 900
-                                }}>{getWorkoutFit().fit.title}</Typography>
+                                }}>{getWorkoutFit().exercise.title}</Typography>
                                 <Typography variant="body2" sx={{
                                     fontFamily: 'Montserrat',
                                     fontWeight: 500

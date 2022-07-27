@@ -15,10 +15,10 @@ const WorkoutExerciseCard = props => {
      * @returns {number|*}
      */
     const displayRepsOrTime = () => {
-        if (props.workoutFit.repsOrTime === workoutsConstants.timer.type.REPS) {
-            return props.workoutFit.repsOrTimeValue + " " + props.workoutFit.repsOrTime;
+        if (props.workoutExercise.repsOrTime === workoutsConstants.timer.type.REPS) {
+            return props.workoutExercise.repsOrTimeValue + " " + props.workoutExercise.repsOrTime;
         }
-        return props.workoutFit.repsOrTimeValue / 1000 + " " + props.workoutFit.repsOrTime;
+        return props.workoutExercise.repsOrTimeValue / 1000 + " " + props.workoutExercise.repsOrTime;
     };
 
     return (
@@ -26,7 +26,7 @@ const WorkoutExerciseCard = props => {
             <Video
                 style={styles.videoStyle}
                 source={{
-                    uri: "https://" + props.workoutFit.fit.videoUrls[0],
+                    uri: "https://" + props.workoutExercise.exercise.videoUrls[0],
                 }}
                 poster="https://d26u7w064jxl38.cloudfront.net/public/fitpin-public/black_wallpaper.jpg"
                 paused={true}
@@ -34,8 +34,11 @@ const WorkoutExerciseCard = props => {
             />
             <View style={styles.textContainer}>
                 <ThemeProvider theme={theme}>
-                    <Typography variant="body1" sx={{fontFamily: 'Montserrat', fontWeight: 500, fontSize: 12}}>{props.workoutFit.fit.title}</Typography>
-                    <Typography variant="body2" sx={{fontFamily: 'Montserrat', fontWeight: 300, fontSize: 12}}>{displayRepsOrTime()}{props.workoutFit.sets > 0 && ` x ${props.workoutFit.sets} Set(s)`}</Typography>
+                    <Typography variant="body1" sx={{fontFamily: 'Montserrat', fontWeight: 500, fontSize: 12}}>{props.workoutExercise.exercise.title}</Typography>
+                    {props.type === workoutsConstants.workoutType.CIRCUIT ?
+                        <Typography variant="body2" sx={{fontFamily: 'Montserrat', fontWeight: 300, fontSize: 12}}>{displayRepsOrTime()}</Typography> :
+                        <Typography variant="body2" sx={{fontFamily: 'Montserrat', fontWeight: 300, fontSize: 12}}>{`${displayRepsOrTime()} x ${props.workoutExercise.sets} Set(s)`}</Typography>
+                    }
                 </ThemeProvider>
             </View>
         </View>

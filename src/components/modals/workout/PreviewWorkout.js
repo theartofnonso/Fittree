@@ -1,14 +1,12 @@
 /* eslint-disable */
 import React from "react";
-import {StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
-import workoutsConstants from "../../../utils/workout/workoutsConstants";
+import {StyleSheet, TouchableOpacity, View} from "react-native-web";
 import WorkoutCardBig from "../../cards/WorkoutCardBig";
 import WorkoutExerciseCard from "../../cards/WorkoutExerciseCard";
 import Entypo from "react-native-vector-icons/Entypo";
-import {Feather} from '@expo/vector-icons';
 import {createTheme, responsiveFontSizes, ThemeProvider, Typography, useMediaQuery, useTheme} from "@mui/material";
 
-const PreviewWorkout = ({ workout, play, close}) => {
+const PreviewWorkout = ({workout, play, close}) => {
 
     const theme = useTheme();
     const isBigScreen = useMediaQuery(theme.breakpoints.up('sm'));
@@ -32,14 +30,14 @@ const PreviewWorkout = ({ workout, play, close}) => {
      * Sorted WorkoutFits
      * @type {unknown[]}
      */
-    const sortedWorkoutFits = Array.from(workout.workoutFits.items).sort((a, b) => a.index - b.index);
+    const sortedWorkoutFits = Array.from(workout.workoutExercises.items).sort((a, b) => a.index - b.index);
 
     /**
      * Get appropriate styling for wrapper
      * @returns {number}
      */
     const getWrapperStyling = () => {
-        if(isBiggerScreen) {
+        if (isBiggerScreen) {
             return styles.wrapperLg
         } else if (isBigScreen) {
             return styles.wrapperMd
@@ -65,19 +63,23 @@ const PreviewWorkout = ({ workout, play, close}) => {
                         </View>
                     }
                     <WorkoutCardBig workout={workout}/>
-                    <View style={[ isBigScreen ? styles.previewInfo : styles.previewInfoSmall]}>
+                    <View style={[isBigScreen ? styles.previewInfo : styles.previewInfoSmall]}>
                         <ThemeProvider theme={responsiveFontTheme}>
-                            <Typography variant="body2" sx={{ontFamily: 'Montserrat', fontWeight: 300, marginTop: 2, marginRight: 2}}>{workout.description}</Typography>
+                            <Typography variant="body2" sx={{
+                                ontFamily: 'Montserrat',
+                                fontWeight: 300,
+                                marginTop: 2,
+                                marginRight: 2
+                            }}>{workout.description}</Typography>
                         </ThemeProvider>
                         <View style={{marginVertical: 10}}>
-                            {sortedWorkoutFits.map((workoutFit, i) =>
-                                <WorkoutExerciseCard key={i} workoutFit={workoutFit}/>)}
+                            {sortedWorkoutFits.map((workoutExercise, i) =>
+                                <WorkoutExerciseCard key={i} workoutExercise={workoutExercise} type={workout.type}/>)}
                         </View>
                     </View>
-                    <TouchableOpacity
-                        style={[isBigScreen ? styles.startWorkoutBtn : styles.startWorkoutBtnSmall]}
-                        onPress={playWorkout}>
-                        <Feather name="play" size={24} color="white"/>
+                    <TouchableOpacity style={[isBigScreen ? styles.startWorkoutBtn : styles.startWorkoutBtnSmall]}
+                                      onPress={playWorkout}>
+                        <Entypo name="controller-play" size={32} color="white"/>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -149,29 +151,21 @@ const styles = StyleSheet.create({
     },
     startWorkoutBtn: {
         backgroundColor: '#ef7a75',
-        borderRadius: '100%',
-        width: 50,
-        height: 50,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
         position: 'absolute',
-        right: 15,
-        bottom: 15,
-        boxShadow: '1px 1px 5px gray'
+        right: 25,
+        bottom: 30,
+        boxShadow: '1px 1px 5px gray',
+        padding: 10,
+        borderRadius: 18,
     },
     startWorkoutBtnSmall: {
         backgroundColor: '#ef7a75',
-        borderRadius: '100%',
-        width: 50,
-        height: 50,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
         position: 'fixed',
-        right: 15,
-        bottom: 15,
-        boxShadow: '1px 1px 5px gray'
+        right: 25,
+        bottom: 30,
+        boxShadow: '1px 1px 5px gray',
+        padding: 10,
+        borderRadius: 18,
     },
     card: {
         width: "100%",
