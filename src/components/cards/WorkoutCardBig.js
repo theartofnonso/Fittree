@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native-web';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native-web';
 import workoutsConstants from '../../utils/workout/workoutsConstants';
 import {LinearGradient} from "expo-linear-gradient";
 import {createTheme, responsiveFontSizes, ThemeProvider, Typography, useMediaQuery, useTheme} from "@mui/material";
@@ -11,8 +11,6 @@ const WorkoutCardBig = props => {
 
     let responsiveFontTheme = createTheme();
     responsiveFontTheme = responsiveFontSizes(responsiveFontTheme);
-
-    console.log(props.workout)
 
     return (
         <View>
@@ -31,32 +29,35 @@ const WorkoutCardBig = props => {
             </View>
             <View style={styles.textContainer}>
                 <ThemeProvider theme={responsiveFontTheme}>
-                    <Typography variant="h6" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 900}}>{props.workout.title}</Typography>
+                    <Typography variant="h6" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 500}}>{props.workout.title}</Typography>
                     <Typography variant="body2" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 500, fontSize: 10, marginVertical: 1}}>
                         {props.workout.intensityLevel}{' '}
                         {props.workout.type === workoutsConstants.workoutType.CIRCUIT ? `| ${props.workout.rounds} Round(s)` : null}
                     </Typography>
                 </ThemeProvider>
-                <View style={{flexDirection: 'row', flexWrap: 'wrap', marginVertical: 1}}>
-                    {props.workout.equipments.map((equipment, index) => {
-                        return (
-                            <View key={index}>
-                                <ThemeProvider theme={responsiveFontTheme}>
-                                    <Typography
-                                        variant="body2"
-                                        color='#ffffff'
-                                        sx={{
-                                            fontSize: 10,
-                                            marginRight: 0.5,
-                                            fontFamily: 'Montserrat',
-                                            fontWeight: 500,
-                                        }}>{equipment}</Typography>
-                                </ThemeProvider>
-                            </View>
-                        );
-                    })}
+                <View style={styles.scrollViewContainer}>
+                    <ScrollView horizontal>
+                        {props.workout.equipments.map((equipment, index) => {
+                            return (
+                                <View key={index}>
+                                    <ThemeProvider theme={responsiveFontTheme}>
+                                        <Typography
+                                            variant="body2"
+                                            color='#ffffff'
+                                            sx={{
+                                                fontSize: 12,
+                                                marginRight: 0.5,
+                                                fontFamily: 'Montserrat',
+                                                fontWeight: 500,
+                                            }}>{equipment}</Typography>
+                                    </ThemeProvider>
+                                </View>
+                            );
+                        })}
+                    </ScrollView>
                 </View>
-                <View style={{flexDirection: 'row', flexWrap: 'wrap', marginVertical: 1}}>
+                <View style={styles.scrollViewContainer}>
+                    <ScrollView horizontal>
                         {props.workout.bodyParts.map((bodyPart, index) => {
                             return (
                                 <View key={index}>
@@ -65,7 +66,7 @@ const WorkoutCardBig = props => {
                                             variant="body2"
                                             color='#ffffff'
                                             sx={{
-                                                fontSize: 10,
+                                                fontSize: 12,
                                                 marginRight: 0.5,
                                                 fontFamily: 'Montserrat',
                                                 fontWeight: 500,
@@ -74,6 +75,7 @@ const WorkoutCardBig = props => {
                                 </View>
                             )
                         })}
+                    </ScrollView>
                 </View>
             </View>
             <View style={styles.timerContainer}>
@@ -105,6 +107,12 @@ const styles = StyleSheet.create({
     },
     overlay: {
         ...StyleSheet.absoluteFillObject,
+    },
+    scrollViewContainer: {
+        height: 25,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     textContainer: {
         display: 'flex',

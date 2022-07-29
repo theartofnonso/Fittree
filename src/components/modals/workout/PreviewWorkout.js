@@ -66,16 +66,12 @@ const PreviewWorkout = ({workout, play, close}) => {
                     <View style={[isBigScreen ? styles.previewInfo : styles.previewInfoSmall]}>
                         <ThemeProvider theme={responsiveFontTheme}>
                             <Typography variant="body2" sx={{
-                                ontFamily: 'Montserrat',
+                                fontFamily: 'Montserrat',
                                 fontWeight: 300,
-                                marginTop: 2,
-                                marginRight: 2
                             }}>{workout.description}</Typography>
                         </ThemeProvider>
-                        <View style={{marginVertical: 10}}>
-                            {sortedWorkoutFits.map((workoutExercise, i) =>
-                                <WorkoutExerciseCard key={i} workoutExercise={workoutExercise} type={workout.type}/>)}
-                        </View>
+                        {sortedWorkoutFits.map((workoutExercise, i) =>
+                            <WorkoutExerciseCard key={i} workoutExercise={workoutExercise} type={workout.type}/>)}
                     </View>
                     <TouchableOpacity style={[isBigScreen ? styles.startWorkoutBtn : styles.startWorkoutBtnSmall]}
                                       onPress={playWorkout}>
@@ -129,9 +125,11 @@ const styles = StyleSheet.create({
     },
     previewInfo: {
         overflow: 'scroll',
-        paddingLeft: 10
+        paddingLeft: 10,
+        paddingTop: 10
     },
     previewInfoSmall: {
+        paddingTop: 10,
         overflow: 'scroll',
     },
     description: {
@@ -142,7 +140,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        paddingRight: 8,
+        paddingHorizontal: 8,
+        marginBottom: 8
     },
     closeBtnStyle: {
         position: 'fixed',

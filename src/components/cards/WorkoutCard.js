@@ -5,8 +5,6 @@ import {createTheme, responsiveFontSizes, ThemeProvider, Typography} from "@mui/
 
 const WorkoutCard = ({workout}) => {
 
-    console.log(workout.duration)
-
     let theme = createTheme();
     theme = responsiveFontSizes(theme);
 
