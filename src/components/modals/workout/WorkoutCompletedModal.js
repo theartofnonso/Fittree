@@ -3,6 +3,7 @@ import {SafeAreaView, StyleSheet, TouchableOpacity, View,} from 'react-native';
 //import {convertMilliseconds} from '../../../utils/utils';
 import {createTheme, responsiveFontSizes, ThemeProvider, Typography} from "@mui/material";
 import {Modal} from "react-native-paper";
+import WorkoutCompletedSvg from "../../illustrations/WorkoutCompletedSvg";
 
 const WorkoutCompletedModal = props => {
 
@@ -31,16 +32,20 @@ const WorkoutCompletedModal = props => {
     return (
         <Modal style={styles.rootStyle} visible={props.isVisible}>
             <View style={styles.container}>
-                <ThemeProvider theme={responsiveFontTheme}>
-                    <Typography variant="h6" sx={{
-                        fontFamily: 'Montserrat',
-                        fontWeight: 700
-                    }}> Workout Completed</Typography>
-                    <Typography variant="body2" sx={{
-                        fontFamily: 'Montserrat',
-                        fontWeight: 500
-                    }}> It took you {calculateWorkoutDuration()}</Typography>
-                </ThemeProvider>
+                <WorkoutCompletedSvg/>
+                <View style={styles.textContainer}>
+                    <ThemeProvider theme={responsiveFontTheme}>
+                        <Typography variant="h6" sx={{
+                            fontFamily: 'Montserrat',
+                            fontWeight: 700
+                        }}> Workout Completed</Typography>
+                        <Typography variant="body1" sx={{
+                            fontFamily: 'Montserrat',
+                            fontWeight: 400
+                        }}> It took you {calculateWorkoutDuration()}</Typography>
+                    </ThemeProvider>
+                </View>
+
                 <TouchableOpacity
                     activeOpacity={0.5}
                     style={styles.btnStyle}
@@ -57,17 +62,26 @@ const WorkoutCompletedModal = props => {
 
 const styles = StyleSheet.create({
     rootStyle: {
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
         backgroundColor: 'white',
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
+        position: 'fixed',
     },
     container: {
+        height: '100vh',
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    textContainer: {
+        marginVertical: 20,
         display: 'flex',
-        flex: 1,
-        flexDirection: 'column',
+        flex: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     btnStyle: {
         alignItems: 'center',

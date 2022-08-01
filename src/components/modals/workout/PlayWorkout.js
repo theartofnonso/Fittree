@@ -7,7 +7,6 @@ import IntervalModal from "./IntervalModal";
 import workoutsConstants from "../../../utils/workout/workoutsConstants";
 import {timeOrReps} from "../../../utils/workout/workoutsHelperFunctions";
 import WorkoutCompletedModal from "./WorkoutCompletedModal";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import {createTheme, responsiveFontSizes, ThemeProvider, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {Video} from "expo-av";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -145,7 +144,7 @@ const PlayWorkout = props => {
                     close={props.close}
                     onFinish={props.onFinishInterval}/> : null}
             <WorkoutCompletedModal
-                isVisible={props.isPaused}
+                isVisible={props.onEnd}
                 navigateToWorkoutPreview={props.close}/>
         </View>
     );
