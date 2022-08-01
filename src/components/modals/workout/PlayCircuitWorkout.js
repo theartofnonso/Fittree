@@ -84,7 +84,7 @@ const PlayCircuitWorkout = props => {
         if (!isPlayMode()) {
             if (nextExerciseIndex < workoutFromStore.workoutExercises.items.length) {
                 setExerciseIndex(nextExerciseIndex);
-                setExerciseDuration(getWorkoutFit().repsOrTimeValue);
+                setExerciseDuration(getWorkoutExercise().repsOrTimeValue);
             }
             return;
         }
@@ -102,7 +102,7 @@ const PlayCircuitWorkout = props => {
             }
         } else {
             setExerciseIndex(nextExerciseIndex);
-            setExerciseDuration(getWorkoutFit().repsOrTimeValue);
+            setExerciseDuration(getWorkoutExercise().repsOrTimeValue);
             setIntervalModalDescription(rounds[roundsIndex][nextExerciseIndex].exercise.title);
             setIntervalModalTime(workout.exerciseInterval);
             setShowIntervalModal(true);
@@ -123,20 +123,6 @@ const PlayCircuitWorkout = props => {
             setExerciseIndex(0);
         }
     };
-
-    /**
-     * Navigate back
-     * @returns {*}
-     */
-    const navigateBack = () => props.navigation.pop();
-
-    // /**
-    //  * Close the workout
-    //  */
-    // const closeWorkout = () => {
-    //     setShowWorkoutCompletedModal(false)
-    //     props.end()
-    // }
 
     /**
      * Play workout
@@ -187,103 +173,13 @@ const PlayCircuitWorkout = props => {
             play={playWorkout}
             pause={pauseWorkout}
             isPaused={paused}
-            close={navigateBack}
+            close={props.end}
             type={workoutsConstants.workoutType.CIRCUIT}
             extraData={{exerciseDuration, exerciseExtras: `Round ${roundsIndex + 1} of ${workout.rounds}`}}
             interval={{ intervalModalTime, intervalModalDescription }}
             shouldPlayInterval={showIntervalModal}
             onFinishInterval={() => setShowIntervalModal(false)}
             onEnd={showWorkoutCompletedModal}/>
-        // <View style={styles.root}>
-        //     <View style={styles.container}>
-        //         {isBigScreen &&
-        //             <TouchableOpacity style={styles.closeBtnStyle} onPress={() => closeWorkout()}>
-        //                 <Entypo name="cross" size={32} color="white"/>
-        //             </TouchableOpacity>
-        //         }
-        //         <View style={[getWrapperStyling()]}>
-        //             {!isBigScreen &&
-        //                 <View style={styles.navigationBar}>
-        //                     <TouchableOpacity onPress={() => closeWorkout()}>
-        //                         <Entypo name="cross" size={24} color="#282828"/>
-        //                     </TouchableOpacity>
-        //                     <TouchableOpacity style={styles.playBtn} onPress={navigateToFitPreview}>
-        //                         <Ionicons name="information-circle-sharp" size={24} color="black"/>
-        //                     </TouchableOpacity>
-        //                 </View>
-        //             }
-        //             <View style={[isBigScreen ? styles.videoContainer : styles.videoContainerSmall]}>
-        //                 <Video
-        //                     style={[getVideoStyling()]}
-        //                     source={{
-        //                         uri: "https://" + getWorkoutFit().exercise.videoUrls[0],
-        //                     }}
-        //                     resizeMode="contain"
-        //                     shouldPlay={true}
-        //                     isLooping={true}
-        //                     isMuted={true}
-        //                     onLoad={() => setIsLoading(false)}
-        //                 />
-        //             </View>
-        //             <View style={[isBigScreen ? styles.playInfoContainer : styles.playInfoContainerSmall]}>
-        //                 {!paused ?
-        //                     <View style={[isBigScreen ? styles.playBtnsContainer : styles.playBtnsContainerSmall]}>
-        //                         <TouchableOpacity style={styles.playBtn} onPress={seekBackward}>
-        //                             <Typography variant="body2"
-        //                                         sx={{fontFamily: 'Montserrat', fontWeight: 500}}>Prev</Typography>
-        //                         </TouchableOpacity>
-        //                         <TouchableOpacity style={styles.playBtn} onPress={pauseWorkout}>
-        //                             <Entypo
-        //                                 name="controller-paus"
-        //                                 size={24}
-        //                                 color="#282828"
-        //                             />
-        //                         </TouchableOpacity>
-        //                         <TouchableOpacity style={styles.playBtn} onPress={seekForward}>
-        //                             <Typography variant="body2"
-        //                                         sx={{fontFamily: 'Montserrat', fontWeight: 500}}>Next</Typography>
-        //                         </TouchableOpacity>
-        //                     </View> : null}
-        //                 <View>
-        //                     <ThemeProvider theme={responsiveFontTheme}>
-        //                         <Typography variant="h6" sx={{
-        //                             fontFamily: 'Montserrat',
-        //                             fontWeight: 900
-        //                         }}>{getWorkoutFit().exercise.title}</Typography>
-        //                         <Typography variant="body2" sx={{
-        //                             fontFamily: 'Montserrat',
-        //                             fontWeight: 500
-        //                         }}>Round {roundsIndex + 1} of {workout.rounds}</Typography>
-        //                         {getWorkoutFit().repsOrTime === REPS ?
-        //                             <Typography variant="body2" sx={{
-        //                                 fontFamily: 'Montserrat',
-        //                                 fontWeight: 500
-        //                             }}>{getWorkoutFit().repsOrTimeValue} Reps</Typography> :
-        //                             <Typography variant="body2" sx={{
-        //                                 fontFamily: 'Montserrat',
-        //                                 fontWeight: 500
-        //                             }}>{exerciseDuration / 1000}s</Typography>
-        //                         }
-        //                     </ThemeProvider>
-        //                 </View>
-        //             </View>
-        //         </View>
-        //     </View>
-        //     {paused ?
-        //         <WPauseModal
-        //             close={navigateBack}
-        //             play={playWorkout}
-        //         /> : null}
-        //     {showIntervalModal ?
-        //         <WIntervalModal
-        //             description={intervalModalDescription}
-        //             intervalTime={intervalModalTime}
-        //             close={navigateBack}
-        //             onFinish={() => setShowIntervalModal(false)}/> : null}
-        //     {showWorkoutCompletedModal ?
-        //         <WorkoutCompletedModal
-        //             navigateToWorkoutPreview={navigateBack} close={closeWorkout}/> : null}
-        // </View>
     );
 };
 

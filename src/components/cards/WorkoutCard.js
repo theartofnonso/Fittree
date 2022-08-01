@@ -74,16 +74,16 @@ const styles = StyleSheet.create({
     },
     timerText: {
         color: 'white',
-        fontWeight: 300,
         textAlign: 'center',
         fontFamily: 'Montserrat',
-        fontSize: 10
+        fontSize: 10,
+        fontWeight: 'bold',
     },
     timerContainer: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10,
+        borderRadius: 3,
         paddingVertical: 5,
         paddingHorizontal: 10,
         backgroundColor: '#ef7a75',

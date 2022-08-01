@@ -2,6 +2,7 @@ import React from 'react';
 import {SafeAreaView, StyleSheet, TouchableOpacity, View,} from 'react-native';
 //import {convertMilliseconds} from '../../../utils/utils';
 import {createTheme, responsiveFontSizes, ThemeProvider, Typography} from "@mui/material";
+import {Modal} from "react-native-paper";
 
 const WorkoutCompletedModal = props => {
 
@@ -28,7 +29,7 @@ const WorkoutCompletedModal = props => {
     };
 
     return (
-        <SafeAreaView style={styles.rootStyle}>
+        <Modal style={styles.rootStyle} visible={props.isVisible}>
             <View style={styles.container}>
                 <ThemeProvider theme={responsiveFontTheme}>
                     <Typography variant="h6" sx={{
@@ -50,7 +51,7 @@ const WorkoutCompletedModal = props => {
                     </Typography>
                 </TouchableOpacity>
             </View>
-        </SafeAreaView>
+        </Modal>
     );
 };
 

@@ -29,53 +29,58 @@ const WorkoutCardBig = props => {
             </View>
             <View style={styles.textContainer}>
                 <ThemeProvider theme={responsiveFontTheme}>
-                    <Typography variant="h6" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 500}}>{props.workout.title}</Typography>
-                    <Typography variant="body2" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 500, fontSize: 10, marginVertical: 1}}>
-                        {props.workout.intensityLevel}{' '}
-                        {props.workout.type === workoutsConstants.workoutType.CIRCUIT ? `| ${props.workout.rounds} Round(s)` : null}
-                    </Typography>
+                    <Typography variant="h6" color='#ffffff'
+                                sx={{fontFamily: 'Montserrat', fontWeight: 500}}>{props.workout.title}</Typography>
                 </ThemeProvider>
-                <View style={styles.scrollViewContainer}>
-                    <ScrollView horizontal>
-                        {props.workout.equipments.map((equipment, index) => {
-                            return (
-                                <View key={index}>
-                                    <ThemeProvider theme={responsiveFontTheme}>
-                                        <Typography
-                                            variant="body2"
-                                            color='#ffffff'
-                                            sx={{
-                                                fontSize: 12,
-                                                marginRight: 0.5,
-                                                fontFamily: 'Montserrat',
-                                                fontWeight: 500,
-                                            }}>{equipment}</Typography>
-                                    </ThemeProvider>
-                                </View>
-                            );
-                        })}
-                    </ScrollView>
-                </View>
-                <View style={styles.scrollViewContainer}>
-                    <ScrollView horizontal>
-                        {props.workout.bodyParts.map((bodyPart, index) => {
-                            return (
-                                <View key={index}>
-                                    <ThemeProvider theme={responsiveFontTheme}>
-                                        <Typography
-                                            variant="body2"
-                                            color='#ffffff'
-                                            sx={{
-                                                fontSize: 12,
-                                                marginRight: 0.5,
-                                                fontFamily: 'Montserrat',
-                                                fontWeight: 500,
-                                            }}>{bodyPart}</Typography>
-                                    </ThemeProvider>
-                                </View>
-                            )
-                        })}
-                    </ScrollView>
+                <View style={styles.textContainerInfo}>
+                    <ThemeProvider theme={responsiveFontTheme}>
+                        <Typography variant="body2" color='#ffffff' sx={{fontFamily: 'Montserrat', fontSize: 11}}>
+                            {props.workout.intensityLevel}{' '}
+                            {props.workout.type === workoutsConstants.workoutType.CIRCUIT ? `| ${props.workout.rounds} Round(s)` : null}
+                        </Typography>
+                    </ThemeProvider>
+                    <View style={styles.scrollViewContainer}>
+                        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                            {props.workout.equipments.map((equipment, index) => {
+                                return (
+                                    <View key={index}>
+                                        <ThemeProvider theme={responsiveFontTheme}>
+                                            <Typography
+                                                variant="body2"
+                                                color='#ffffff'
+                                                sx={{
+                                                    fontSize: 12,
+                                                    marginRight: 0.5,
+                                                    fontFamily: 'Montserrat',
+                                                    fontWeight: 500,
+                                                }}>{equipment}</Typography>
+                                        </ThemeProvider>
+                                    </View>
+                                );
+                            })}
+                        </ScrollView>
+                    </View>
+                    <View style={styles.scrollViewContainer}>
+                        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                            {props.workout.bodyParts.map((bodyPart, index) => {
+                                return (
+                                    <View key={index}>
+                                        <ThemeProvider theme={responsiveFontTheme}>
+                                            <Typography
+                                                variant="body2"
+                                                color='#ffffff'
+                                                sx={{
+                                                    fontSize: 12,
+                                                    marginRight: 0.5,
+                                                    fontFamily: 'Montserrat',
+                                                    fontWeight: 500,
+                                                }}>{bodyPart}</Typography>
+                                        </ThemeProvider>
+                                    </View>
+                                )
+                            })}
+                        </ScrollView>
+                    </View>
                 </View>
             </View>
             <View style={styles.timerContainer}>
@@ -109,32 +114,33 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
     },
     scrollViewContainer: {
-        height: 25,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
     },
     textContainer: {
+        position: 'absolute',
+        bottom: 5,
+        left: 10,
+    },
+    textContainerInfo: {
+        height: 80,
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'flex-start',
-        justifyContent: 'space-evenly',
-        position: 'absolute',
-        bottom: 10,
-        left: 10,
+        justifyContent: 'space-evenly'
     },
     timerText: {
         color: 'white',
-        fontWeight: 300,
+        fontWeight: 'bold',
         textAlign: 'center',
         fontFamily: 'Montserrat',
-        fontSize: 10
+        fontSize: 10,
     },
     timerContainer: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10,
+        borderRadius: 3,
         paddingVertical: 5,
         paddingHorizontal: 10,
         backgroundColor: '#ef7a75',

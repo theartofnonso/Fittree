@@ -10,6 +10,7 @@ import WorkoutCompletedModal from "./WorkoutCompletedModal";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import {createTheme, responsiveFontSizes, ThemeProvider, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {Video} from "expo-av";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const PlayWorkout = props => {
 
@@ -73,11 +74,11 @@ const PlayWorkout = props => {
                 <View style={[getWrapperStyling()]}>
                     {!isBigScreen &&
                         <View style={styles.navigationBar}>
-                            <TouchableOpacity onPress={() => props.close}>
-                                <Entypo name="cross" size={24} color="#282828"/>
+                            <TouchableOpacity onPress={props.close}>
+                                <Entypo name="cross" size={32} color="#282828"/>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.playBtn} onPress={props.previewExercise}>
-                                <Ionicons name="information-circle-sharp" size={24} color="black"/>
+                                <MaterialCommunityIcons name="information-variant" size={32} color="#282828" />
                             </TouchableOpacity>
                         </View>
                     }
@@ -97,19 +98,19 @@ const PlayWorkout = props => {
                     <View style={[isBigScreen ? styles.playInfoContainer : styles.playInfoContainerSmall]}>
                         {!props.isPaused ?
                             <View style={[isBigScreen ? styles.playBtnsContainer : styles.playBtnsContainerSmall]}>
-                                <TouchableOpacity style={styles.playBtn} onPress={props.seekBackward}>
-                                    <Typography variant="body2"
+                                <TouchableOpacity onPress={props.seekBackward}>
+                                    <Typography variant="body1"
                                                 sx={{fontFamily: 'Montserrat', fontWeight: 500}}>Prev</Typography>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.playBtn} onPress={props.pause}>
+                                <TouchableOpacity style={styles.pauseBtn} onPress={props.pause}>
                                     <Entypo
                                         name="controller-paus"
                                         size={24}
                                         color="#282828"
                                     />
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.playBtn} onPress={props.seekForward}>
-                                    <Typography variant="body2"
+                                <TouchableOpacity onPress={props.seekForward}>
+                                    <Typography variant="body1"
                                                 sx={{fontFamily: 'Montserrat', fontWeight: 500}}>Next</Typography>
                                 </TouchableOpacity>
                             </View> : null}
@@ -117,15 +118,15 @@ const PlayWorkout = props => {
                             <ThemeProvider theme={responsiveFontTheme}>
                                 <Typography variant="h6" sx={{
                                     fontFamily: 'Montserrat',
-                                    fontWeight: 900
+                                    fontWeight: 500
                                 }}>{props.workoutExercise.exercise.title}</Typography>
-                                <Typography variant="body2" sx={{
+                                <Typography variant="body1" sx={{
                                     fontFamily: 'Montserrat',
-                                    fontWeight: 500
+                                    fontWeight: 300
                                 }}>{getRepsOrTimeValue()}</Typography>
-                                <Typography variant="body2" sx={{
+                                <Typography variant="body1" sx={{
                                     fontFamily: 'Montserrat',
-                                    fontWeight: 500
+                                    fontWeight: 300
                                 }}>{props.extraData.exerciseExtras}</Typography>
                             </ThemeProvider>
                         </View>
@@ -143,9 +144,9 @@ const PlayWorkout = props => {
                     intervalTime={props.interval.intervalModalTime}
                     close={props.close}
                     onFinish={props.onFinishInterval}/> : null}
-            {/*<WorkoutCompletedModal*/}
-            {/*    isVisible={props.isPaused}*/}
-            {/*    navigateToWorkoutPreview={props.close}/>*/}
+            <WorkoutCompletedModal
+                isVisible={props.isPaused}
+                navigateToWorkoutPreview={props.close}/>
         </View>
     );
 };
@@ -170,7 +171,6 @@ const styles = StyleSheet.create({
         left: 0,
         overflow: 'scroll',
         backgroundColor: 'white',
-        padding: 8,
     },
     wrapperMd: {
         display: 'grid',
@@ -192,7 +192,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingRight: 8
+        paddingVertical: 10,
+        paddingHorizontal: 10,
     },
     closeBtnStyle: {
         position: 'fixed',
@@ -216,7 +217,6 @@ const styles = StyleSheet.create({
     videoContainerSmall: {
         height: 300,
         backgroundColor: 'black',
-        borderRadius: 8
     },
     videoXs: {
         flex: 1,
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     playInfoContainerSmall: {
-        paddingTop: 10,
+        padding: 20
     },
     playBtnsContainer: {
         flexDirection: "row",
@@ -242,13 +242,19 @@ const styles = StyleSheet.create({
         flex: 1
     },
     playBtnsContainerSmall: {
-        flex: 1,
         flexDirection: "row",
-        alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: "center",
+        alignItems: "center",
+        marginVertical: 20,
     },
-    playBtn: {
-        marginRight: 8,
-    }
+    pauseBtn: {
+        alignItems: "center",
+        borderRadius: 5,
+        flexDirection: "column",
+        justifyContent: "center",
+        width: 40,
+        height: 40,
+        marginHorizontal: 15,
+    },
 });
 export default PlayWorkout;

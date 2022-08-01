@@ -22,10 +22,6 @@ const PreviewWorkout = ({workout, play, close}) => {
         play()
     };
 
-    if (!workout) {
-        return <View/>;
-    }
-
     /**
      * Sorted WorkoutFits
      * @type {unknown[]}
@@ -50,14 +46,14 @@ const PreviewWorkout = ({workout, play, close}) => {
         <View style={styles.root}>
             <View style={styles.container}>
                 {isBigScreen &&
-                    <TouchableOpacity style={styles.closeBtnStyle} onPress={() => close()}>
+                    <TouchableOpacity style={styles.closeBtnStyle} onPress={close}>
                         <Entypo name="cross" size={32} color="white"/>
                     </TouchableOpacity>
                 }
                 <View style={[getWrapperStyling()]}>
                     {!isBigScreen &&
                         <View style={styles.navigationBar}>
-                            <TouchableOpacity onPress={() => close()}>
+                            <TouchableOpacity onPress={close}>
                                 <Entypo name="cross" size={24} color="#282828"/>
                             </TouchableOpacity>
                         </View>

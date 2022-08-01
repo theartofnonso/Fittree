@@ -7,7 +7,7 @@ import {
     selectWorkouts
 } from "../src/features/CreatorProfileSlice";
 import {useDispatch, useSelector} from "react-redux";
-import {StyleSheet, Text, TouchableOpacity, View} from "react-native-web";
+import {StyleSheet, TouchableOpacity, View} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
 import {Feather} from '@expo/vector-icons';
 import {Avatar, TextInput} from "react-native-paper";
