@@ -133,9 +133,7 @@ const PlayRepsSetsWorkout = ({workout, exercises, end}) => {
     /**
      * Get the workoutFit
      */
-    const getWorkoutExercise = () => {
-        return exercises[exerciseIndex][setIndex];
-    }
+    const getWorkoutExercise = () => exercises[exerciseIndex][setIndex];
 
     return (
         <PlayWorkout

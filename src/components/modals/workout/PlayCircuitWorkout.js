@@ -126,9 +126,7 @@ const PlayCircuitWorkout = ({workout, rounds, end}) => {
     /**
      * Get the workoutExercise
      */
-    const getWorkoutExercise = () => {
-        return rounds[roundsIndex][exerciseIndex];
-    }
+    const getWorkoutExercise = () => rounds[roundsIndex][exerciseIndex];
 
     return (
         <PlayWorkout
