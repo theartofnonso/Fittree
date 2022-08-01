@@ -4,6 +4,7 @@ import {StyleSheet, View} from "react-native-web";
 import {Video} from "expo-av";
 import workoutsConstants from "../../utils/workout/workoutsConstants";
 import {createTheme, responsiveFontSizes, ThemeProvider, Typography} from "@mui/material";
+import {timeOrReps} from "../../utils/workout/workoutsHelperFunctions";
 
 const WorkoutExerciseCard = props => {
 
@@ -15,10 +16,13 @@ const WorkoutExerciseCard = props => {
      * @returns {number|*}
      */
     const displayRepsOrTime = () => {
-        if (props.workoutExercise.repsOrTime === workoutsConstants.timer.type.REPS) {
-            return props.workoutExercise.repsOrTimeValue + " " + props.workoutExercise.repsOrTime;
+        let exerciseInfo;
+        if (props.workoutExercise.repsOrTime === workoutsConstants.exerciseInfo.TIME) {
+            exerciseInfo = props.workoutExercise.repsOrTimeValue / 1000 + " " + timeOrReps(props.workoutExercise.repsOrTime);
+        } else {
+            exerciseInfo = props.workoutExercise.repsOrTimeValue + " " + timeOrReps(props.workoutExercise.repsOrTime);
         }
-        return props.workoutExercise.repsOrTimeValue / 1000 + " " + props.workoutExercise.repsOrTime;
+        return exerciseInfo
     };
 
     return (
@@ -34,10 +38,22 @@ const WorkoutExerciseCard = props => {
             />
             <View style={styles.textContainer}>
                 <ThemeProvider theme={theme}>
-                    <Typography variant="body1" sx={{fontFamily: 'Montserrat', fontWeight: 500, fontSize: 12}}>{props.workoutExercise.exercise.title}</Typography>
+                    <Typography variant="body1" sx={{
+                        fontFamily: 'Montserrat',
+                        fontWeight: 500,
+                        fontSize: 12
+                    }}>{props.workoutExercise.exercise.title}</Typography>
                     {props.type === workoutsConstants.workoutType.CIRCUIT ?
-                        <Typography variant="body2" sx={{fontFamily: 'Montserrat', fontWeight: 300, fontSize: 12}}>{displayRepsOrTime()}</Typography> :
-                        <Typography variant="body2" sx={{fontFamily: 'Montserrat', fontWeight: 300, fontSize: 12}}>{`${displayRepsOrTime()} x ${props.workoutExercise.sets} Set(s)`}</Typography>
+                        <Typography variant="body2" sx={{
+                            fontFamily: 'Montserrat',
+                            fontWeight: 300,
+                            fontSize: 12
+                        }}>{displayRepsOrTime()}</Typography> :
+                        <Typography variant="body2" sx={{
+                            fontFamily: 'Montserrat',
+                            fontWeight: 300,
+                            fontSize: 12
+                        }}>{`${displayRepsOrTime()} x ${props.workoutExercise.sets} Set(s)`}</Typography>
                     }
                 </ThemeProvider>
             </View>

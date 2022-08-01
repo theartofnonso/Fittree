@@ -1,14 +1,17 @@
 /**
- * Timer for a fit in workout
+ * Timer for in workoutS
  * @type {{type: {REPS: string, DURATION: string}}}
  */
-const timer = {
-  type: {
-    REPS: 'Reps',
-    SECS: 'Secs',
+const exerciseInfo = {
+  TIME: 'Time',
+  COUNT: 'Count',
+  duration: {
     MINS: 'Mins',
+    SECS: 'Secs',
   },
+  REPS: 'Reps',
 };
+
 /**
  * Workout type
  * @type {{REPS_SETS: string, CIRCUIT: string}}
@@ -19,6 +22,6 @@ const workoutType = {
 };
 
 export default {
-  timer,
+  exerciseInfo,
   workoutType,
 };
