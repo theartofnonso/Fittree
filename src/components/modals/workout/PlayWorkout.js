@@ -66,7 +66,7 @@ const PlayWorkout = props => {
         <View style={styles.root}>
             <View style={styles.container}>
                 {isBigScreen &&
-                    <TouchableOpacity style={styles.closeBtnStyle} onPress={() => closeWorkout()}>
+                    <TouchableOpacity style={styles.closeBtnStyle} onPress={props.close}>
                         <Entypo name="cross" size={32} color="white"/>
                     </TouchableOpacity>
                 }

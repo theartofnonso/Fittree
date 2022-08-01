@@ -2,18 +2,18 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native-web";
 import Entypo from "react-native-vector-icons/Entypo";
+import {Modal} from "react-native-paper";
 
 const PauseModal = props => {
 
   return (
-    <View style={styles.root}>
-      <View style={styles.container}>
-        <TouchableOpacity onPress={props.play}>
-          <Entypo name="controller-play" size={50} color="white" />
-        </TouchableOpacity>
-      </View>
-
-    </View>
+      <Modal style={styles.root} visible={props.isVisible}>
+          <View style={styles.container}>
+            <TouchableOpacity onPress={props.play}>
+              <Entypo name="controller-play" size={50} color="white" />
+            </TouchableOpacity>
+          </View>
+      </Modal>
   );
 };
 
