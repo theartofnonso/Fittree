@@ -1,16 +1,11 @@
 /* eslint-disable */
 import React, {useEffect, useState} from "react";
-import {View} from "react-native-web";
 import PlayWorkout from "./PlayWorkout";
 import workoutsConstants from "../../../utils/workout/workoutsConstants";
 
-const PlayCircuitWorkout = props => {
+const PlayCircuitWorkout = ({workout, rounds, end}) => {
 
-    const [workout, setWorkout] = useState(null);
-
-    const [exerciseDuration, setExerciseDuration] = useState(null);
-
-    const [rounds, setRounds] = useState(null);
+    const [exerciseDuration, setExerciseDuration] = useState(rounds[0][0].repsOrTimeValue);
 
     const [roundsIndex, setRoundsIndex] = useState(0);
 
@@ -24,32 +19,7 @@ const PlayCircuitWorkout = props => {
 
     const [paused, togglePaused] = useState(false);
 
-    const [isLoading, setIsLoading] = useState(true);
-
     const [showWorkoutCompletedModal, setShowWorkoutCompletedModal] = useState(false)
-
-    /**
-     * Load Workout from either Store or from navigation
-     */
-    useEffect(() => {
-        loadWorkout(props.workout);
-        setIsLoading(false)
-    }, []);
-
-    /**
-     * Load the exercises into the rounds array to play
-     * @param workout
-     */
-    const loadWorkout = (workout) => {
-        let rounds = new Array(workout.rounds);
-        for (let i = 0; i < rounds.length; i++) {
-            rounds[i] = Array.from(workout.workoutExercises.items).sort((a, b) => a.index - b.index);
-        }
-        setRounds(rounds);
-        // Set initial ExerciseDuration
-        setExerciseDuration(rounds[0][0].repsOrTimeValue)
-        setWorkout(workout);
-    };
 
     useEffect(() => {
         let intervalId = null;
@@ -82,7 +52,7 @@ const PlayCircuitWorkout = props => {
         const nextExerciseIndex = exerciseIndex + 1;
 
         if (!isPlayMode()) {
-            if (nextExerciseIndex < workoutFromStore.workoutExercises.items.length) {
+            if (nextExerciseIndex < workout.workoutExercises.items.length) {
                 setExerciseIndex(nextExerciseIndex);
                 setExerciseDuration(getWorkoutExercise().repsOrTimeValue);
             }
@@ -144,10 +114,6 @@ const PlayCircuitWorkout = props => {
      */
     const isPlayMode = () => true
 
-    if (!workout) {
-        return <View/>;
-    }
-
     /**
      * Navigate to Fit
      */
@@ -173,10 +139,10 @@ const PlayCircuitWorkout = props => {
             play={playWorkout}
             pause={pauseWorkout}
             isPaused={paused}
-            close={props.end}
+            close={end}
             type={workoutsConstants.workoutType.CIRCUIT}
             extraData={{exerciseDuration, exerciseExtras: `Round ${roundsIndex + 1} of ${workout.rounds}`}}
-            interval={{ intervalModalTime, intervalModalDescription }}
+            interval={{intervalModalTime, intervalModalDescription}}
             shouldPlayInterval={showIntervalModal}
             onFinishInterval={() => setShowIntervalModal(false)}
             onEnd={showWorkoutCompletedModal}/>

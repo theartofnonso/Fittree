@@ -28,6 +28,7 @@ import PlayCircuitWorkout from "../src/components/modals/workout/PlayCircuitWork
 import workoutsConstants from "../src/utils/workout/workoutsConstants";
 import PlayRepsAndSetsWorkout from "../src/components/modals/workout/PlayRepsAndSetsWorkout";
 import Favicon from "../src/components/illustrations/Favicon";
+import {loadCircuitWorkout, loadRepsAndSetsWorkout} from "../src/utils/workout/workoutsHelperFunctions";
 
 const CreatorProfile = () => {
 
@@ -98,13 +99,17 @@ const CreatorProfile = () => {
      */
     const getWorkoutComponent = () => {
         if (currentWorkout.type === workoutsConstants.workoutType.CIRCUIT) {
+            const rounds = loadCircuitWorkout(currentWorkout);
             return <PlayCircuitWorkout
                 workout={currentWorkout}
+                rounds={rounds}
                 end={() => togglePlayWorkout(false)}/>
 
         } else {
+            const exercises = loadRepsAndSetsWorkout(currentWorkout);
             return <PlayRepsAndSetsWorkout
                 workout={currentWorkout}
+                exercises={exercises}
                 end={() => togglePlayWorkout(false)}/>
         }
     }
