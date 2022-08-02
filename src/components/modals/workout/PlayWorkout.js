@@ -77,7 +77,7 @@ const PlayWorkout = props => {
                                 <Entypo name="cross" size={32} color="#282828"/>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.playBtn} onPress={props.previewExercise}>
-                                <MaterialCommunityIcons name="information-variant" size={32} color="#282828" />
+                                <MaterialCommunityIcons name="information-variant" size={32} color="#282828"/>
                             </TouchableOpacity>
                         </View>
                     }
@@ -132,20 +132,23 @@ const PlayWorkout = props => {
                     </View>
                 </View>
             </View>
-            <PauseModal
-                isVisible={props.isPaused}
-                close={props.close}
-                play={props.play}
-            />
+            {props.isPaused ?
+                <PauseModal
+                    isVisible={props.isPaused}
+                    close={props.close}
+                    play={props.play}
+                /> : null}
             {props.shouldPlayInterval ?
                 <IntervalModal
                     description={props.interval.intervalModalDescription}
                     intervalTime={props.interval.intervalModalTime}
                     close={props.close}
                     onFinish={props.onFinishInterval}/> : null}
-            <WorkoutCompletedModal
-                isVisible={props.onEnd}
-                navigateToWorkoutPreview={props.close}/>
+            {props.onEnd ?
+                <WorkoutCompletedModal
+                    isVisible={props.onEnd}
+                    startTime={props.startTime}
+                    navigateToWorkoutPreview={props.close}/> : null}
         </View>
     );
 };

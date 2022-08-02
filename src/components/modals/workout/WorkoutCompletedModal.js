@@ -1,6 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, TouchableOpacity, View,} from 'react-native';
-//import {convertMilliseconds} from '../../../utils/utils';
+import {StyleSheet, TouchableOpacity, View,} from 'react-native';
 import {createTheme, responsiveFontSizes, ThemeProvider, Typography} from "@mui/material";
 import {Modal} from "react-native-paper";
 import WorkoutCompletedSvg from "../../illustrations/WorkoutCompletedSvg";
@@ -10,24 +9,34 @@ const WorkoutCompletedModal = props => {
     let responsiveFontTheme = createTheme();
     responsiveFontTheme = responsiveFontSizes(responsiveFontTheme);
 
+    /**
+     * calculate workout duration
+     * @returns {string}
+     */
     const calculateWorkoutDuration = () => {
         const startTime = props.startTime;
-        const endTime = new Date().getTime();
-        const difference = endTime - startTime;
-        const seconds = 0 //convertMilliseconds(difference, 's');
-        const minutes = 0 //convertMilliseconds(difference, 'm');
-        const hour = 0 //convertMilliseconds(difference, 'h');
-
-        let time;
-        if (seconds <= 59) {
-            time = seconds + ' secs';
-        } else if (minutes <= 59) {
-            time = minutes + ' mins';
-        } else {
-            time = hour + ' hr';
-        }
-        return time;
+        const endTime = Date.now();
+        const difference = (endTime - startTime) / 1000
+        return toReadableTime(difference)
     };
+
+    /**
+     * Convert date to readable format
+     * @param difference
+     * @returns {string}
+     */
+    const toReadableTime = (difference) => {
+        /* extend the String by using prototypical inheritance */
+        let seconds = parseInt(difference, 10); // don't forget the second param
+        let hours   = Math.floor(seconds / 3600);
+        let minutes = Math.floor((seconds - (hours * 3600)) / 60);
+        seconds = seconds - (hours * 3600) - (minutes * 60);
+
+        if (hours   < 10) {hours   = "0"+hours;}
+        if (minutes < 10) {minutes = "0"+minutes;}
+        if (seconds < 10) {seconds = "0"+seconds;}
+        return hours + 'hrs: ' + minutes + 'mins: ' + seconds + 'secs';
+    }
 
     return (
         <Modal style={styles.rootStyle} visible={props.isVisible}>

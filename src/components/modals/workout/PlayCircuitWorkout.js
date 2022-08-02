@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import PlayWorkout from "./PlayWorkout";
 import workoutsConstants from "../../../utils/workout/workoutsConstants";
 
-const PlayCircuitWorkout = ({workout, rounds, end}) => {
+const PlayCircuitWorkout = ({workout, rounds, startTime, end}) => {
 
     const [exerciseDuration, setExerciseDuration] = useState(rounds[0][0].repsOrTimeValue);
 
@@ -130,6 +130,7 @@ const PlayCircuitWorkout = ({workout, rounds, end}) => {
 
     return (
         <PlayWorkout
+            startTime={startTime}
             workoutExercise={getWorkoutExercise()}
             previewExercise={navigateToExercisePreview}
             seekForward={seekForward}
