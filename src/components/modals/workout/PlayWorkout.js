@@ -10,10 +10,13 @@ import WorkoutCompletedModal from "./WorkoutCompletedModal";
 import {createTheme, responsiveFontSizes, ThemeProvider, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {Video} from "expo-av";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import PreviewExercise from "./PreviewExercise";
 
 const PlayWorkout = props => {
 
     const [isLoading, setIsLoading] = useState(true);
+
+    const [showExercise, setShowExercise] = useState(false)
 
     const theme = useTheme();
     const isBigScreen = useMediaQuery(theme.breakpoints.up('sm'));
@@ -62,6 +65,14 @@ const PlayWorkout = props => {
         }
     }
 
+    /**
+     * Preview exercise information
+     */
+    const previewExercise = () => {
+        props.previewExercise()
+        setShowExercise(true)
+    }
+
     return (
         <View style={styles.root}>
             <View style={styles.container}>
@@ -76,7 +87,7 @@ const PlayWorkout = props => {
                             <TouchableOpacity onPress={props.close}>
                                 <Entypo name="cross" size={32} color="#282828"/>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.playBtn} onPress={props.previewExercise}>
+                            <TouchableOpacity onPress={previewExercise}>
                                 <MaterialCommunityIcons name="information-variant" size={32} color="#282828"/>
                             </TouchableOpacity>
                         </View>
@@ -149,6 +160,10 @@ const PlayWorkout = props => {
                     isVisible={props.onEnd}
                     startTime={props.startTime}
                     navigateToWorkoutPreview={props.close}/> : null}
+            {showExercise ?
+                <PreviewExercise
+                    exercise={props.workoutExercise.exercise}
+                    close={() => setShowExercise(false)}/> : null}
         </View>
     );
 };
