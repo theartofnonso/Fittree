@@ -82,7 +82,7 @@ const PlayWorkout = props => {
                     </TouchableOpacity>
                 }
                 <View style={[getWrapperStyling()]}>
-                    {!isBigScreen &&
+                    {!isBigScreen ?
                         <View style={styles.navigationBar}>
                             <TouchableOpacity onPress={props.close}>
                                 <Entypo name="cross" size={32} color="#282828"/>
@@ -91,7 +91,7 @@ const PlayWorkout = props => {
                                 <MaterialCommunityIcons name="information-variant" size={32} color="#282828"/>
                             </TouchableOpacity>
                         </View>
-                    }
+                        : null}
                     <View style={[isBigScreen ? styles.videoContainer : styles.videoContainerSmall]}>
                         <Video
                             style={[getVideoStyling()]}
@@ -140,6 +140,11 @@ const PlayWorkout = props => {
                                 }}>{props.extraData.exerciseExtras}</Typography>
                             </ThemeProvider>
                         </View>
+                        {isBigScreen ?
+                            <TouchableOpacity style={{position: 'absolute', bottom: 8, right: 8}}
+                                              onPress={previewExercise}>
+                                <MaterialCommunityIcons name="information-variant" size={32} color="#282828"/>
+                            </TouchableOpacity> : null}
                     </View>
                 </View>
             </View>

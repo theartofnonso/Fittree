@@ -2,6 +2,8 @@
 import React, {useEffect, useState} from "react";
 import {StyleSheet, View} from "react-native-web";
 import {Typography} from "@mui/material";
+import Entypo from "react-native-vector-icons/Entypo";
+import {TouchableOpacity} from "react-native";
 
 const IntervalModal = props => {
 
@@ -22,6 +24,9 @@ const IntervalModal = props => {
     return (
         <View style={styles.root}>
             <View style={styles.container}>
+                <TouchableOpacity style={styles.closeBtn} onPress={props.close}>
+                    <Entypo name="cross" size={32} color="white"/>
+                </TouchableOpacity>
                 <Typography variant="body2" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 500}}>
                     {props.description} in {intervalTime / 1000}s
                 </Typography>
@@ -51,6 +56,11 @@ const styles = StyleSheet.create({
         fontSize: 20,
         position: "absolute",
         bottom: 50,
+    },
+    closeBtn: {
+        position: 'fixed',
+        top: 10,
+        right: 10,
     },
 });
 
