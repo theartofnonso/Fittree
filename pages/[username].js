@@ -193,7 +193,7 @@ const CreatorProfile = () => {
                             cache: 'force-cache',
                         }}/>
                         <ThemeProvider theme={theme}>
-                            <Typography variant="h6" textAlign='center' sx={{fontFamily: 'Montserrat', fontWeight: 500}}>{profile.preferred_username}</Typography>
+                            <Typography variant="h6" textAlign='center' sx={{my: 1, fontFamily: 'Montserrat', fontWeight: 500}}>{profile.preferred_username}</Typography>
                             <Typography variant="body2" textAlign='center' sx={{fontFamily: 'Montserrat', fontSize: 12}}>{profile.displayBrief}</Typography>
                         </ThemeProvider>
                     </View>

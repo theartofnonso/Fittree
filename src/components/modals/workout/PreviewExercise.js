@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, {useState} from "react";
+import React from "react";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
 import Entypo from "react-native-vector-icons/Entypo";
 import {createTheme, responsiveFontSizes, ThemeProvider, Typography, useMediaQuery, useTheme} from "@mui/material";
@@ -7,8 +7,6 @@ import {Video} from "expo-av";
 import {ScrollView} from "react-native-web";
 
 const PreviewExercise = ({exercise, close}) => {
-
-    const [isLoading, setIsLoading] = useState(true);
 
     const theme = useTheme();
     const isBigScreen = useMediaQuery(theme.breakpoints.up('sm'));

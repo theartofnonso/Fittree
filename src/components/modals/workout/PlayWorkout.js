@@ -14,8 +14,6 @@ import PreviewExercise from "./PreviewExercise";
 
 const PlayWorkout = props => {
 
-    const [isLoading, setIsLoading] = useState(true);
-
     const [showExercise, setShowExercise] = useState(false)
 
     const theme = useTheme();
@@ -102,7 +100,6 @@ const PlayWorkout = props => {
                             shouldPlay={true}
                             isLooping={true}
                             isMuted={true}
-                            onLoad={() => setIsLoading(false)}
                         />
                     </View>
                     <View style={[isBigScreen ? styles.playInfoContainer : styles.playInfoContainerSmall]}>
