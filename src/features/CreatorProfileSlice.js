@@ -22,7 +22,9 @@ const creatorProfileSlice = createSlice({
             .addCase(fetchCreatorProfile.fulfilled, (state, action) => {
                 state.profile = action.payload;
                 state.status = 'ready'
-                state.liveWorkouts = action.payload ? action.payload.workouts.items.filter(item => item.isLive).sort((a, b) => new Date(b.date) - new Date(a.date)) : []
+                state.liveWorkouts = action.payload ? action.payload.workouts.items
+                    .filter(item => item.isLive)
+                    .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)) : []
             });
     },
 });

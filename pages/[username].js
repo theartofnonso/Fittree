@@ -205,7 +205,7 @@ const CreatorProfile = (props) => {
                 <Container maxWidth="md" sx={{padding: 1}}>
                     <View style={styles.topContainerStyle}>
                         <View style={styles.navBarStyle}>
-                            <TouchableOpacity style={styles.btnStyle} onPress={copyShareableLink}>
+                            <TouchableOpacity onPress={copyShareableLink}>
                                 <Feather name="share" size={24} color="black"/>
                             </TouchableOpacity>
                         </View>
@@ -267,8 +267,12 @@ const CreatorProfile = (props) => {
 const styles = StyleSheet.create({
 
     navBarStyle: {
-        flexDirection: "row",
         justifyContent: "space-between",
+        display: 'flex',
+        flexDirection: "row",
+        alignItems: 'center',
+        paddingHorizontal: 10,
+        paddingVertical: 12,
     },
     infoStyle: {
         flexDirection: "column",
@@ -278,21 +282,13 @@ const styles = StyleSheet.create({
         display: 'grid',
         gridTemplateColumns: 'repeat(3, 1fr)',
         gridGap: 8,
+        overflow: 'scroll'
     },
     wrapperSmall: {
         display: 'grid',
         gridTemplateColumns: 'repeat(2, 1fr)',
         gridGap: 8,
-    },
-    btnStyle: {
-        alignItems: "center",
-        backgroundColor: "white",
-        borderRadius: 15,
-        flexDirection: "column",
-        justifyContent: "center",
-        width: 40,
-        height: 40,
-        marginBottom: 20,
+        overflow: 'scroll'
     },
     emptyStateViewStyle: {
         justifyContent: "center",
