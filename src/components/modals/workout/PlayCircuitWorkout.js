@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import PlayWorkout from "./PlayWorkout";
 import workoutsConstants from "../../../utils/workout/workoutsConstants";
 
-const PlayCircuitWorkout = ({workout, rounds, startTime, end}) => {
+const PlayCircuitWorkout = ({workout, rounds, end}) => {
 
     const [exerciseDuration, setExerciseDuration] = useState(rounds[0][0].repsOrTimeValue);
 
@@ -20,6 +20,13 @@ const PlayCircuitWorkout = ({workout, rounds, startTime, end}) => {
     const [paused, togglePaused] = useState(false);
 
     const [showWorkoutCompletedModal, setShowWorkoutCompletedModal] = useState(false)
+
+    const [startTime, setStartTime] = useState(0)
+
+    useEffect(() => {
+        const currentTime = Date.now();
+        setStartTime(currentTime)
+    }, [])
 
     useEffect(() => {
         let intervalId = null;

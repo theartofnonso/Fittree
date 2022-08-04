@@ -32,10 +32,7 @@ const WorkoutCompletedModal = props => {
         let minutes = Math.floor((seconds - (hours * 3600)) / 60);
         seconds = seconds - (hours * 3600) - (minutes * 60);
 
-        if (hours   < 10) {hours   = "0"+hours;}
-        if (minutes < 10) {minutes = "0"+minutes;}
-        if (seconds < 10) {seconds = "0"+seconds;}
-        return hours + 'hrs: ' + minutes + 'mins: ' + seconds + 'secs';
+        return minutes > 1 ? minutes + ' mins' : ' less than a min';
     }
 
     return (
@@ -50,7 +47,8 @@ const WorkoutCompletedModal = props => {
                         }}> Workout Completed</Typography>
                         <Typography variant="body1" sx={{
                             fontFamily: 'Montserrat',
-                            fontWeight: 400
+                            fontWeight: 400,
+                            my: 1
                         }}> It took you {calculateWorkoutDuration()}</Typography>
                     </ThemeProvider>
                 </View>
