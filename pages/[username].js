@@ -33,6 +33,7 @@ import {
     loadCircuitWorkout,
     loadRepsAndSetsWorkout
 } from "../src/utils/workout/workoutsHelperFunctions";
+import * as Clipboard from 'expo-clipboard';
 
 const CreatorProfile = (props) => {
 
@@ -132,9 +133,10 @@ const CreatorProfile = (props) => {
      * copy shareable link
      */
     const copyShareableLink = () => {
-        navigator.clipboard.writeText(generateShareableLink(username));
-        setSnackbarMessage("Link copied")
-        setSnackbarVisible(true)
+        Clipboard.setStringAsync(generateShareableLink(username)).then(() => {
+            setSnackbarMessage("Link copied")
+            setSnackbarVisible(true)
+        });
     }
 
     /**
@@ -199,63 +201,66 @@ const CreatorProfile = (props) => {
          * Loaded Creator page content
          */
         return (
-            <Container maxWidth="md" sx={{padding: 1}}>
-                <View style={styles.topContainerStyle}>
-                    <View style={styles.navBarStyle}>
-                        <TouchableOpacity style={styles.btnStyle} onPress={copyShareableLink}>
-                            <Feather name="share" size={24} color="black"/>
-                        </TouchableOpacity>
+            <>
+                <Container maxWidth="md" sx={{padding: 1}}>
+                    <View style={styles.topContainerStyle}>
+                        <View style={styles.navBarStyle}>
+                            <TouchableOpacity style={styles.btnStyle} onPress={copyShareableLink}>
+                                <Feather name="share" size={24} color="black"/>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.infoStyle}>
+                            <Avatar.Image size={96} source={{
+                                uri: 'https://' + profile.displayProfile,
+                                cache: 'force-cache',
+                            }}/>
+                            <ThemeProvider theme={theme}>
+                                <Typography variant="h6" textAlign='center' sx={{my: 1, fontFamily: 'Montserrat', fontWeight: 500}}>{profile.preferred_username}</Typography>
+                                <Typography variant="body2" textAlign='center' sx={{fontFamily: 'Montserrat', fontSize: 12}}>{profile.displayBrief}</Typography>
+                            </ThemeProvider>
+                        </View>
                     </View>
-                    <View style={styles.infoStyle}>
-                        <Avatar.Image size={96} source={{
-                            uri: 'https://' + profile.displayProfile,
-                            cache: 'force-cache',
-                        }}/>
-                        <ThemeProvider theme={theme}>
-                            <Typography variant="h6" textAlign='center' sx={{my: 1, fontFamily: 'Montserrat', fontWeight: 500}}>{profile.preferred_username}</Typography>
-                            <Typography variant="body2" textAlign='center' sx={{fontFamily: 'Montserrat', fontSize: 12}}>{profile.displayBrief}</Typography>
-                        </ThemeProvider>
-                    </View>
-                </View>
-                <TextInput
-                    autoCapitalize="none"
-                    mode="outlined"
-                    autoCorrect={false}
-                    value={searchQuery}
-                    label="Search workouts"
-                    maxLength={15}
-                    style={styles.textInputStyle}
-                    outlineColor='white'
-                    onChangeText={value => onChangeSearch(value.toLowerCase())}
-                />
-                {workouts.length > 0 ?
-                    <View style={[isBigScreen ? styles.wrapper : styles.wrapperSmall]}>
-                        {filteredWorkouts.map((item, index) => {
-                            return (
-                                <TouchableOpacity key={index} activeOpacity={0.8}
-                                                  onPress={() => setCurrentWorkout(item)}>
-                                    <WorkoutCard workout={item}/>
-                                </TouchableOpacity>
-                            );
-                        })}
-                    </View> :
-                    <View style={styles.emptyStateViewStyle}>
-                        <Typography variant="body2" textAlign='center' sx={{fontFamily: 'Montserrat', fontSize: 12}}>{`${username} has no workouts`}</Typography>
-                    </View>}
-                {currentWorkout && !shouldPlayWorkout ?
-                    <PreviewWorkout
-                        workout={currentWorkout}
-                        play={() => togglePlayWorkout(true)}
-                        close={closePreview}/> : null}
-                {shouldPlayWorkout ? getWorkoutComponent() : null}
+                    <TextInput
+                        autoCapitalize="none"
+                        mode="outlined"
+                        autoCorrect={false}
+                        value={searchQuery}
+                        label="Search workouts"
+                        maxLength={15}
+                        style={styles.textInputStyle}
+                        outlineColor='white'
+                        onChangeText={value => onChangeSearch(value.toLowerCase())}
+                    />
+                    {workouts.length > 0 ?
+                        <View style={[isBigScreen ? styles.wrapper : styles.wrapperSmall]}>
+                            {filteredWorkouts.map((item, index) => {
+                                return (
+                                    <TouchableOpacity key={index} activeOpacity={0.8}
+                                                      onPress={() => setCurrentWorkout(item)}>
+                                        <WorkoutCard workout={item}/>
+                                    </TouchableOpacity>
+                                );
+                            })}
+                        </View> :
+                        <View style={styles.emptyStateViewStyle}>
+                            <Typography variant="body2" textAlign='center' sx={{fontFamily: 'Montserrat', fontSize: 12}}>{`${username} has no workouts`}</Typography>
+                        </View>}
+                    {currentWorkout && !shouldPlayWorkout ?
+                        <PreviewWorkout
+                            workout={currentWorkout}
+                            play={() => togglePlayWorkout(true)}
+                            close={closePreview}/> : null}
+                    {shouldPlayWorkout ? getWorkoutComponent() : null}
+
+                </Container>
                 <Snackbar
                     style={styles.snackbar}
                     visible={snackbarVisible}
                     onDismiss={() => setSnackbarVisible(false)}>
                     {snackbarMessage}
                 </Snackbar>
-            </Container>
-        );
+            </>
+        )
     }
 }
 
