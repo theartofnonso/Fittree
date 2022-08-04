@@ -39,3 +39,5 @@ export const loadRepsAndSetsWorkout = (workout) => {
 
     return exercises;
 };
+
+export const generateShareableLink = username => 'https://www.fittree.io/' + username;

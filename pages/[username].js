@@ -10,7 +10,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {StyleSheet, TouchableOpacity, View} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
 import {Feather} from '@expo/vector-icons';
-import {Avatar, TextInput} from "react-native-paper";
+import {Avatar, Snackbar, TextInput} from "react-native-paper";
 import {searchExerciseOrWorkout} from "../src/utils/workoutAndExerciseUtils";
 import {
     Container,
@@ -28,9 +28,13 @@ import PlayCircuitWorkout from "../src/components/modals/workout/PlayCircuitWork
 import workoutsConstants from "../src/utils/workout/workoutsConstants";
 import PlayRepsAndSetsWorkout from "../src/components/modals/workout/PlayRepsAndSetsWorkout";
 import Favicon from "../src/components/illustrations/Favicon";
-import {loadCircuitWorkout, loadRepsAndSetsWorkout} from "../src/utils/workout/workoutsHelperFunctions";
+import {
+    generateShareableLink,
+    loadCircuitWorkout,
+    loadRepsAndSetsWorkout
+} from "../src/utils/workout/workoutsHelperFunctions";
 
-const CreatorProfile = () => {
+const CreatorProfile = (props) => {
 
     const theme = useTheme();
     const isBigScreen = useMediaQuery(theme.breakpoints.up('sm'));
@@ -59,6 +63,12 @@ const CreatorProfile = () => {
     const [shouldPlayWorkout, setShouldPlayWorkout] = useState(false)
 
     const [searchQuery, setSearchQuery] = React.useState('');
+
+    /**
+     * Show snackbar for err message
+     */
+    const [snackbarVisible, setSnackbarVisible] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
 
     /**
      * Load workouts into filtered workouts
@@ -116,6 +126,15 @@ const CreatorProfile = () => {
                 startTime={currentTime}
                 end={() => togglePlayWorkout(false)}/>
         }
+    }
+
+    /**
+     * copy shareable link
+     */
+    const copyShareableLink = () => {
+        navigator.clipboard.writeText(generateShareableLink(username));
+        setSnackbarMessage("Link copied")
+        setSnackbarVisible(true)
     }
 
     /**
@@ -183,7 +202,7 @@ const CreatorProfile = () => {
             <Container maxWidth="md" sx={{padding: 1}}>
                 <View style={styles.topContainerStyle}>
                     <View style={styles.navBarStyle}>
-                        <TouchableOpacity style={styles.btnStyle}>
+                        <TouchableOpacity style={styles.btnStyle} onPress={copyShareableLink}>
                             <Feather name="share" size={24} color="black"/>
                         </TouchableOpacity>
                     </View>
@@ -229,6 +248,12 @@ const CreatorProfile = () => {
                         play={() => togglePlayWorkout(true)}
                         close={closePreview}/> : null}
                 {shouldPlayWorkout ? getWorkoutComponent() : null}
+                <Snackbar
+                    style={styles.snackbar}
+                    visible={snackbarVisible}
+                    onDismiss={() => setSnackbarVisible(false)}>
+                    {snackbarMessage}
+                </Snackbar>
             </Container>
         );
     }
@@ -287,8 +312,8 @@ const styles = StyleSheet.create({
     emptyWorkoutStyle: {
         backgroundColor: "transparent",
     },
-    errSnackbar: {
-        backgroundColor: "#f54755",
+    snackbar: {
+        backgroundColor: "#ef7a75",
     },
 });
 

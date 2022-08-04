@@ -3,6 +3,7 @@ import {Image, ScrollView, StyleSheet, Text, View} from 'react-native-web';
 import workoutsConstants from '../../utils/workout/workoutsConstants';
 import {LinearGradient} from "expo-linear-gradient";
 import {createTheme, responsiveFontSizes, ThemeProvider, Typography, useMediaQuery, useTheme} from "@mui/material";
+import {Snackbar} from "react-native-paper";
 
 const WorkoutCardBig = props => {
 
