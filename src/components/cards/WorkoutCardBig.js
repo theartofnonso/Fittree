@@ -31,56 +31,54 @@ const WorkoutCardBig = props => {
                 <ThemeProvider theme={responsiveFontTheme}>
                     <Typography variant="h6" color='#ffffff'
                                 sx={{fontFamily: 'Montserrat', fontWeight: 500}}>{props.workout.title}</Typography>
+                    <Typography variant="body2" color='#ffffff' sx={{fontFamily: 'Montserrat', fontSize: 11, my: 0.3,}}>
+                        {props.workout.intensityLevel}{' '}
+                        {props.workout.type === workoutsConstants.workoutType.CIRCUIT ? `| ${props.workout.rounds} Round(s)` : null}
+                    </Typography>
                 </ThemeProvider>
-                <View style={styles.textContainerInfo}>
-                    <ThemeProvider theme={responsiveFontTheme}>
-                        <Typography variant="body2" color='#ffffff' sx={{fontFamily: 'Montserrat', fontSize: 11}}>
-                            {props.workout.intensityLevel}{' '}
-                            {props.workout.type === workoutsConstants.workoutType.CIRCUIT ? `| ${props.workout.rounds} Round(s)` : null}
-                        </Typography>
-                    </ThemeProvider>
-                    <View style={styles.scrollViewContainer}>
-                        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                            {props.workout.equipments.map((equipment, index) => {
-                                return (
-                                    <View key={index}>
-                                        <ThemeProvider theme={responsiveFontTheme}>
-                                            <Typography
-                                                variant="body2"
-                                                color='#ffffff'
-                                                sx={{
-                                                    fontSize: 12,
-                                                    marginRight: 0.5,
-                                                    fontFamily: 'Montserrat',
-                                                    fontWeight: 500,
-                                                }}>{equipment}</Typography>
-                                        </ThemeProvider>
-                                    </View>
-                                );
-                            })}
-                        </ScrollView>
-                    </View>
-                    <View style={styles.scrollViewContainer}>
-                        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                            {props.workout.bodyParts.map((bodyPart, index) => {
-                                return (
-                                    <View key={index}>
-                                        <ThemeProvider theme={responsiveFontTheme}>
-                                            <Typography
-                                                variant="body2"
-                                                color='#ffffff'
-                                                sx={{
-                                                    fontSize: 12,
-                                                    marginRight: 0.5,
-                                                    fontFamily: 'Montserrat',
-                                                    fontWeight: 500,
-                                                }}>{bodyPart}</Typography>
-                                        </ThemeProvider>
-                                    </View>
-                                )
-                            })}
-                        </ScrollView>
-                    </View>
+                <View style={styles.scrollViewContainer}>
+                    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                        {props.workout.equipments.map((equipment, index) => {
+                            return (
+                                <View key={index}>
+                                    <ThemeProvider theme={responsiveFontTheme}>
+                                        <Typography
+                                            variant="body2"
+                                            color='#ffffff'
+                                            sx={{
+                                                fontSize: 12,
+                                                marginRight: 0.5,
+                                                my: 0.3,
+                                                fontFamily: 'Montserrat',
+                                                fontWeight: 300,
+                                            }}>{equipment}</Typography>
+                                    </ThemeProvider>
+                                </View>
+                            );
+                        })}
+                    </ScrollView>
+                </View>
+                <View style={styles.scrollViewContainer}>
+                    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                        {props.workout.bodyParts.map((bodyPart, index) => {
+                            return (
+                                <View key={index}>
+                                    <ThemeProvider theme={responsiveFontTheme}>
+                                        <Typography
+                                            variant="body2"
+                                            color='#ffffff'
+                                            sx={{
+                                                fontSize: 12,
+                                                marginRight: 0.5,
+                                                my: 0.3,
+                                                fontFamily: 'Montserrat',
+                                                fontWeight: 300,
+                                            }}>{bodyPart}</Typography>
+                                    </ThemeProvider>
+                                </View>
+                            )
+                        })}
+                    </ScrollView>
                 </View>
             </View>
             <View style={styles.timerContainer}>
@@ -119,15 +117,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     textContainer: {
-        position: 'absolute',
-        bottom: 5,
-        left: 10,
-    },
-    textContainerInfo: {
-        height: 80,
         display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-evenly'
+        position: 'absolute',
+        left: 10,
+        bottom: 10,
     },
     timerText: {
         color: 'white',
