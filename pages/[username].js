@@ -10,14 +10,16 @@ import {useDispatch, useSelector} from "react-redux";
 import {StyleSheet, TouchableOpacity, View} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
 import {Feather} from '@expo/vector-icons';
-import {Avatar, Snackbar, TextInput} from "react-native-paper";
+import {Avatar, TextInput} from "react-native-paper";
 import {searchExerciseOrWorkout} from "../src/utils/workoutAndExerciseUtils";
 import {
+    Alert,
     Container,
     createTheme,
     Divider,
     Link,
     responsiveFontSizes,
+    Snackbar,
     ThemeProvider,
     Typography,
     useMediaQuery,
@@ -68,7 +70,7 @@ const CreatorProfile = (props) => {
     /**
      * Show snackbar for err message
      */
-    const [snackbarVisible, setSnackbarVisible] = useState(false);
+    const [showSnackBar, setShowSnackBar] = useState(false)
     const [snackbarMessage, setSnackbarMessage] = useState("");
 
     /**
@@ -108,7 +110,7 @@ const CreatorProfile = (props) => {
      * Display appropriate workout play component
      * @returns {JSX.Element}
      */
-    const getWorkoutComponent = () => {
+    const getWorkoutPlayComponent = () => {
         const currentTime = Date.now();
 
         if (currentWorkout.type === workoutsConstants.workoutType.CIRCUIT) {
@@ -135,9 +137,17 @@ const CreatorProfile = (props) => {
     const copyShareableLink = () => {
         Clipboard.setStringAsync(generateShareableLink(username)).then(() => {
             setSnackbarMessage("Link copied")
-            setSnackbarVisible(true)
+            setShowSnackBar(true)
         });
     }
+
+    const handleClick = () => () => {
+        setShowSnackBar(true);
+    };
+
+    const handleClose = () => {
+        setShowSnackBar(false);
+    };
 
     /**
      * Retrieve creator's profile
@@ -193,7 +203,6 @@ const CreatorProfile = (props) => {
                         </Typography>
                     </Typography>
                 </ThemeProvider>
-
             </Container>
         );
     } else {
@@ -201,24 +210,29 @@ const CreatorProfile = (props) => {
          * Loaded Creator page content
          */
         return (
-            <>
-                <Container maxWidth="md" sx={{padding: 1}}>
-                    <View style={styles.topContainerStyle}>
-                        <View style={styles.navBarStyle}>
-                            <TouchableOpacity onPress={copyShareableLink}>
-                                <Feather name="share" size={24} color="black"/>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.infoStyle}>
-                            <Avatar.Image size={96} source={{
-                                uri: 'https://' + profile.displayProfile,
-                                cache: 'force-cache',
-                            }}/>
-                            <ThemeProvider theme={theme}>
-                                <Typography variant="h6" textAlign='center' sx={{my: 1, fontFamily: 'Montserrat', fontWeight: 500}}>{profile.preferred_username}</Typography>
-                                <Typography variant="body2" textAlign='center' sx={{fontFamily: 'Montserrat', fontSize: 12}}>{profile.displayBrief}</Typography>
-                            </ThemeProvider>
-                        </View>
+            <Container maxWidth="md" sx={{padding: 1}}>
+                <View style={styles.topContainerStyle}>
+                    <View style={styles.navBarStyle}>
+                        <TouchableOpacity onPress={copyShareableLink}>
+                            <Feather name="share" size={24} color="black"/>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.infoStyle}>
+                        <Avatar.Image size={96} source={{
+                            uri: 'https://' + profile.displayProfile,
+                            cache: 'force-cache',
+                        }}/>
+                        <ThemeProvider theme={theme}>
+                            <Typography variant="h6" textAlign='center' sx={{
+                                my: 1,
+                                fontFamily: 'Montserrat',
+                                fontWeight: 500
+                            }}>{profile.preferred_username}</Typography>
+                            <Typography variant="body2" textAlign='center' sx={{
+                                fontFamily: 'Montserrat',
+                                fontSize: 12
+                            }}>{profile.displayBrief}</Typography>
+                        </ThemeProvider>
                     </View>
                     <TextInput
                         autoCapitalize="none"
@@ -231,6 +245,8 @@ const CreatorProfile = (props) => {
                         outlineColor='white'
                         onChangeText={value => onChangeSearch(value.toLowerCase())}
                     />
+                </View>
+                <View style={styles.listOfWorkoutsContainer}>
                     {workouts.length > 0 ?
                         <View style={[isBigScreen ? styles.wrapper : styles.wrapperSmall]}>
                             {filteredWorkouts.map((item, index) => {
@@ -243,23 +259,37 @@ const CreatorProfile = (props) => {
                             })}
                         </View> :
                         <View style={styles.emptyStateViewStyle}>
-                            <Typography variant="body2" textAlign='center' sx={{fontFamily: 'Montserrat', fontSize: 12}}>{`${username} has no workouts`}</Typography>
+                            <Typography variant="body2" textAlign='center' sx={{
+                                fontFamily: 'Montserrat',
+                                fontSize: 12
+                            }}>{`${username} has no workouts`}</Typography>
                         </View>}
-                    {currentWorkout && !shouldPlayWorkout ?
-                        <PreviewWorkout
-                            workout={currentWorkout}
-                            play={() => togglePlayWorkout(true)}
-                            close={closePreview}/> : null}
-                    {shouldPlayWorkout ? getWorkoutComponent() : null}
-
-                </Container>
+                </View>
+                <ThemeProvider theme={responsiveFontTheme}>
+                    <Typography variant="h6" sx={{
+                        fontFamily: 'Montserrat',
+                        fontWeight: 'bold',
+                        textAlign: 'center',
+                        my: 4}}>
+                        <Link href='#' color='#ef7a75' sx={{textDecoration: 'none'}}>Fittree</Link>
+                    </Typography>
+                </ThemeProvider>
+                {currentWorkout && !shouldPlayWorkout ?
+                    <PreviewWorkout
+                        workout={currentWorkout}
+                        play={() => togglePlayWorkout(true)}
+                        close={closePreview}/> : null}
+                {shouldPlayWorkout ? getWorkoutPlayComponent() : null}
                 <Snackbar
-                    style={styles.snackbar}
-                    visible={snackbarVisible}
-                    onDismiss={() => setSnackbarVisible(false)}>
-                    {snackbarMessage}
+                    autoHideDuration={2000}
+                    open={showSnackBar}
+                    onClose={handleClose}
+                    message={snackbarMessage}>
+                    <Alert severity="success" sx={{width: '100%'}}>
+                        {snackbarMessage}
+                    </Alert>
                 </Snackbar>
-            </>
+            </Container>
         )
     }
 }
@@ -272,11 +302,16 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: 'center',
         paddingHorizontal: 10,
-        paddingVertical: 12,
+        paddingVertical: 5,
     },
     infoStyle: {
         flexDirection: "column",
         alignItems: 'center'
+    },
+    listOfWorkoutsContainer: {
+        height: 400,
+        overflow: 'scroll',
+        borderRadius: 8
     },
     wrapper: {
         display: 'grid',
@@ -288,7 +323,6 @@ const styles = StyleSheet.create({
         display: 'grid',
         gridTemplateColumns: 'repeat(2, 1fr)',
         gridGap: 8,
-        overflow: 'scroll'
     },
     emptyStateViewStyle: {
         justifyContent: "center",
@@ -302,13 +336,12 @@ const styles = StyleSheet.create({
     topContainerStyle: {
         display: "flex",
         flexDirection: "column",
-        marginBottom: 20,
+        marginBottom: 15,
     },
     textInputStyle: {
         backgroundColor: "#f6f6f6",
         flex: 1,
         height: 40,
-        marginVertical: 20,
     },
     emptyWorkoutStyle: {
         backgroundColor: "transparent",
