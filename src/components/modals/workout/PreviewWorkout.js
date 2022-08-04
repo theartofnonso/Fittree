@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     },
     previewInfo: {
         overflow: 'scroll',
-        paddingLeft: 10,
+        paddingHorizontal: 10,
         paddingTop: 10
     },
     previewInfoSmall: {

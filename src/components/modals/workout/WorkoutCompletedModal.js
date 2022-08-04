@@ -32,7 +32,9 @@ const WorkoutCompletedModal = props => {
         let minutes = Math.floor((seconds - (hours * 3600)) / 60);
         seconds = seconds - (hours * 3600) - (minutes * 60);
 
-        return minutes > 1 ? minutes + ' mins' : ' less than a min';
+        console.log(difference)
+
+        return minutes > 1 ? minutes + ' min(s)' : ' less than a min';
     }
 
     return (
