@@ -111,14 +111,12 @@ const CreatorProfile = (props) => {
      * @returns {JSX.Element}
      */
     const getWorkoutPlayComponent = () => {
-        const currentTime = Date.now();
 
         if (currentWorkout.type === workoutsConstants.workoutType.CIRCUIT) {
             const rounds = loadCircuitWorkout(currentWorkout);
             return <PlayCircuitWorkout
                 workout={currentWorkout}
                 rounds={rounds}
-                startTime={currentTime}
                 end={() => togglePlayWorkout(false)}/>
 
         } else {
@@ -126,7 +124,6 @@ const CreatorProfile = (props) => {
             return <PlayRepsAndSetsWorkout
                 workout={currentWorkout}
                 exercises={exercises}
-                startTime={currentTime}
                 end={() => togglePlayWorkout(false)}/>
         }
     }

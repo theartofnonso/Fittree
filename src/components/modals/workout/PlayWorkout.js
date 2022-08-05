@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
 import Entypo from "react-native-vector-icons/Entypo";
 import PauseModal from "./PauseModal";
@@ -14,14 +14,22 @@ import PreviewExercise from "./PreviewExercise";
 
 const PlayWorkout = props => {
 
-    const [showExercise, setShowExercise] = useState(false)
-
     const theme = useTheme();
     const isBigScreen = useMediaQuery(theme.breakpoints.up('sm'));
     const isBiggerScreen = useMediaQuery(theme.breakpoints.up('md'));
 
     let responsiveFontTheme = createTheme();
     responsiveFontTheme = responsiveFontSizes(responsiveFontTheme);
+
+
+    const [showExercise, setShowExercise] = useState(false)
+
+    const [startTime, setStartTime] = useState(0)
+
+    useEffect(() => {
+        const currentTime = Date.now();
+        setStartTime(currentTime)
+    }, [])
 
     /**
      * Display Reps or Time value
@@ -160,7 +168,7 @@ const PlayWorkout = props => {
             {props.onEnd ?
                 <WorkoutCompletedModal
                     isVisible={props.onEnd}
-                    startTime={props.startTime}
+                    startTime={startTime}
                     navigateToWorkoutPreview={props.close}/> : null}
             {showExercise ?
                 <PreviewExercise

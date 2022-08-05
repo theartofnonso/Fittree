@@ -21,13 +21,6 @@ const PlayCircuitWorkout = ({workout, rounds, end}) => {
 
     const [showWorkoutCompletedModal, setShowWorkoutCompletedModal] = useState(false)
 
-    const [startTime, setStartTime] = useState(0)
-
-    useEffect(() => {
-        const currentTime = Date.now();
-        setStartTime(currentTime)
-    }, [])
-
     useEffect(() => {
         let intervalId = null;
 
@@ -137,7 +130,6 @@ const PlayCircuitWorkout = ({workout, rounds, end}) => {
 
     return (
         <PlayWorkout
-            startTime={startTime}
             workoutExercise={getWorkoutExercise()}
             previewExercise={navigateToExercisePreview}
             seekForward={seekForward}

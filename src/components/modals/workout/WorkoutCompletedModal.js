@@ -9,6 +9,8 @@ const WorkoutCompletedModal = props => {
     let responsiveFontTheme = createTheme();
     responsiveFontTheme = responsiveFontSizes(responsiveFontTheme);
 
+    console.log("Start ", props.startTime)
+
     /**
      * calculate workout duration
      * @returns {string}
@@ -17,6 +19,7 @@ const WorkoutCompletedModal = props => {
         const startTime = props.startTime;
         const endTime = Date.now();
         const difference = (endTime - startTime) / 1000
+        console.log("End ", endTime)
         return toReadableTime(difference)
     };
 
@@ -31,8 +34,6 @@ const WorkoutCompletedModal = props => {
         let hours   = Math.floor(seconds / 3600);
         let minutes = Math.floor((seconds - (hours * 3600)) / 60);
         seconds = seconds - (hours * 3600) - (minutes * 60);
-
-        console.log(difference)
 
         return minutes > 1 ? minutes + ' min(s)' : ' less than a min';
     }
