@@ -44,7 +44,10 @@ const PreviewExercise = ({exercise, close}) => {
                         </View>
                     }
                     <View style={styles.videoContainer}>
-                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                        <ScrollView
+                            horizontal={true}
+                            showsHorizontalScrollIndicator={false}
+                            contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
                             {exercise.videoUrls.map((url, index) => {
                                 return (
                                     <Video
