@@ -22,49 +22,6 @@ export const listCreators = /* GraphQL */ `
             bodyParts
             equipments
             videoUrls
-            workoutExercises {
-              items {
-                id
-                exerciseId
-                workoutId
-                exercise {
-                  id
-                  creatorId
-                  title
-                  description
-                  bodyParts
-                  equipments
-                  videoUrls
-                  workoutExercises {
-                    items {
-                      id
-                      exerciseId
-                      workoutId
-                      repsOrTime
-                      repsOrTimeValue
-                      sets
-                      index
-                      createdAt
-                      updatedAt
-                      owner
-                    }
-                    nextToken
-                  }
-                  type
-                  createdAt
-                  updatedAt
-                  owner
-                }
-                repsOrTime
-                repsOrTimeValue
-                sets
-                index
-                createdAt
-                updatedAt
-                owner
-              }
-              nextToken
-            }
             type
             createdAt
             updatedAt
