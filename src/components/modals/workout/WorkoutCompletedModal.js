@@ -9,8 +9,6 @@ const WorkoutCompletedModal = props => {
     let responsiveFontTheme = createTheme();
     responsiveFontTheme = responsiveFontSizes(responsiveFontTheme);
 
-    console.log("Start ", props.startTime)
-
     /**
      * calculate workout duration
      * @returns {string}

@@ -138,10 +138,6 @@ const CreatorProfile = (props) => {
         });
     }
 
-    const handleClick = () => () => {
-        setShowSnackBar(true);
-    };
-
     const handleClose = () => {
         setShowSnackBar(false);
     };
@@ -243,7 +239,7 @@ const CreatorProfile = (props) => {
                         onChangeText={value => onChangeSearch(value.toLowerCase())}
                     />
                 </View>
-                <View style={styles.listOfWorkoutsContainer}>
+                <View style={[isBigScreen ? styles.listOfWorkoutsContainer : styles.listOfWorkoutsContainerSmall]}>
                     {workouts.length > 0 ?
                         <View style={[isBigScreen ? styles.wrapper : styles.wrapperSmall]}>
                             {filteredWorkouts.map((item, index) => {
@@ -306,6 +302,11 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     listOfWorkoutsContainer: {
+        height: 800,
+        overflow: 'scroll',
+        borderRadius: 8,
+    },
+    listOfWorkoutsContainerSmall: {
         height: 400,
         overflow: 'scroll',
         borderRadius: 8
