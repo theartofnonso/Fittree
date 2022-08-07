@@ -25,6 +25,13 @@ const WorkoutExerciseCard = props => {
         return exerciseInfo
     };
 
+    /**
+     * Only load workout exercise information when available
+     */
+    if(!props.workoutExercise.exercise) {
+        return <View/>
+    }
+
     return (
         <View style={styles.card}>
             <Video

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import workoutsConstants from './workoutsConstants';
 
 /**
@@ -13,31 +15,45 @@ export const timeOrReps = timeOrCount =>
  * Load the exercises into the rounds array to play
  * @param workout
  */
-export const loadCircuitWorkout = (workout) => {
+export const loadCircuitWorkout = workout => {
     let rounds = new Array(workout.rounds);
     for (let i = 0; i < rounds.length; i++) {
-        rounds[i] = Array.from(workout.workoutExercises.items).sort((a, b) => a.index - b.index);
+        rounds[i] = workout.workoutExercises;
     }
-    return rounds
+    console.log(rounds)
+    return rounds;
 };
 
 /**
  * Load the exercises into the exercises array to play
  * @param workout
  */
-export const loadRepsAndSetsWorkout = (workout) => {
-    let exercises = new Array(workout.workoutExercises.items.length);
-    const sortedWorkoutExercises = Array.from(workout.workoutExercises.items).sort((a, b) => a.index - b.index);
+export const loadRepsAndSetsWorkout = workout => {
+    let exercises = new Array(workout.workoutExercises.length);
     for (let i = 0; i < exercises.length; i++) {
-        const exercise = sortedWorkoutExercises[i];
+        const exercise = workout.workoutExercises[i];
         const sets = new Array(exercise.sets);
-        for (let i = 0; i < sets.length; i++) {
-            sets[i] = exercise;
+        for (let j = 0; j < sets.length; j++) {
+            sets[j] = exercise;
         }
         exercises[i] = sets;
     }
-
     return exercises;
 };
+
+/**
+ * Sort out exercises
+ * @param workout
+ * @param exercises
+ * @returns {any[]}
+ */
+export const sortWorkouts = (workout, exercises) =>
+    Array.from(workout.workoutExercises)
+        .map(workoutExerciseJSON => {
+            const workoutExercise = JSON.parse(workoutExerciseJSON);
+            const exercise = exercises.find(item => item.id === workoutExercise.exerciseId);
+            return { ...workoutExercise, exercise };
+        })
+        .sort((a, b) => a.index - b.index);
 
 export const generateShareableLink = username => 'https://www.fittree.io/' + username;

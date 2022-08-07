@@ -23,12 +23,6 @@ const PreviewWorkout = ({workout, play, close}) => {
     };
 
     /**
-     * Sorted WorkoutFits
-     * @type {unknown[]}
-     */
-    const sortedWorkoutFits = Array.from(workout.workoutExercises.items).sort((a, b) => a.index - b.index);
-
-    /**
      * Get appropriate styling for wrapper
      * @returns {number}
      */
@@ -66,7 +60,7 @@ const PreviewWorkout = ({workout, play, close}) => {
                                 fontWeight: 300,
                             }}>{workout.description}</Typography>
                         </ThemeProvider>
-                        {sortedWorkoutFits.map((workoutExercise, i) =>
+                        {workout.workoutExercises.map((workoutExercise, i) =>
                             <WorkoutExerciseCard key={i} workoutExercise={workoutExercise} type={workout.type}/>)}
                     </View>
                     <TouchableOpacity style={[isBigScreen ? styles.startWorkoutBtn : styles.startWorkoutBtnSmall]}

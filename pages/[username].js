@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import {
     fetchCreatorProfile,
     selectCreator,
-    selectCreatorStatus,
+    selectCreatorStatus, selectExercises,
     selectWorkouts
 } from "../src/features/CreatorProfileSlice";
 import {useDispatch, useSelector} from "react-redux";
@@ -16,7 +16,6 @@ import {
     Alert,
     Container,
     createTheme,
-    Divider,
     Link,
     responsiveFontSizes,
     Snackbar,
@@ -29,15 +28,17 @@ import PreviewWorkout from "../src/components/modals/workout/PreviewWorkout";
 import PlayCircuitWorkout from "../src/components/modals/workout/PlayCircuitWorkout";
 import workoutsConstants from "../src/utils/workout/workoutsConstants";
 import PlayRepsAndSetsWorkout from "../src/components/modals/workout/PlayRepsAndSetsWorkout";
-import Favicon from "../src/components/illustrations/Favicon";
 import {
     generateShareableLink,
     loadCircuitWorkout,
-    loadRepsAndSetsWorkout
+    loadRepsAndSetsWorkout, sortWorkouts
 } from "../src/utils/workout/workoutsHelperFunctions";
 import * as Clipboard from 'expo-clipboard';
+import CreatorProfile404 from "../src/components/views/CreatorProfile404";
+import CreatorProfile500 from "../src/components/views/CreatorProfile500";
+import CreatorProfileLoading from "../src/components/views/CreatorProfileLoading";
 
-const CreatorProfile = (props) => {
+const CreatorProfile = () => {
 
     const theme = useTheme();
     const isBigScreen = useMediaQuery(theme.breakpoints.up('sm'));
@@ -58,6 +59,8 @@ const CreatorProfile = (props) => {
     const status = useSelector(selectCreatorStatus)
 
     const workouts = useSelector(selectWorkouts)
+
+    const exercises = useSelector(selectExercises)
 
     const [filteredWorkouts, setFilteredWorkouts] = useState(workouts);
 
@@ -97,6 +100,17 @@ const CreatorProfile = (props) => {
      */
     const togglePlayWorkout = (shouldPlay) => {
         setShouldPlayWorkout(shouldPlay)
+    }
+
+    /**
+     * Preview a workout from the list
+     */
+    const previewWorkout = (selectedWorkout) => {
+        const enrichedWorkout = {
+            ...selectedWorkout,
+            workoutExercises: sortWorkouts(selectedWorkout, exercises),
+        };
+        setCurrentWorkout(enrichedWorkout);
     }
 
     /**
@@ -150,55 +164,27 @@ const CreatorProfile = (props) => {
         dispatch(fetchCreatorProfile({username: username}));
     }, [username])
 
-    if (status !== 'ready') {
+    if (status === workoutsConstants.profileStatus.LOADING) {
         /**
          * Creator page is still loading
          */
-        return (
-            <Container
-                maxWidth="md"
-                sx={{
-                    height: '100vh',
-                    display: 'flex',
-                    padding: 1,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}>
-                <Favicon/>
-            </Container>
-        );
-    } else if (profile === null) {
+        return <CreatorProfileLoading/>
+    } else if (status === workoutsConstants.profileStatus.FAILED) {
         /**
-         * Creator doesn't exist
+         * Backend error from server
          */
-        return (
-            <Container
-                maxWidth="md"
-                sx={{
-                    height: '100vh',
-                    display: 'flex',
-                    padding: 2,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}>
-                <Favicon/>
-                <Divider orientation='vertical' sx={{height: 80, marginRight: 2.5}}/>
+        return <CreatorProfile500 username={username}/>
 
-                <ThemeProvider theme={responsiveFontTheme}>
-                    <Typography variant="h6">
-                        {username} doesn't seem to have an account
-                        <br/>
-                        <Typography variant="subtitle1">
-                            You can claim it
-                            <Link href='#' color='#000000' sx={{fontWeight: 'bold', marginLeft: 0.75}}>here</Link>
-                        </Typography>
-                    </Typography>
-                </ThemeProvider>
-            </Container>
-        );
     } else {
+        /**
+         * Page is ready but profile may not exists
+         */
+        if(profile === null) {
+            /**
+             * Creator doesn't exist
+             */
+            return <CreatorProfile404 username={username}/>
+        }
         /**
          * Loaded Creator page content
          */
@@ -244,8 +230,7 @@ const CreatorProfile = (props) => {
                         <View style={[isBigScreen ? styles.wrapper : styles.wrapperSmall]}>
                             {filteredWorkouts.map((item, index) => {
                                 return (
-                                    <TouchableOpacity key={index} activeOpacity={0.8}
-                                                      onPress={() => setCurrentWorkout(item)}>
+                                    <TouchableOpacity key={index} activeOpacity={0.8} onPress={() => previewWorkout(item)}>
                                         <WorkoutCard workout={item}/>
                                     </TouchableOpacity>
                                 );
@@ -263,7 +248,8 @@ const CreatorProfile = (props) => {
                         fontFamily: 'Montserrat',
                         fontWeight: 'bold',
                         textAlign: 'center',
-                        my: 4}}>
+                        my: 4
+                    }}>
                         <Link href='#' color='#ef7a75' sx={{textDecoration: 'none'}}>Fittree</Link>
                     </Typography>
                 </ThemeProvider>

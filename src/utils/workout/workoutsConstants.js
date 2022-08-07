@@ -21,7 +21,14 @@ const workoutType = {
   REPS_SETS: 'RepsAndSetsWorkout',
 };
 
+const profileStatus = {
+  LOADING: 'Loading',
+  READY: 'Ready',
+  FAILED: 'Failed'
+}
+
 export default {
   exerciseInfo,
   workoutType,
+  profileStatus
 };

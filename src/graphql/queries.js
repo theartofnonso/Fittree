@@ -87,49 +87,7 @@ export const listCreators = /* GraphQL */ `
             exerciseInterval
             setsInterval
             thumbnailUrl
-            workoutExercises {
-              items {
-                id
-                exerciseId
-                workoutId
-                exercise {
-                  id
-                  creatorId
-                  title
-                  description
-                  bodyParts
-                  equipments
-                  videoUrls
-                  workoutExercises {
-                    items {
-                      id
-                      exerciseId
-                      workoutId
-                      repsOrTime
-                      repsOrTimeValue
-                      sets
-                      index
-                      createdAt
-                      updatedAt
-                      owner
-                    }
-                    nextToken
-                  }
-                  type
-                  createdAt
-                  updatedAt
-                  owner
-                }
-                repsOrTime
-                repsOrTimeValue
-                sets
-                index
-                createdAt
-                updatedAt
-                owner
-              }
-              nextToken
-            }
+            workoutExercises
             type
             isLive
             duration
