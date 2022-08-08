@@ -28,7 +28,6 @@ const PlayWorkout = props => {
 
     useEffect(() => {
         const currentTime = Date.now();
-        console.log("Start ", currentTime)
         setStartTime(currentTime)
     }, [])
 
