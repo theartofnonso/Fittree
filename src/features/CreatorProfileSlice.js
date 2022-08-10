@@ -32,6 +32,7 @@ const creatorProfileSlice = createSlice({
                 state.exercises = action.payload ? action.payload.exercises.items : []
             })
             .addCase(fetchCreatorProfile.rejected, (state, action) => {
+                console.log('Hey wait')
                 state.status = workoutsConstants.profileStatus.FAILED
                 state.profile = null
             });
@@ -44,7 +45,6 @@ const creatorProfileSlice = createSlice({
  */
 export const fetchCreatorProfile = createAsyncThunk("creatorProfile/get", async (payload, {rejectWithValue}) => {
     const {username} = payload;
-
     try {
         const response = await API.graphql(graphqlOperation(queries.listCreators, {
                     filter: {

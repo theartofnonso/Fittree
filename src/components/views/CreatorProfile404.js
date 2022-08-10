@@ -1,7 +1,9 @@
 /* eslint-disable */
 import React from "react";
-import {Container, createTheme, Divider, responsiveFontSizes, ThemeProvider, Typography} from "@mui/material";
-import Favicon from "../illustrations/Favicon";
+import {Container, createTheme, Link, responsiveFontSizes, ThemeProvider, Typography} from "@mui/material";
+import EmptyState from "../illustrations/EmptyState";
+import NotFound from "../illustrations/NotFound";
+import {View} from "react-native-web";
 
 const CreatorProfile404 = ({username}) => {
 
@@ -15,15 +17,13 @@ const CreatorProfile404 = ({username}) => {
                 height: '100vh',
                 display: 'flex',
                 padding: 2,
-                flexDirection: 'row',
+                flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
             }}>
-            <Favicon/>
-            <Divider orientation='vertical' sx={{height: 80, marginRight: 2}}/>
-
+            <NotFound />
             <ThemeProvider theme={responsiveFontTheme}>
-                <Typography variant="h6">Oops! {username} does not exist</Typography>
+                <Typography variant="body1" sx={{marginTop: 5}}>Oops! {username} does not exist, claim your <Link href='#' color='#ef7a75' sx={{textDecoration: 'underline', fontWeight: 'bold'}}>Fittree</Link></Typography>
             </ThemeProvider>
         </Container>
     );

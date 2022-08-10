@@ -2,6 +2,7 @@
 import React from "react";
 import {Container, createTheme, Divider, responsiveFontSizes, ThemeProvider, Typography} from "@mui/material";
 import Favicon from "../illustrations/Favicon";
+import NotFound from "../illustrations/NotFound";
 
 const CreatorProfile500 = ({username}) => {
 
@@ -15,15 +16,13 @@ const CreatorProfile500 = ({username}) => {
                 height: '100vh',
                 display: 'flex',
                 padding: 2,
-                flexDirection: 'row',
+                flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
             }}>
-            <Favicon/>
-            <Divider orientation='vertical' sx={{height: 80, marginRight: 2}}/>
-
+            <NotFound />
             <ThemeProvider theme={responsiveFontTheme}>
-                <Typography variant="h6">Unable to load {username}'s page at this moment</Typography>
+                <Typography variant="body1" sx={{marginTop: 5}}>Unable to load {username}'s page at this moment</Typography>
             </ThemeProvider>
         </Container>
     );

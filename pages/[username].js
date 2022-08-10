@@ -3,7 +3,8 @@ import React, {useEffect, useState} from "react";
 import {
     fetchCreatorProfile,
     selectCreator,
-    selectCreatorStatus, selectExercises,
+    selectCreatorStatus,
+    selectExercises,
     selectWorkouts
 } from "../src/features/CreatorProfileSlice";
 import {useDispatch, useSelector} from "react-redux";
@@ -31,12 +32,14 @@ import PlayRepsAndSetsWorkout from "../src/components/modals/workout/PlayRepsAnd
 import {
     generateShareableLink,
     loadCircuitWorkout,
-    loadRepsAndSetsWorkout, sortWorkouts
+    loadRepsAndSetsWorkout,
+    sortWorkouts
 } from "../src/utils/workout/workoutsHelperFunctions";
 import * as Clipboard from 'expo-clipboard';
 import CreatorProfile404 from "../src/components/views/CreatorProfile404";
 import CreatorProfile500 from "../src/components/views/CreatorProfile500";
 import CreatorProfileLoading from "../src/components/views/CreatorProfileLoading";
+import EmptyState from "../src/components/illustrations/EmptyState";
 
 const CreatorProfile = () => {
 
@@ -152,6 +155,20 @@ const CreatorProfile = () => {
         });
     }
 
+    /**
+     * Display Avatar
+     * @returns {JSX.Element}
+     */
+    const displayAvatar = () => {
+        if (profile) {
+            return profile.displayProfile ?
+                <Avatar.Image size={80} source={{uri: "https://" + profile.displayProfile, cache: "force-cache"}}
+                              style={styles.avatar}/> :
+                <Avatar.Text size={80} label={profile.preferred_username.slice(0, 1).toUpperCase()} color="white"
+                             style={styles.avatar}/>;
+        }
+    };
+
     const handleClose = () => {
         setShowSnackBar(false);
     };
@@ -161,7 +178,9 @@ const CreatorProfile = () => {
      * @type {Dispatch<AnyAction>}
      */
     useEffect(() => {
-        dispatch(fetchCreatorProfile({username: username}));
+        if (username) {
+            dispatch(fetchCreatorProfile({username: username}));
+        }
     }, [username])
 
     if (status === workoutsConstants.profileStatus.LOADING) {
@@ -179,7 +198,7 @@ const CreatorProfile = () => {
         /**
          * Page is ready but profile may not exists
          */
-        if(profile === null) {
+        if (profile === null) {
             /**
              * Creator doesn't exist
              */
@@ -197,10 +216,7 @@ const CreatorProfile = () => {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.infoStyle}>
-                        <Avatar.Image size={96} source={{
-                            uri: 'https://' + profile.displayProfile,
-                            cache: 'force-cache',
-                        }}/>
+                        {displayAvatar()}
                         <ThemeProvider theme={theme}>
                             <Typography variant="h6" textAlign='center' sx={{
                                 my: 1,
@@ -230,16 +246,20 @@ const CreatorProfile = () => {
                         <View style={[isBigScreen ? styles.wrapper : styles.wrapperSmall]}>
                             {filteredWorkouts.map((item, index) => {
                                 return (
-                                    <TouchableOpacity key={index} activeOpacity={0.8} onPress={() => previewWorkout(item)}>
+                                    <TouchableOpacity key={index} activeOpacity={0.8}
+                                                      onPress={() => previewWorkout(item)}>
                                         <WorkoutCard workout={item}/>
                                     </TouchableOpacity>
                                 );
                             })}
                         </View> :
                         <View style={styles.emptyStateViewStyle}>
-                            <Typography variant="body2" textAlign='center' sx={{
+                            <EmptyState/>
+                            <Typography variant="body1" textAlign='center' sx={{
                                 fontFamily: 'Montserrat',
-                                fontSize: 12
+                                fontSize: 12,
+                                fontWeight: 700,
+                                marginTop: 5
                             }}>{`${username} has no workouts`}</Typography>
                         </View>}
                 </View>
@@ -281,7 +301,10 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: 'center',
         paddingHorizontal: 10,
-        paddingVertical: 5,
+        marginTop: 10,
+    },
+    avatar: {
+        backgroundColor: "#ef7a75",
     },
     infoStyle: {
         flexDirection: "column",
