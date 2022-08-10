@@ -10,7 +10,6 @@ export const listCreators = /* GraphQL */ `
         cognitoId
         username
         preferred_username
-        profile
         displayBrief
         displayProfile
         exercises {
@@ -22,7 +21,6 @@ export const listCreators = /* GraphQL */ `
             bodyParts
             equipments
             videoUrls
-            type
             createdAt
             updatedAt
             owner

@@ -22,20 +22,14 @@ const creatorProfileSlice = createSlice({
     extraReducers: builder => {
         builder
             .addCase(fetchCreatorProfile.fulfilled, (state, action) => {
-                if(action.payload.status === workoutsConstants.profileStatus.FAILED) {
-                    state.status = workoutsConstants.profileStatus.FAILED
-                    state.profile = action.payload.profile;
-                } else {
-                    state.status = workoutsConstants.profileStatus.READY
-                    state.profile = action.payload;
-                    // Get their live workouts only
-                    state.liveWorkouts = action.payload ? action.payload.workouts.items
-                        .filter(item => item.isLive)
-                        .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)) : []
-                    // Get all their exercises (it will be needed to load workouts)
-                    state.exercises = action.payload ? action.payload.exercises.items : []
-                }
-
+                state.status = workoutsConstants.profileStatus.READY
+                state.profile = action.payload;
+                // Get their live workouts only
+                state.liveWorkouts = action.payload ? action.payload.workouts.items
+                    .filter(item => item.isLive)
+                    .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)) : []
+                // Get all their exercises (it will be needed to load workouts)
+                state.exercises = action.payload ? action.payload.exercises.items : []
             });
     },
 });
@@ -44,7 +38,7 @@ const creatorProfileSlice = createSlice({
  * Get the creator's data
  * @type {AsyncThunk<unknown, void, {}>}
  */
-export const fetchCreatorProfile = createAsyncThunk("creatorProfile/get", async (payload, { rejectWithValue }) => {
+export const fetchCreatorProfile = createAsyncThunk("creatorProfile/get", async (payload, {rejectWithValue}) => {
     const {username} = payload;
 
     try {
