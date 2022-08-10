@@ -30,6 +30,10 @@ const creatorProfileSlice = createSlice({
                     .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)) : []
                 // Get all their exercises (it will be needed to load workouts)
                 state.exercises = action.payload ? action.payload.exercises.items : []
+            })
+            .addCase(fetchCreatorProfile.rejected, (state, action) => {
+                state.status = workoutsConstants.profileStatus.FAILED
+                state.profile = null
             });
     },
 });
