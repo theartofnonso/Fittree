@@ -39,7 +39,6 @@ const WorkoutExerciseCard = props => {
                 source={{
                     uri: "https://" + props.workoutExercise.exercise.videoUrls[0],
                 }}
-                poster="https://d26u7w064jxl38.cloudfront.net/public/fitpin-public/black_wallpaper.jpg"
                 paused={true}
                 resizeMode="cover"
             />
@@ -83,6 +82,7 @@ const styles = StyleSheet.create({
         width: 50,
         borderRadius: 5,
         marginRight: 10,
+        backgroundColor: '#282828'
     },
     textContainer: {
         display: "flex",

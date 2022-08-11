@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     },
     videoContainerSmall: {
         height: 300,
-        backgroundColor: 'black',
+        backgroundColor: '#282828'
     },
     videoXs: {
         flex: 1,
