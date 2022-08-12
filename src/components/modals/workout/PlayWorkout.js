@@ -202,6 +202,7 @@ const styles = StyleSheet.create({
     wrapperMd: {
         display: 'grid',
         gridTemplateColumns: '300px 250px',
+        gridTemplateRows: '400px',
         backgroundColor: 'white',
         margin: 'auto',
         borderRadius: 8,
@@ -250,8 +251,7 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
     },
     videoMd: {
-        borderTopLeftRadius: 8,
-        borderBottomLeftRadius: 8,
+
     },
     videoLg: {},
     playInfoContainer: {
