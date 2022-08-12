@@ -23,7 +23,7 @@ const CreatorProfile404 = ({username}) => {
             }}>
             <NotFound />
             <ThemeProvider theme={responsiveFontTheme}>
-                <Typography variant="body1" sx={{marginTop: 5}}>Oops! {username} does not exist, claim your <Link href='#' color='#ef7a75' sx={{textDecoration: 'underline', fontWeight: 'bold'}}>Fittree</Link></Typography>
+                <Typography variant="body1" sx={{marginTop: 5}}>Can't find {username}, claim <Link href='#' color='#ef7a75' sx={{textDecoration: 'underline', fontWeight: 'bold'}}>Fittree/{username}</Link></Typography>
             </ThemeProvider>
         </Container>
     );
