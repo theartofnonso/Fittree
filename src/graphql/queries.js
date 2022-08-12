@@ -53,6 +53,12 @@ export const listCreators = /* GraphQL */ `
           }
           nextToken
         }
+        instagram
+        facebook
+        twitter
+        spotify
+        tiktok
+        youtube
         createdAt
         updatedAt
         owner

@@ -10,7 +10,7 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import {StyleSheet, TouchableOpacity, View} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
-import {Feather} from '@expo/vector-icons';
+import {Entypo, Feather, FontAwesome, SimpleLineIcons} from '@expo/vector-icons';
 import {Avatar, TextInput} from "react-native-paper";
 import {searchExerciseOrWorkout} from "../src/utils/workoutAndExerciseUtils";
 import {
@@ -40,6 +40,7 @@ import CreatorProfile404 from "../src/components/views/CreatorProfile404";
 import CreatorProfile500 from "../src/components/views/CreatorProfile500";
 import CreatorProfileLoading from "../src/components/views/CreatorProfileLoading";
 import EmptyState from "../src/components/illustrations/EmptyState";
+import Socials from "../src/components/views/Socials";
 
 const CreatorProfile = () => {
 
@@ -228,6 +229,7 @@ const CreatorProfile = () => {
                                 fontSize: 12
                             }}>{profile.displayBrief}</Typography>
                         </ThemeProvider>
+                        {profile ? <Socials profile={profile}/> : null}
                     </View>
                     <TextInput
                         autoCapitalize="none"
@@ -349,7 +351,6 @@ const styles = StyleSheet.create({
         backgroundColor: "#f6f6f6",
         flex: 1,
         height: 40,
-        marginTop: 10
     },
     emptyWorkoutStyle: {
         backgroundColor: "transparent",

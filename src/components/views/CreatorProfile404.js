@@ -1,9 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import {Container, createTheme, Link, responsiveFontSizes, ThemeProvider, Typography} from "@mui/material";
-import EmptyState from "../illustrations/EmptyState";
 import NotFound from "../illustrations/NotFound";
-import {View} from "react-native-web";
 
 const CreatorProfile404 = ({username}) => {
 
