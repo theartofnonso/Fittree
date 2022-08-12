@@ -58,6 +58,8 @@ const PreviewWorkout = ({workout, play, close}) => {
                             <Typography variant="body2" sx={{
                                 fontFamily: 'Montserrat',
                                 fontWeight: 300,
+                                paddingTop: 0.5,
+                                whiteSpace: 'pre-line'
                             }}>{workout.description}</Typography>
                         </ThemeProvider>
                         {workout.workoutExercises.map((workoutExercise, i) =>
@@ -115,7 +117,7 @@ const styles = StyleSheet.create({
     },
     previewInfo: {
         overflow: 'scroll',
-        paddingHorizontal: 10,
+        paddingHorizontal: 15,
         paddingTop: 10
     },
     previewInfoSmall: {

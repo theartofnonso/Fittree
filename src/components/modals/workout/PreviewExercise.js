@@ -77,6 +77,7 @@ const PreviewExercise = ({exercise, close}) => {
                                 <Typography variant="body2" sx={{
                                     fontFamily: 'Montserrat',
                                     fontWeight: 400,
+                                    whiteSpace: 'pre-line'
                                 }}>{exercise.description}</Typography>
                             </ThemeProvider>
                         </View>
