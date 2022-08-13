@@ -41,6 +41,7 @@ import CreatorProfile500 from "../src/components/views/CreatorProfile500";
 import CreatorProfileLoading from "../src/components/views/CreatorProfileLoading";
 import EmptyState from "../src/components/illustrations/EmptyState";
 import Socials from "../src/components/views/Socials";
+import FittrIconBig from "../src/components/illustrations/FittrIconBig";
 
 const CreatorProfile = () => {
 
@@ -265,16 +266,20 @@ const CreatorProfile = () => {
                             }}>{`${username} has no workouts`}</Typography>
                         </View>}
                 </View>
-                <ThemeProvider theme={responsiveFontTheme}>
-                    <Typography variant="h6" sx={{
-                        fontFamily: 'Montserrat',
-                        fontWeight: 'bold',
-                        textAlign: 'center',
-                        my: 4
-                    }}>
-                        <Link href='#' color='#ef7a75' sx={{textDecoration: 'none'}}>Fittree</Link>
-                    </Typography>
-                </ThemeProvider>
+                <View style={styles.fittreeIconContainer}>
+                    <FittrIconBig/>
+                </View>
+
+                {/*<ThemeProvider theme={responsiveFontTheme}>*/}
+                {/*    <Typography variant="h6" sx={{*/}
+                {/*        fontFamily: 'Montserrat',*/}
+                {/*        fontWeight: 'bold',*/}
+                {/*        textAlign: 'center',*/}
+                {/*        my: 4*/}
+                {/*    }}>*/}
+                {/*        <Link href='#' color='#ef7a75' sx={{textDecoration: 'none'}}>Fittree</Link>*/}
+                {/*    </Typography>*/}
+                {/*</ThemeProvider>*/}
                 {currentWorkout && !shouldPlayWorkout ?
                     <PreviewWorkout
                         workout={currentWorkout}
@@ -354,6 +359,12 @@ const styles = StyleSheet.create({
     },
     emptyWorkoutStyle: {
         backgroundColor: "transparent",
+    },
+    fittreeIconContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     snackbar: {
         backgroundColor: "#ef7a75",

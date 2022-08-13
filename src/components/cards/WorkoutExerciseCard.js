@@ -28,7 +28,7 @@ const WorkoutExerciseCard = props => {
     /**
      * Only load workout exercise information when available
      */
-    if(!props.workoutExercise.exercise) {
+    if (!props.workoutExercise.exercise) {
         return <View/>
     }
 
@@ -40,7 +40,7 @@ const WorkoutExerciseCard = props => {
                     uri: "https://" + props.workoutExercise.exercise.videoUrls[0],
                 }}
                 paused={true}
-                resizeMode="cover"
+                resizeMode="contain"
             />
             <View style={styles.textContainer}>
                 <ThemeProvider theme={theme}>
@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginTop: 10,
         marginBottom: 10,
+
     },
     videoStyle: {
         height: 50,
@@ -83,7 +84,6 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginRight: 10,
         backgroundColor: '#282828',
-        ...StyleSheet.absoluteFill
     },
     textContainer: {
         display: "flex",
