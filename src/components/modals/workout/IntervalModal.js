@@ -103,6 +103,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: 200,
         height: 40,
+        position: 'absolute',
+        bottom: 50,
     },
 });
 
