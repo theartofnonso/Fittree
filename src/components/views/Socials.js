@@ -4,6 +4,7 @@ import {TouchableOpacity, View} from "react-native-web";
 import {SimpleLineIcons} from "@expo/vector-icons";
 import {Link} from "@mui/material";
 import {INSTAGRAM, TIKTOK, TWITTER, YOUTUBE} from "../../utils/workout/utilsConstants";
+import TikTokSvg from "../illustrations/TikTokSvg";
 
 const Socials = ({profile}) => {
 
@@ -38,10 +39,10 @@ const Socials = ({profile}) => {
             {/*    <TouchableOpacity style={{marginHorizontal: 6}}><SimpleLineIcons name="social-spotify" size={24}*/}
             {/*                                                                     color="#ef7a75"/></TouchableOpacity> : null}*/}
             {profile.tiktok ?
-                <TouchableOpacity style={{marginHorizontal: 6}}>
-                    <Link target="_blank" href={TIKTOK + profile.twitter} sx={{textDecoration: 'none'}}
+                <TouchableOpacity style={{marginLeft: 1, marginRight: 6}}>
+                    <Link target="_blank" href={TIKTOK + profile.tiktok} sx={{textDecoration: 'none'}}
                           rel="noopener">
-                        <SimpleLineIcons name="social-twitter" size={24} color="#ef7a75"/>
+                        <TikTokSvg/>
                     </Link>
                 </TouchableOpacity> : null}
             {profile.youtube ?
