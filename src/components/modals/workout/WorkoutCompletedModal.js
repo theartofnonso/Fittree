@@ -17,7 +17,6 @@ const WorkoutCompletedModal = props => {
         const startTime = props.startTime;
         const endTime = Date.now();
         const difference = (endTime - startTime) / 1000
-        console.log("End ", endTime)
         return toReadableTime(difference)
     };
 
