@@ -13,6 +13,16 @@ const exerciseInfo = {
 };
 
 /**
+ * Messages displayed while playing a workout
+ */
+const playMessages = {
+  WORKOUT_STARTING: 'Workout is Starting',
+  NEXT_ROUND: 'Next Round',
+  NEXT_SET: 'Next Set',
+  NEXT_EXERCISE: 'Next Exercise',
+};
+
+/**
  * Workout type
  * @type {{REPS_SETS: string, CIRCUIT: string}}
  */
@@ -30,5 +40,6 @@ const profileStatus = {
 export default {
   exerciseInfo,
   workoutType,
-  profileStatus
+  profileStatus,
+  playMessages
 };

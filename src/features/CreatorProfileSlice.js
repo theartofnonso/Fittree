@@ -32,7 +32,6 @@ const creatorProfileSlice = createSlice({
                 state.exercises = action.payload ? action.payload.exercises.items : []
             })
             .addCase(fetchCreatorProfile.rejected, (state, action) => {
-                console.log('Hey wait')
                 state.status = workoutsConstants.profileStatus.FAILED
                 state.profile = null
             });

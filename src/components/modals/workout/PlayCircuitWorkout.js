@@ -13,7 +13,7 @@ const PlayCircuitWorkout = ({workout, rounds, end}) => {
 
     const [showIntervalModal, setShowIntervalModal] = useState(true);
 
-    const [intervalModalDescription, setIntervalModalDescription] = useState("Workout Starting");
+    const [intervalModalDescription, setIntervalModalDescription] = useState(workoutsConstants.playMessages.WORKOUT_STARTING);
 
     const [intervalModalTime, setIntervalModalTime] = useState(5000);
 
@@ -66,14 +66,13 @@ const PlayCircuitWorkout = ({workout, rounds, end}) => {
                 setRoundsIndex(nextRoundsIndex);
                 setExerciseIndex(0);
                 setExerciseDuration(rounds[0][0].repsOrTimeValue);
-                setIntervalModalDescription("Next Round");
+                setIntervalModalDescription(workoutsConstants.playMessages.NEXT_ROUND);
                 setIntervalModalTime(workout.roundsInterval);
                 setShowIntervalModal(true);
             }
         } else {
             setExerciseIndex(nextExerciseIndex);
             setExerciseDuration(getWorkoutExercise().repsOrTimeValue);
-            setIntervalModalDescription(rounds[roundsIndex][nextExerciseIndex].exercise.title);
             setIntervalModalTime(workout.exerciseInterval);
             setShowIntervalModal(true);
         }
@@ -140,9 +139,12 @@ const PlayCircuitWorkout = ({workout, rounds, end}) => {
             close={end}
             type={workoutsConstants.workoutType.CIRCUIT}
             extraData={{exerciseDuration, exerciseExtras: `Round ${roundsIndex + 1} of ${workout.rounds}`}}
-            interval={{intervalModalTime, intervalModalDescription}}
+            interval={{duration: intervalModalTime, description: intervalModalDescription}}
             shouldPlayInterval={showIntervalModal}
-            onFinishInterval={() => setShowIntervalModal(false)}
+            onFinishInterval={() => {
+                setShowIntervalModal(false)
+                setIntervalModalDescription("")
+            }}
             onEnd={showWorkoutCompletedModal}/>
     );
 };

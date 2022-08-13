@@ -104,7 +104,7 @@ const PlayWorkout = props => {
                             source={{
                                 uri: "https://" + props.workoutExercise.exercise.videoUrls[0],
                             }}
-                            resizeMode="contain"
+                            resizeMode="stretch"
                             shouldPlay={true}
                             isLooping={true}
                             isMuted={true}
@@ -161,9 +161,9 @@ const PlayWorkout = props => {
                 /> : null}
             {props.shouldPlayInterval ?
                 <IntervalModal
-                    description={props.interval.intervalModalDescription}
-                    intervalTime={props.interval.intervalModalTime}
-                    close={props.close}
+                    description={props.interval.description}
+                    intervalTime={props.interval.duration}
+                    navigateToWorkoutPreview={props.close}
                     onFinish={props.onFinishInterval}/> : null}
             {props.onEnd ?
                 <WorkoutCompletedModal
@@ -238,17 +238,17 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        backgroundColor: 'black',
         borderTopLeftRadius: 8,
         borderBottomLeftRadius: 8,
+        backgroundColor: '#282828'
     },
     videoContainerSmall: {
         height: 300,
         backgroundColor: '#282828'
     },
     videoXs: {
-        flex: 1,
-        ...StyleSheet.absoluteFillObject,
+        height: 200,
+        resizeMode:'contain'
     },
     videoMd: {
 

@@ -13,7 +13,7 @@ const PlayRepsSetsWorkout = ({workout, exercises, end}) => {
 
     const [showIntervalModal, setShowIntervalModal] = useState(true);
 
-    const [intervalModalDescription, setIntervalModalDescription] = useState("Workout Starting");
+    const [intervalModalDescription, setIntervalModalDescription] = useState(workoutsConstants.playMessages.WORKOUT_STARTING);
 
     const [intervalModalTime, setIntervalModalTime] = useState(5000);
 
@@ -66,14 +66,13 @@ const PlayRepsSetsWorkout = ({workout, exercises, end}) => {
                 setExerciseIndex(nextExerciseIndex);
                 setSetIndex(0);
                 setExerciseDuration(exercises[0][0].repsOrTimeValue);
-                setIntervalModalDescription("Next Exercise");
+                setIntervalModalDescription(workoutsConstants.playMessages.NEXT_EXERCISE);
                 setIntervalModalTime(workout.exerciseInterval);
                 setShowIntervalModal(true);
             }
         } else {
             setSetIndex(nextSetIndex);
             setExerciseDuration(getWorkoutExercise().repsOrTimeValue);
-            setIntervalModalDescription(exercises[exerciseIndex][setIndex].exercise.title);
             setIntervalModalTime(workout.setsInterval);
             setShowIntervalModal(true);
         }
@@ -147,9 +146,12 @@ const PlayRepsSetsWorkout = ({workout, exercises, end}) => {
             close={end}
             type={workoutsConstants.workoutType.REPS_SETS}
             extraData={{exerciseDuration, exerciseExtras: `Set ${setIndex + 1} of ${getWorkoutExercise().sets}`}}
-            interval={{intervalModalTime, intervalModalDescription}}
+            interval={{duration: intervalModalTime, description: intervalModalDescription}}
             shouldPlayInterval={showIntervalModal}
-            onFinishInterval={() => setShowIntervalModal(false)}
+            onFinishInterval={() => {
+                setShowIntervalModal(false)
+                setIntervalModalDescription("")
+            }}
             onEnd={showWorkoutCompletedModal}/>
     );
 };
