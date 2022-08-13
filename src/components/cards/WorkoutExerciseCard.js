@@ -37,7 +37,7 @@ const WorkoutExerciseCard = props => {
             <Video
                 style={styles.videoStyle}
                 source={{
-                    uri: "https://www." + props.workoutExercise.exercise.videoUrls[0],
+                    uri: "https://" + props.workoutExercise.exercise.videoUrls[0],
                 }}
                 paused={true}
                 resizeMode="cover"
