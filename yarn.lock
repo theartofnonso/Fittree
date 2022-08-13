@@ -3479,27 +3479,6 @@
     "node-forge" "^1.2.1"
     "nullthrows" "^1.1.1"
 
-"@expo/config-plugins@^4.0.14":
-  "integrity" "sha512-RVvU40RtZt12HavuDAe+LDIq9lHj7sheOfMEHdmpJ/uTA8pgvkbc56XF6JHQD+yRr6+uhhb+JnAasGq49dsQbw=="
-  "resolved" "https://registry.npmjs.org/@expo/config-plugins/-/config-plugins-4.1.5.tgz"
-  "version" "4.1.5"
-  dependencies:
-    "@expo/config-types" "^45.0.0"
-    "@expo/json-file" "8.2.36"
-    "@expo/plist" "0.0.18"
-    "@expo/sdk-runtime-versions" "^1.0.0"
-    "@react-native/normalize-color" "^2.0.0"
-    "chalk" "^4.1.2"
-    "debug" "^4.3.1"
-    "find-up" "~5.0.0"
-    "getenv" "^1.0.0"
-    "glob" "7.1.6"
-    "resolve-from" "^5.0.0"
-    "semver" "^7.3.5"
-    "slash" "^3.0.0"
-    "xcode" "^3.0.1"
-    "xml2js" "0.4.23"
-
 "@expo/config-plugins@~5.0.0":
   "integrity" "sha512-1OfnsOrfeSkB0VZfT01UjQ5Uq6p+yYbq8yNkj0e99K/6NLHpyvIxj+5tZIV0nQXgkOcqBIABL2uA7lwB8CkaBQ=="
   "resolved" "https://registry.npmjs.org/@expo/config-plugins/-/config-plugins-5.0.1.tgz"
@@ -3564,11 +3543,6 @@
   "integrity" "sha512-Ax0pHuY5OQaSrzplOkT9DdpdmNzaVDnq9VySb4Ujq7UJ4U4jriLy8u93W98zunOXpcu0iiKubPsqD6lCiq0pig=="
   "resolved" "https://registry.npmjs.org/@expo/config-types/-/config-types-41.0.0.tgz"
   "version" "41.0.0"
-
-"@expo/config-types@^45.0.0":
-  "integrity" "sha512-/QGhhLWyaGautgEyU50UJr5YqKJix5t77ePTwreOVAhmZH+ff3nrrtYTTnccx+qF08ZNQmfAyYMCD3rQfzpiJA=="
-  "resolved" "https://registry.npmjs.org/@expo/config-types/-/config-types-45.0.0.tgz"
-  "version" "45.0.0"
 
 "@expo/config-types@^46.0.0", "@expo/config-types@^46.0.1":
   "integrity" "sha512-PXkmOgNwRyBfgVT1HmFZhfh3Qm7WKKyV6mk3/5HJ/LzPh1t+Zs2JrWX8U2YncTLV1QzV7nV8tnkyvszzqnZEzQ=="
@@ -7621,12 +7595,12 @@
     "path-browserify" "^1.0.0"
     "url-parse" "^1.5.9"
 
-"expo-av@~11.2.3":
-  "integrity" "sha512-ptTe96s33Ct0eOsOmNTvtaWFx4B0SDkQmDfPbiuX/C2afqbLQf8geEopw7BRO8ZZl7Qe3qBMH6YLHXKTkZkTyQ=="
-  "resolved" "https://registry.npmjs.org/expo-av/-/expo-av-11.2.3.tgz"
-  "version" "11.2.3"
+"expo-av@~12.0.4":
+  "integrity" "sha512-wq3wx6J1aacZEPZce9TK1+o4YTAOWyb5cJ4CqfsgHcXeUdHyO3qbva/5uecigpEYlCxOlWYFhAz2T0dQ7nWSpQ=="
+  "resolved" "https://registry.npmjs.org/expo-av/-/expo-av-12.0.4.tgz"
+  "version" "12.0.4"
   dependencies:
-    "@expo/config-plugins" "^4.0.14"
+    "@expo/config-plugins" "~5.0.0"
 
 "expo-clipboard@~3.0.1":
   "integrity" "sha512-y3gooHxfXpdlslS8GLTrXdWKGCr5hXLI+Y49PolbjUqBVh819+Z/T8bdskUf5YNxu/Bb0HG1yuHpHPe8XyvxSA=="
