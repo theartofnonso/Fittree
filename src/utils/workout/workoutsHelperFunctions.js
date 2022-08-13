@@ -52,8 +52,13 @@ export const sortWorkouts = (workout, exercises) =>
         .map(workoutExerciseJSON => {
             const workoutExercise = JSON.parse(workoutExerciseJSON);
             const exercise = exercises.find(item => item.id === workoutExercise.exerciseId);
-            return { ...workoutExercise, exercise };
+            if(exercise) {
+                return { ...workoutExercise, exercise };
+            } else {
+                return null
+            }
         })
+        .filter(workoutExercise => workoutExercise !== null)
         .sort((a, b) => a.index - b.index);
 
 export const generateShareableLink = username => 'https://www.fittree.io/' + username;

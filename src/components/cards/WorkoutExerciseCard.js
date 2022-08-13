@@ -82,7 +82,8 @@ const styles = StyleSheet.create({
         width: 50,
         borderRadius: 5,
         marginRight: 10,
-        backgroundColor: '#282828'
+        backgroundColor: '#282828',
+        ...StyleSheet.absoluteFill
     },
     textContainer: {
         display: "flex",

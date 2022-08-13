@@ -10,7 +10,7 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import {StyleSheet, TouchableOpacity, View} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
-import {Entypo, Feather, FontAwesome, SimpleLineIcons} from '@expo/vector-icons';
+import {Feather} from '@expo/vector-icons';
 import {Avatar, TextInput} from "react-native-paper";
 import {searchExerciseOrWorkout} from "../src/utils/workoutAndExerciseUtils";
 import {
