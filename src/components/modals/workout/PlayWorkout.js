@@ -104,7 +104,7 @@ const PlayWorkout = props => {
                             source={{
                                 uri: "https://" + props.workoutExercise.exercise.videoUrls[0],
                             }}
-                            resizeMode="stretch"
+                            resizeMode="contain"
                             shouldPlay={true}
                             isLooping={true}
                             isMuted={true}
@@ -238,17 +238,17 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
+        backgroundColor: 'black',
         borderTopLeftRadius: 8,
         borderBottomLeftRadius: 8,
-        backgroundColor: '#282828'
     },
     videoContainerSmall: {
         height: 300,
         backgroundColor: '#282828'
     },
     videoXs: {
-        height: 200,
-        resizeMode:'contain'
+        flex: 1,
+        ...StyleSheet.absoluteFillObject,
     },
     videoMd: {
 
