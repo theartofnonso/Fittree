@@ -11,6 +11,7 @@ import {createTheme, responsiveFontSizes, ThemeProvider, Typography, useMediaQue
 import {Video} from "expo-av";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import PreviewExercise from "./PreviewExercise";
+import InformationSvg from "../../icons/InformationSvg";
 
 const PlayWorkout = props => {
 
@@ -94,7 +95,7 @@ const PlayWorkout = props => {
                                 <Entypo name="cross" size={32} color="#282828"/>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={previewExercise}>
-                                <MaterialCommunityIcons name="information-variant" size={32} color="#282828"/>
+                                <InformationSvg/>
                             </TouchableOpacity>
                         </View>
                         : null}
@@ -148,7 +149,7 @@ const PlayWorkout = props => {
                         {isBigScreen ?
                             <TouchableOpacity style={{position: 'absolute', bottom: 8, right: 8}}
                                               onPress={previewExercise}>
-                                <MaterialCommunityIcons name="information-variant" size={32} color="#282828"/>
+                                <InformationSvg/>
                             </TouchableOpacity> : null}
                     </View>
                 </View>

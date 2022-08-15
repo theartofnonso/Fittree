@@ -17,7 +17,6 @@ import {
     Alert,
     Container,
     createTheme,
-    Link,
     responsiveFontSizes,
     Snackbar,
     ThemeProvider,
@@ -42,6 +41,7 @@ import CreatorProfileLoading from "../src/components/views/CreatorProfileLoading
 import EmptyState from "../src/components/illustrations/EmptyState";
 import Socials from "../src/components/views/Socials";
 import FittrIconBig from "../src/components/illustrations/FittrIconBig";
+import ShareSvg from "../src/components/icons/ShareSvg";
 
 const CreatorProfile = () => {
 
@@ -214,7 +214,7 @@ const CreatorProfile = () => {
                 <View style={styles.topContainerStyle}>
                     <View style={styles.navBarStyle}>
                         <TouchableOpacity onPress={copyShareableLink}>
-                            <Feather name="share" size={24} color="black"/>
+                            <ShareSvg/>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.infoStyle}>
