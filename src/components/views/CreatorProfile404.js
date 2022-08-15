@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 
     fittreeIconContainer: {
         position: 'absolute',
-        bottom: 10
+        bottom: 0
     },
 })
 
