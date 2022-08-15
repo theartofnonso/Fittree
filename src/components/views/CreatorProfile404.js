@@ -2,6 +2,8 @@
 import React from "react";
 import {Container, createTheme, Link, responsiveFontSizes, ThemeProvider, Typography} from "@mui/material";
 import NotFound from "../illustrations/NotFound";
+import FittrIconBig from "../illustrations/FittrIconBig";
+import {StyleSheet, TouchableOpacity} from "react-native-web";
 
 const CreatorProfile404 = ({username}) => {
 
@@ -19,12 +21,29 @@ const CreatorProfile404 = ({username}) => {
                 alignItems: 'center',
                 justifyContent: 'center',
             }}>
-            <NotFound />
+            <NotFound/>
             <ThemeProvider theme={responsiveFontTheme}>
-                <Typography variant="body1" sx={{marginTop: 5}}>Can't find {username}, claim <Link href='#' color='#ef7a75' sx={{textDecoration: 'underline', fontWeight: 'bold'}}>Fittree/{username}</Link></Typography>
+                <Typography variant="body1" sx={{marginTop: 5}}>We can't find {username}, claim <Link href='#'
+                                                                                                      color='#ef7a75'
+                                                                                                      sx={{
+                                                                                                          textDecoration: 'underline',
+                                                                                                          fontWeight: 'bold'
+                                                                                                      }}>Fittree.io/{username}</Link></Typography>
             </ThemeProvider>
+            <TouchableOpacity style={styles.fittreeIconContainer}>
+                <Link href='/' sx={{textDecoration: 'none'}}>
+                    <FittrIconBig/>
+                </Link>
+            </TouchableOpacity>
         </Container>
     );
 };
+const styles = StyleSheet.create({
+
+    fittreeIconContainer: {
+        position: 'absolute',
+        bottom: 20
+    },
+})
 
 export default CreatorProfile404;

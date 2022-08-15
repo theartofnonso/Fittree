@@ -16,7 +16,7 @@ import {searchExerciseOrWorkout} from "../src/utils/workoutAndExerciseUtils";
 import {
     Alert,
     Container,
-    createTheme,
+    createTheme, Link,
     responsiveFontSizes,
     Snackbar,
     ThemeProvider,
@@ -42,6 +42,8 @@ import EmptyState from "../src/components/illustrations/EmptyState";
 import Socials from "../src/components/views/Socials";
 import FittrIconBig from "../src/components/illustrations/FittrIconBig";
 import ShareSvg from "../src/components/icons/ShareSvg";
+import {TIKTOK} from "../src/utils/workout/utilsConstants";
+import TikTokSvg from "../src/components/illustrations/TikTokSvg";
 
 const CreatorProfile = () => {
 
@@ -266,9 +268,11 @@ const CreatorProfile = () => {
                             }}>{`${username} has no workouts`}</Typography>
                         </View>}
                 </View>
-                <View style={styles.fittreeIconContainer}>
-                    <FittrIconBig/>
-                </View>
+                <TouchableOpacity style={styles.fittreeIconContainer}>
+                    <Link href='/' sx={{textDecoration: 'none'}}>
+                        <FittrIconBig/>
+                    </Link>
+                </TouchableOpacity>
 
                 {/*<ThemeProvider theme={responsiveFontTheme}>*/}
                 {/*    <Typography variant="h6" sx={{*/}
