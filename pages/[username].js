@@ -10,13 +10,13 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import {StyleSheet, TouchableOpacity, View} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
-import {Feather} from '@expo/vector-icons';
 import {Avatar, TextInput} from "react-native-paper";
 import {searchExerciseOrWorkout} from "../src/utils/workoutAndExerciseUtils";
 import {
     Alert,
     Container,
-    createTheme, Link,
+    createTheme,
+    Link,
     responsiveFontSizes,
     Snackbar,
     ThemeProvider,
@@ -42,16 +42,11 @@ import EmptyState from "../src/components/illustrations/EmptyState";
 import Socials from "../src/components/views/Socials";
 import FittrIconBig from "../src/components/illustrations/FittrIconBig";
 import ShareSvg from "../src/components/icons/ShareSvg";
-import {TIKTOK} from "../src/utils/workout/utilsConstants";
-import TikTokSvg from "../src/components/illustrations/TikTokSvg";
 
 const CreatorProfile = () => {
 
     const theme = useTheme();
     const isBigScreen = useMediaQuery(theme.breakpoints.up('sm'));
-
-    let responsiveFontTheme = createTheme();
-    responsiveFontTheme = responsiveFontSizes(responsiveFontTheme);
 
     /**
      * Retrieve creator's username

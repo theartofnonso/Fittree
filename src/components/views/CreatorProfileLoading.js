@@ -1,23 +1,24 @@
 /* eslint-disable */
 import React from "react";
-import {Container} from "@mui/material";
 import Favicon from "../illustrations/Favicon";
+import {View} from "react-native-web";
 
 const CreatorProfileLoading = () => {
 
     return (
-        <Container
-            maxWidth="md"
-            sx={{
-                height: '100vh',
+        <View
+            style={{
+                height: '100%',
+                width: '100%',
+                position: 'fixed',
                 display: 'flex',
-                padding: 1,
-                flexDirection: 'row',
+                padding: 2,
+                flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
             }}>
             <Favicon/>
-        </Container>
+        </View>
     );
 };
 

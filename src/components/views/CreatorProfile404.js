@@ -1,9 +1,9 @@
 /* eslint-disable */
 import React from "react";
-import {Container, createTheme, Link, responsiveFontSizes, ThemeProvider, Typography} from "@mui/material";
+import {createTheme, Link, responsiveFontSizes, ThemeProvider, Typography} from "@mui/material";
 import NotFound from "../illustrations/NotFound";
 import FittrIconBig from "../illustrations/FittrIconBig";
-import {StyleSheet, TouchableOpacity} from "react-native-web";
+import {StyleSheet, TouchableOpacity, View} from "react-native-web";
 
 const CreatorProfile404 = ({username}) => {
 
@@ -11,10 +11,11 @@ const CreatorProfile404 = ({username}) => {
     responsiveFontTheme = responsiveFontSizes(responsiveFontTheme);
 
     return (
-        <Container
-            maxWidth="md"
-            sx={{
-                height: '100vh',
+        <View
+            style={{
+                height: '100%',
+                width: '100%',
+                position: 'fixed',
                 display: 'flex',
                 padding: 2,
                 flexDirection: 'column',
@@ -22,6 +23,7 @@ const CreatorProfile404 = ({username}) => {
                 justifyContent: 'center',
             }}>
             <NotFound/>
+
             <ThemeProvider theme={responsiveFontTheme}>
                 <Typography variant="body1" sx={{marginTop: 5}}>We can't find {username}, claim <Link href='#'
                                                                                                       color='#ef7a75'
@@ -35,14 +37,14 @@ const CreatorProfile404 = ({username}) => {
                     <FittrIconBig/>
                 </Link>
             </TouchableOpacity>
-        </Container>
+        </View>
     );
 };
 const styles = StyleSheet.create({
 
     fittreeIconContainer: {
         position: 'absolute',
-        bottom: 20
+        bottom: 10
     },
 })
 
