@@ -39,8 +39,9 @@ const WorkoutExerciseCard = props => {
                 source={{
                     uri: "https://" + props.workoutExercise.exercise.videoUrls[0],
                 }}
-                paused={true}
                 resizeMode="contain"
+                shouldPlay={true}
+                isMuted={true}
             />
             <View style={styles.textContainer}>
                 <ThemeProvider theme={theme}>
