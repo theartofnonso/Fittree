@@ -4,15 +4,17 @@ import {StyleSheet, View} from "react-native-web";
 import {Typography} from "@mui/material";
 import {TouchableOpacity} from "react-native";
 import workoutsConstants from "../../../utils/workout/workoutsConstants";
+import {MaterialCommunityIcons} from "@expo/vector-icons";
 
 const IntervalModal = props => {
 
     const [intervalTime, setIntervalTime] = useState(props.intervalTime);
 
+    let intervalId = 0;
+
     useEffect(() => {
-        const intervalId = setInterval(() => {
+        intervalId = setInterval(() => {
             if (intervalTime === 0) {
-                clearInterval(intervalId);
                 props.onFinish();
             } else {
                 setIntervalTime(prevValue => prevValue - 1000);
@@ -20,6 +22,14 @@ const IntervalModal = props => {
         }, 1000);
         return () => clearInterval(intervalId);
     }, [intervalTime]);
+
+    /**
+     * Skip the interval
+     */
+    const skipInterval = () => {
+        props.onFinish();
+        clearInterval(intervalId)
+    }
 
     /**
      * Display messages for respective intervals
@@ -30,25 +40,30 @@ const IntervalModal = props => {
         switch (props.description) {
             case workoutsConstants.playMessages.WORKOUT_STARTING:
                 return <View style={styles.intervalContainer}>
-                    <Typography variant="body2" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 500, my: 0.5}}>
+                    <Typography variant="body2" color='#ffffff'
+                                sx={{fontFamily: 'Montserrat', fontWeight: 500, my: 0.5}}>
                         {props.description}
                     </Typography>
-                    <Typography variant="body2" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 700, my: 0.5}}>
+                    <Typography variant="body2" color='#ffffff'
+                                sx={{fontFamily: 'Montserrat', fontWeight: 700, my: 0.5}}>
                         {intervalTime / 1000}s
                     </Typography>
                 </View>
             case workoutsConstants.playMessages.NEXT_ROUND:
             case workoutsConstants.playMessages.NEXT_EXERCISE:
                 return <View style={styles.intervalContainer}>
-                    <Typography variant="body2" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 500, my: 0.5}}>
+                    <Typography variant="body2" color='#ffffff'
+                                sx={{fontFamily: 'Montserrat', fontWeight: 500, my: 0.5}}>
                         {props.description}
                     </Typography>
-                    <Typography variant="body2" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 700, my: 0.5}}>
+                    <Typography variant="body2" color='#ffffff'
+                                sx={{fontFamily: 'Montserrat', fontWeight: 700, my: 0.5}}>
                         Rest for {intervalTime / 1000}s
                     </Typography>
                 </View>
             default:
-                return <Typography variant="body2" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 500, my: 0.5}}>
+                return <Typography variant="body2" color='#ffffff'
+                                   sx={{fontFamily: 'Montserrat', fontWeight: 500, my: 0.5}}>
                     Rest for {intervalTime / 1000}s
                 </Typography>
         }
@@ -60,13 +75,22 @@ const IntervalModal = props => {
                 {displayIntervalMessage()}
                 <TouchableOpacity
                     activeOpacity={0.5}
-                    style={styles.btnStyle}
+                    style={styles.skipBtn}
+                    onPress={skipInterval}
+                    testID="End_Workout_Btn">
+                    <MaterialCommunityIcons name="skip-next" size={32} color="white"/>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    activeOpacity={0.5}
+                    style={styles.endWorkoutBtn}
                     onPress={props.navigateToWorkoutPreview}
                     testID="End_Workout_Btn">
                     <Typography style={{color: 'white', fontFamily: 'Montserrat', fontWeight: 'bold'}}>
                         End Workout
                     </Typography>
                 </TouchableOpacity>
+
             </View>
         </View>
     );
@@ -95,7 +119,10 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-    btnStyle: {
+    skipBtn: {
+        marginVertical: 5
+    },
+    endWorkoutBtn: {
         alignItems: 'center',
         backgroundColor: '#ef7a75',
         borderRadius: 8,
