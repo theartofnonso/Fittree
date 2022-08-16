@@ -9,7 +9,6 @@ import {timeOrReps} from "../../../utils/workout/workoutsHelperFunctions";
 import WorkoutCompletedModal from "./WorkoutCompletedModal";
 import {createTheme, responsiveFontSizes, ThemeProvider, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {Video} from "expo-av";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import PreviewExercise from "./PreviewExercise";
 import InformationSvg from "../../icons/InformationSvg";
 
