@@ -94,8 +94,8 @@ const PreviewExercise = ({exercise, close}) => {
                             <View style={styles.list}>
                                 {exercise.bodyParts.map((part, index) => {
                                     return (
-                                        <View style={styles.tag}>
-                                            <ThemeProvider key={index} theme={responsiveFontTheme}>
+                                        <View key={index} style={styles.tag}>
+                                            <ThemeProvider theme={responsiveFontTheme}>
                                                 <Typography sx={{
                                                     color: 'white',
                                                     textAlign: 'center',
@@ -119,8 +119,8 @@ const PreviewExercise = ({exercise, close}) => {
                             <View style={styles.list}>
                                 {exercise.equipments.map((equipment, index) => {
                                     return (
-                                        <View style={styles.tag}>
-                                            <ThemeProvider key={index} theme={responsiveFontTheme}>
+                                        <View key={index} style={styles.tag}>
+                                            <ThemeProvider theme={responsiveFontTheme}>
                                                 <Typography sx={{
                                                     color: 'white',
                                                     textAlign: 'center',

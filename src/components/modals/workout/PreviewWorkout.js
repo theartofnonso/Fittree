@@ -1,10 +1,11 @@
 /* eslint-disable */
-import React from "react";
+import React, {useState} from "react";
 import {StyleSheet, TouchableOpacity, View} from "react-native-web";
 import WorkoutCardBig from "../../cards/WorkoutCardBig";
 import WorkoutExerciseCard from "../../cards/WorkoutExerciseCard";
 import Entypo from "react-native-vector-icons/Entypo";
 import {createTheme, responsiveFontSizes, ThemeProvider, Typography, useMediaQuery, useTheme} from "@mui/material";
+import PreviewExercise from "./PreviewExercise";
 
 const PreviewWorkout = ({workout, play, close}) => {
 
@@ -14,6 +15,8 @@ const PreviewWorkout = ({workout, play, close}) => {
 
     let responsiveFontTheme = createTheme();
     responsiveFontTheme = responsiveFontSizes(responsiveFontTheme);
+
+    const [currentExercise, setCurrentExercise] = useState(null)
 
     /**
      * Play the appropriate workout
@@ -34,6 +37,13 @@ const PreviewWorkout = ({workout, play, close}) => {
         } else {
             return styles.wrapperXs
         }
+    }
+
+    /**
+     * Preview exercise information
+     */
+    const playExercise = (exercise) => {
+        setCurrentExercise(exercise)
     }
 
     return (
@@ -63,7 +73,12 @@ const PreviewWorkout = ({workout, play, close}) => {
                             }}>{workout.description}</Typography>
                         </ThemeProvider>
                         {workout.workoutExercises.map((workoutExercise, i) =>
-                            <WorkoutExerciseCard key={i} workoutExercise={workoutExercise} type={workout.type}/>)}
+                            <TouchableOpacity
+                                key={i}
+                                activeOpacity={0.5}
+                                onPress={() => playExercise(workoutExercise.exercise)}>
+                                <WorkoutExerciseCard workoutExercise={workoutExercise} type={workout.type}/>
+                            </TouchableOpacity>)}
                     </View>
                     <TouchableOpacity style={[isBigScreen ? styles.startWorkoutBtn : styles.startWorkoutBtnSmall]}
                                       onPress={playWorkout}>
@@ -71,6 +86,10 @@ const PreviewWorkout = ({workout, play, close}) => {
                     </TouchableOpacity>
                 </View>
             </View>
+            {currentExercise ?
+                <PreviewExercise
+                    exercise={currentExercise}
+                    close={() => setCurrentExercise(null)}/> : null}
         </View>
 
     );
