@@ -1,12 +1,32 @@
 {
   "dependencies": {
+    "@aws-amplify/core": "^4.5.9",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@expo/vector-icons": "^13.0.0",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.9.1",
+    "@reduxjs/toolkit": "^1.8.3",
+    "aws-amplify": "^4.3.27",
+    "babel-preset-expo": "^9.1.0",
     "expo": "^45.0.0",
+    "expo-av": "~11.2.3",
+    "expo-clipboard": "~3.0.1",
+    "expo-font": "~10.1.0",
+    "expo-linear-gradient": "~11.3.0",
     "next": "9.3.5",
+    "next-compose-plugins": "^2.2.1",
+    "next-fonts": "^1.5.1",
+    "next-images": "^1.8.4",
+    "next-transpile-modules": "^9.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-native": "0.68.2",
+    "react-native-paper": "^4.12.3",
+    "react-native-svg": "12.3.0",
+    "react-native-vector-icons": "^6.6.0",
     "react-native-web": "0.17.7",
-    "expo-av": "~11.2.3"
+    "react-redux": "^8.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
