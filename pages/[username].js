@@ -12,18 +12,7 @@ import {StyleSheet, TouchableOpacity, View} from "react-native-web";
 import WorkoutCard from "../src/components/cards/WorkoutCard";
 import {Avatar, TextInput} from "react-native-paper";
 import {searchExerciseOrWorkout} from "../src/utils/workoutAndExerciseUtils";
-import {
-    Alert,
-    Container,
-    createTheme,
-    Link,
-    responsiveFontSizes,
-    Snackbar,
-    ThemeProvider,
-    Typography,
-    useMediaQuery,
-    useTheme
-} from "@mui/material";
+import {Alert, Container, Link, Snackbar, ThemeProvider, Typography, useMediaQuery, useTheme} from "@mui/material";
 import PreviewWorkout from "../src/components/modals/workout/PreviewWorkout";
 import PlayCircuitWorkout from "../src/components/modals/workout/PlayCircuitWorkout";
 import workoutsConstants from "../src/utils/workout/workoutsConstants";
