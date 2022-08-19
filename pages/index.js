@@ -1,15 +1,17 @@
 // @generated: @expo/next-adapter@2.1.52
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native-web';
-import {AccordionDetails, AccordionSummary, Container, Link, Typography} from "@mui/material";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import AppStoreSvg from "../src/components/illustrations/AppStoreSvg";
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native-web';
+import {AccordionDetails, AccordionSummary, Container, Link, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {styled} from '@mui/material/styles';
 import MuiAccordion from '@mui/material/Accordion';
 import FittrIconBig from "../src/components/illustrations/FittrIconBig";
-
+import AppStoreSvg from "../src/components/illustrations/AppStoreSvg";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export default function App() {
+
+    const theme = useTheme();
+    const isBigScreen = useMediaQuery(theme.breakpoints.up('sm'));
 
     const Accordion = styled((props) => (
         <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -54,6 +56,12 @@ export default function App() {
 
     const downloadText = `Are you a fitness influencer\nor creator with a brand to\nbuild? Then claim your\nFittree link here`;
 
+    const fittreeStepLine1 = `Create 5 seconds\nexercise videos`;
+
+    const fittreeStepLine2 = `Curate exercises\ninto workouts`;
+
+    const fittreeStepLine3 = `Go live`;
+
     return (
         <View>
 
@@ -80,10 +88,46 @@ export default function App() {
                 <TouchableOpacity
                     activeOpacity={0.5}
                     style={styles.btnStyle}>
-                    <Typography style={{color: 'white', fontFamily: 'Montserrat', fontWeight: '600'}}>
+                    <Typography style={{color: 'white', fontFamily: 'Montserrat', fontWeight: '500'}}>
                         START FOR FREE
                     </Typography>
                 </TouchableOpacity>
+                <View style={[isBigScreen ? styles.container : styles.containerSmall]}>
+                    <Typography variant='h6'
+                                sx={{textAlign: 'center', fontWeight: '500', fontFamily: 'Montserrat'}}
+                                style={{whiteSpace: 'pre-line'}}>
+                        {fittreeStepLine1}
+                    </Typography>
+                    <Image
+                        source={require('../src/components/illustrations/Frame 22.png')}
+                        style={{height: '100%', width: 300, resizeMode: 'contain'}}
+                    />
+                </View>
+                <View style={[isBigScreen ? styles.container : styles.containerSmall]}>
+                    <Typography variant='h6'
+                                sx={{textAlign: 'center', fontWeight: '500', fontFamily: 'Montserrat'}}
+                                style={{whiteSpace: 'pre-line'}}>
+                        {fittreeStepLine2}
+                    </Typography>
+                    <Image
+                        source={require('../src/components/illustrations/Frame 24.jpg')}
+                        style={{height: '100%', width: 300, resizeMode: 'contain'}}
+                    />
+                </View>
+                <View style={[isBigScreen ? styles.container : styles.containerSmall]}>
+                    <Typography variant='h6'
+                                sx={{textAlign: 'center', fontWeight: '500', fontFamily: 'Montserrat'}}
+                                style={{whiteSpace: 'pre-line'}}>
+                        {fittreeStepLine3}
+                    </Typography>
+                    <Image
+                        source={require('../src/components/illustrations/Frame 23.png')}
+                        style={{height: '100%', width: 300, resizeMode: 'contain'}}
+                    />
+                </View>
+            </Container>
+
+            <Container maxWidth="md" sx={{px: 4}}>
 
 
                 <Typography color='#ef7a75' variant='h4'
@@ -197,7 +241,7 @@ export default function App() {
                     </AccordionDetails>
                 </Accordion>
 
-                <Typography variant='h5' sx={{textAlign: 'center', my: 5, fontFamily: 'Montserrat', fontWeight: '400'}} style={{whiteSpace: 'pre-line'}}>
+                <Typography variant='h6' sx={{textAlign: 'center', my: 5, fontFamily: 'Montserrat', fontWeight: '400'}} style={{whiteSpace: 'pre-line'}}>
                     {downloadText}
                 </Typography>
 
@@ -219,9 +263,21 @@ export default function App() {
 
 const styles = StyleSheet.create({
     container: {
-        height: 300,
-        width: 300,
-        borderWidth: 1
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 'auto',
+        height: 400,
+        marginVertical: 40
+    },
+    containerSmall: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 600,
+        marginVertical: 100
     },
     text: {
         fontSize: 16,
