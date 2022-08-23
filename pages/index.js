@@ -56,16 +56,23 @@ export default function App() {
 
     const downloadText = `Are you a fitness influencer\nor creator with a brand to\nbuild? Then claim your\nFittree link here`;
 
-    const fittreeStepLine1 = `Create 5 seconds\nexercise videos`;
+    const fittreeStep1Big = `Create 5 seconds\nexercise videos`;
+    const fittreeStep1Small = `Shoot 5 seconds videos to demonstrate an exercise\n
+                                   and include a description about it as well as the\n
+                                   body parts trained and equipment used.`
 
-    const fittreeStepLine2 = `Curate exercises\ninto workouts`;
+    const fittreeStep2Big = `Curate exercises\ninto workouts`;
+    const fittreeStep2Small = `Curate various exercises into workouts of circuits\n
+                                or reps and sets with intervals`;
 
-    const fittreeStepLine3 = `Go live`;
+    const fittreeStep3Big = `Go live`;
+    const fittreeStep3Small = `Launch your workouts to your community and have them\n
+                               experience an improved workout session`;
 
     return (
         <View>
 
-            <Container maxWidth="md" sx={{px: 4}}>
+            <Container maxWidth="lg" sx={{px: 4}}>
 
                 <TouchableOpacity>
                     <Link href='/' sx={{textDecoration: 'none'}}>
@@ -73,13 +80,13 @@ export default function App() {
                     </Link>
                 </TouchableOpacity>
 
-                <Typography variant='h5'
-                            sx={{textAlign: 'center', my: 0.5, fontWeight: '700', fontFamily: 'Montserrat'}}
+                <Typography variant='h3'
+                            sx={{textAlign: 'center', my: 0.8, fontWeight: '700', fontFamily: 'Montserrat'}}
                             style={{whiteSpace: 'pre-line'}}>
                     {textBig}
                 </Typography>
 
-                <Typography variant='body2'
+                <Typography variant='h6'
                             sx={{textAlign: 'center', my: 1, fontWeight: '400', fontFamily: 'Montserrat'}}
                             style={{whiteSpace: 'pre-line'}}>
                     {textSmall}
@@ -92,43 +99,84 @@ export default function App() {
                         START FOR FREE
                     </Typography>
                 </TouchableOpacity>
-                <View style={[isBigScreen ? styles.container : styles.containerSmall]}>
-                    <Typography variant='h6'
-                                sx={{textAlign: 'center', fontWeight: '500', fontFamily: 'Montserrat'}}
-                                style={{whiteSpace: 'pre-line'}}>
-                        {fittreeStepLine1}
-                    </Typography>
-                    <Image
-                        source={require('../src/components/illustrations/Frame 22.png')}
-                        style={{height: '100%', width: 300, resizeMode: 'contain'}}
-                    />
-                </View>
-                <View style={[isBigScreen ? styles.container : styles.containerSmall]}>
-                    <Typography variant='h6'
-                                sx={{textAlign: 'center', fontWeight: '500', fontFamily: 'Montserrat'}}
-                                style={{whiteSpace: 'pre-line'}}>
-                        {fittreeStepLine2}
-                    </Typography>
-                    <Image
-                        source={require('../src/components/illustrations/Frame 24.jpg')}
-                        style={{height: '100%', width: 300, resizeMode: 'contain'}}
-                    />
-                </View>
-                <View style={[isBigScreen ? styles.container : styles.containerSmall]}>
-                    <Typography variant='h6'
-                                sx={{textAlign: 'center', fontWeight: '500', fontFamily: 'Montserrat'}}
-                                style={{whiteSpace: 'pre-line'}}>
-                        {fittreeStepLine3}
-                    </Typography>
-                    <Image
-                        source={require('../src/components/illustrations/Frame 23.png')}
-                        style={{height: '100%', width: 300, resizeMode: 'contain'}}
-                    />
-                </View>
-            </Container>
 
-            <Container maxWidth="md" sx={{px: 4}}>
+                <View>
+                    <View style={[isBigScreen ? styles.container : styles.containerSmall]}>
+                        <View style={styles.textContainer}>
+                            <Typography variant='h4'
+                                        sx={{
+                                            textAlign: 'Left',
+                                            fontWeight: '700',
+                                            fontFamily: 'Montserrat',
+                                            marginBottom: 1
+                                        }}
+                                        style={{whiteSpace: 'pre-line'}}>
+                                {fittreeStep1Big}
+                            </Typography>
+                            <Typography variant='body1'
+                                        sx={{fontWeight: '400', fontFamily: 'Montserrat'}}
+                                        style={{whiteSpace: 'pre-line', lineHeight: 0.8}}>
+                                {fittreeStep1Small}
+                            </Typography>
+                        </View>
 
+                        <Image
+                            source={require('../src/components/images/create_exercise.png')}
+                            style={{height: 400, width: 300, resizeMode: 'contain'}}
+                        />
+                    </View>
+
+                    <View style={[isBigScreen ? styles.container : styles.containerSmall]}>
+                        <Image
+                            source={require('../src/components/images/curate_workouts.png')}
+                            style={{height: 400, width: 300, resizeMode: 'contain'}}
+                        />
+                        <View style={styles.textContainer}>
+                            <Typography variant='h4'
+                                        sx={{
+                                            textAlign: 'Left',
+                                            fontWeight: '700',
+                                            fontFamily: 'Montserrat',
+                                            marginBottom: 1
+                                        }}
+                                        style={{whiteSpace: 'pre-line'}}>
+                                {fittreeStep2Big}
+                            </Typography>
+                            <Typography variant='body1'
+                                        sx={{fontWeight: '400', fontFamily: 'Montserrat'}}
+                                        style={{whiteSpace: 'pre-line', lineHeight: 0.8}}>
+                                {fittreeStep2Small}
+                            </Typography>
+                        </View>
+                    </View>
+
+                    <View style={[isBigScreen ? styles.container : styles.containerSmall]}>
+                        <View style={styles.textContainer}>
+                            <Typography variant='h4'
+                                        sx={{
+                                            textAlign: 'Left',
+                                            fontWeight: '700',
+                                            fontFamily: 'Montserrat',
+                                            marginBottom: 1
+                                        }}
+                                        style={{whiteSpace: 'pre-line'}}>
+                                {fittreeStep3Big}
+                            </Typography>
+                            <Typography variant='body1'
+                                        sx={{fontWeight: '400', fontFamily: 'Montserrat'}}
+                                        style={{whiteSpace: 'pre-line', lineHeight: 0.8}}>
+                                {fittreeStep3Small}
+                            </Typography>
+                        </View>
+
+                        <Image
+                            source={require('../src/components/images/go_live.png')}
+                            style={{height: 400, width: 300, resizeMode: 'contain'}}
+                        />
+                    </View>
+
+
+                </View>
 
                 <Typography color='#ef7a75' variant='h4'
                             sx={{textAlign: 'center', my: 2, fontWeight: '500', fontFamily: 'Montserrat'}}>
@@ -241,11 +289,12 @@ export default function App() {
                     </AccordionDetails>
                 </Accordion>
 
-                <Typography variant='h6' sx={{textAlign: 'center', my: 5, fontFamily: 'Montserrat', fontWeight: '400'}} style={{whiteSpace: 'pre-line'}}>
+                <Typography variant='h6' sx={{textAlign: 'center', my: 5, fontFamily: 'Montserrat', fontWeight: '400'}}
+                            style={{whiteSpace: 'pre-line'}}>
                     {downloadText}
                 </Typography>
 
-                <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center',}}>
+                <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', marginVertical: 20}}>
                     <AppStoreSvg/>
                 </View>
 
@@ -265,25 +314,30 @@ const styles = StyleSheet.create({
     container: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
         alignItems: 'center',
         margin: 'auto',
         height: 400,
-        marginVertical: 40
+        width: '100%',
+        marginVertical: 40,
     },
     containerSmall: {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        height: 600,
-        marginVertical: 100
+        marginVertical: 100,
+        width: '100%',
     },
     text: {
         fontSize: 16,
     },
     fittreeIconContainer: {
         marginLeft: 20
+    },
+    fittreeStepsContainer: {
+        display: 'flex',
+        flexDirection: 'row'
     },
     btnStyle: {
         alignItems: 'center',
