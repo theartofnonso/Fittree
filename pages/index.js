@@ -65,7 +65,7 @@ export default function App() {
                     </Link>
                 </TouchableOpacity>
 
-                <View style={{marginBottom: isBigScreen ? 150 : 80}}>
+                <View style={{marginBottom: isBigScreen ? 150 : 50}}>
                     <View>
                         <Typography variant='h3'
                                     sx={{
@@ -79,7 +79,7 @@ export default function App() {
                         <Typography variant='h3'
                                     sx={{
                                         textAlign: 'center',
-                                        marginBottom: 0.8,
+                                        marginBottom: 1,
                                         fontWeight: '700',
                                         fontSize: !isBigScreen ? 30 : null,
                                         fontFamily: 'Montserrat'
@@ -91,7 +91,7 @@ export default function App() {
                     <Typography variant='h6'
                                 sx={{
                                     textAlign: 'center',
-                                    my: 2.5,
+                                    marginBottom: 5,
                                     fontWeight: '400',
                                     fontSize: !isBigScreen ? 14 : null,
                                     fontFamily: 'Montserrat'
