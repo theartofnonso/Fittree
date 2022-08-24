@@ -59,7 +59,7 @@ function MyApp({Component, pageProps}) {
     return (
         <>
             <Head>
-                <title>Fittree</title>
+                <title>Fittree | Your workouts everywhere</title>
             </Head>
             <Provider store={store}>
                 <PaperProvider theme={theme}>
