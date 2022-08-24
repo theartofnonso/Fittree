@@ -65,7 +65,7 @@ export default function App() {
                     </Link>
                 </TouchableOpacity>
 
-                <View style={{marginBottom: isBigScreen ? 100 : 30}}>
+                <View style={{marginBottom: isBigScreen ? 150 : 80}}>
                     <View>
                         <Typography variant='h3'
                                     sx={{
@@ -116,8 +116,8 @@ export default function App() {
                                     sx={{
                                         textAlign: isBigScreen ? 'left' : 'center',
                                         fontWeight: '700',
+                                        fontSize: !isBigScreen ? 25 : null,
                                         fontFamily: 'Montserrat',
-                                        marginBottom: 1
                                     }}
                                     style={{whiteSpace: 'pre-line'}}>
                             Create 5 secs
@@ -126,6 +126,7 @@ export default function App() {
                                     sx={{
                                         textAlign: isBigScreen ? 'left' : 'center',
                                         fontWeight: '700',
+                                        fontSize: !isBigScreen ? 25 : null,
                                         fontFamily: 'Montserrat',
                                         marginBottom: 1
                                     }}
@@ -137,7 +138,8 @@ export default function App() {
                                         my: 0.5,
                                         textAlign: isBigScreen ? 'left' : 'center',
                                         fontWeight: '400',
-                                        fontFamily: 'Montserrat'
+                                        fontFamily: 'Montserrat',
+                                        fontSize: !isBigScreen ? 14 : null,
                                     }}>
                             Shoot 5 seconds exercise videos
                         </Typography>
@@ -146,7 +148,8 @@ export default function App() {
                                         my: 0.5,
                                         textAlign: isBigScreen ? 'left' : 'center',
                                         fontWeight: '400',
-                                        fontFamily: 'Montserrat'
+                                        fontFamily: 'Montserrat',
+                                        fontSize: !isBigScreen ? 14 : null,
                                     }}>
                             to demonstrate an exercise and include
                         </Typography>
@@ -155,7 +158,8 @@ export default function App() {
                                         my: 0.5,
                                         textAlign: isBigScreen ? 'left' : 'center',
                                         fontWeight: '400',
-                                        fontFamily: 'Montserrat'
+                                        fontFamily: 'Montserrat',
+                                        fontSize: !isBigScreen ? 14 : null,
                                     }}>
                             a description about it as well as the
                         </Typography>
@@ -164,7 +168,8 @@ export default function App() {
                                         my: 0.5,
                                         textAlign: isBigScreen ? 'left' : 'center',
                                         fontWeight: '400',
-                                        fontFamily: 'Montserrat'
+                                        fontFamily: 'Montserrat',
+                                        fontSize: !isBigScreen ? 14 : null,
                                     }}>
                             body parts trained and equipment used
                         </Typography>
@@ -186,6 +191,7 @@ export default function App() {
                                         textAlign: isBigScreen ? 'left' : 'center',
                                         fontWeight: '700',
                                         fontFamily: 'Montserrat',
+                                        fontSize: !isBigScreen ? 25 : null,
                                         marginBottom: 1
                                     }}
                                     style={{whiteSpace: 'pre-line'}}>
@@ -196,6 +202,7 @@ export default function App() {
                                         textAlign: isBigScreen ? 'left' : 'center',
                                         fontWeight: '700',
                                         fontFamily: 'Montserrat',
+                                        fontSize: !isBigScreen ? 25 : null,
                                         marginBottom: 1
                                     }}
                                     style={{whiteSpace: 'pre-line'}}>
@@ -206,7 +213,8 @@ export default function App() {
                                         my: 0.5,
                                         textAlign: isBigScreen ? 'left' : 'center',
                                         fontWeight: '400',
-                                        fontFamily: 'Montserrat'
+                                        fontFamily: 'Montserrat',
+                                        fontSize: !isBigScreen ? 14 : null,
                                     }}>
                             Curate various exercises into workouts
                         </Typography>
@@ -215,7 +223,8 @@ export default function App() {
                                         my: 0.5,
                                         textAlign: isBigScreen ? 'left' : 'center',
                                         fontWeight: '400',
-                                        fontFamily: 'Montserrat'
+                                        fontFamily: 'Montserrat',
+                                        fontSize: !isBigScreen ? 14 : null,
                                     }}>
                             of Circuits or Reps and Sets
                         </Typography>
@@ -233,7 +242,7 @@ export default function App() {
                                         textAlign: isBigScreen ? 'left' : 'center',
                                         fontWeight: '700',
                                         fontFamily: 'Montserrat',
-                                        marginBottom: 1
+                                        fontSize: !isBigScreen ? 25 : null,
                                     }}
                                     style={{whiteSpace: 'pre-line'}}>
                             Go live
@@ -243,7 +252,8 @@ export default function App() {
                                         my: 0.5,
                                         textAlign: isBigScreen ? 'left' : 'center',
                                         fontWeight: '400',
-                                        fontFamily: 'Montserrat'
+                                        fontFamily: 'Montserrat',
+                                        fontSize: !isBigScreen ? 14 : null,
                                     }}>
                             Launch your workouts to
                         </Typography>
@@ -451,6 +461,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center',
         width: '100%',
+        marginTop: -150,
     },
     containerSmall: {
         display: 'flex',
