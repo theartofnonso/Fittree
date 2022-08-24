@@ -65,7 +65,7 @@ export default function App() {
                     </Link>
                 </TouchableOpacity>
 
-                <View style={{marginBottom: isBigScreen ? 150 : 50}}>
+                <View style={{marginTop: 50, marginBottom: isBigScreen ? 150 : 50}}>
                     <View>
                         <Typography variant='h3'
                                     sx={{
@@ -140,7 +140,7 @@ export default function App() {
                                         fontFamily: 'Montserrat',
                                         fontSize: !isBigScreen ? 14 : null,
                                     }}>
-                            Shoot 5 seconds exercise videos
+                            Shoot 5 seconds videos
                         </Typography>
                         <Typography variant='body1'
                                     sx={{
@@ -150,27 +150,7 @@ export default function App() {
                                         fontFamily: 'Montserrat',
                                         fontSize: !isBigScreen ? 14 : null,
                                     }}>
-                            to demonstrate an exercise and include
-                        </Typography>
-                        <Typography variant='body1'
-                                    sx={{
-                                        my: 0.5,
-                                        textAlign: isBigScreen ? 'left' : 'center',
-                                        fontWeight: '400',
-                                        fontFamily: 'Montserrat',
-                                        fontSize: !isBigScreen ? 14 : null,
-                                    }}>
-                            a description about it as well as the
-                        </Typography>
-                        <Typography variant='body1'
-                                    sx={{
-                                        my: 0.5,
-                                        textAlign: isBigScreen ? 'left' : 'center',
-                                        fontWeight: '400',
-                                        fontFamily: 'Montserrat',
-                                        fontSize: !isBigScreen ? 14 : null,
-                                    }}>
-                            body parts trained and equipment used
+                            to demonstrate an exercise
                         </Typography>
                     </View>
                     <Image
@@ -187,7 +167,7 @@ export default function App() {
                     <View>
                         <Typography variant='h4'
                                     sx={{
-                                        textAlign: isBigScreen ? 'left' : 'center',
+                                        textAlign: isBigScreen ? 'right' : 'center',
                                         fontWeight: '700',
                                         fontFamily: 'Montserrat',
                                         fontSize: !isBigScreen ? 25 : null,
@@ -197,34 +177,34 @@ export default function App() {
                         </Typography>
                         <Typography variant='h4'
                                     sx={{
-                                        textAlign: isBigScreen ? 'left' : 'center',
+                                        textAlign: isBigScreen ? 'right' : 'center',
                                         fontWeight: '700',
                                         fontFamily: 'Montserrat',
                                         fontSize: !isBigScreen ? 25 : null,
                                         marginBottom: 1
                                     }}
                                     style={{whiteSpace: 'pre-line'}}>
-                            exercise videos
+                            into workouts
                         </Typography>
                         <Typography variant='body1'
                                     sx={{
                                         my: 0.5,
-                                        textAlign: isBigScreen ? 'left' : 'center',
+                                        textAlign: isBigScreen ? 'right' : 'center',
                                         fontWeight: '400',
                                         fontFamily: 'Montserrat',
                                         fontSize: !isBigScreen ? 14 : null,
                                     }}>
-                            Curate various exercises into workouts
+                            Curate various exercises into
                         </Typography>
                         <Typography variant='body1'
                                     sx={{
                                         my: 0.5,
-                                        textAlign: isBigScreen ? 'left' : 'center',
+                                        textAlign: isBigScreen ? 'right' : 'center',
                                         fontWeight: '400',
                                         fontFamily: 'Montserrat',
                                         fontSize: !isBigScreen ? 14 : null,
                                     }}>
-                            of Circuits or Reps and Sets
+                            workouts of Circuits or Reps and Sets
                         </Typography>
                     </View>
                     {!isBigScreen ? <Image
@@ -260,18 +240,10 @@ export default function App() {
                                         my: 0.5,
                                         textAlign: isBigScreen ? 'left' : 'center',
                                         fontWeight: '400',
-                                        fontFamily: 'Montserrat'
+                                        fontFamily: 'Montserrat',
+                                        fontSize: !isBigScreen ? 14 : null,
                                     }}>
                             your community and have them
-                        </Typography>
-                        <Typography variant='body1'
-                                    sx={{
-                                        my: 0.5,
-                                        textAlign: isBigScreen ? 'left' : 'center',
-                                        fontWeight: '400',
-                                        fontFamily: 'Montserrat'
-                                    }}>
-                            experience an improved workout
                         </Typography>
                     </View>
                     <Image
