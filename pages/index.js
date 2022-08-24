@@ -70,7 +70,6 @@ export default function App() {
                         <Typography variant='h3'
                                     sx={{
                                         textAlign: 'center',
-                                        my: 0.8,
                                         fontWeight: '700',
                                         fontSize: !isBigScreen ? 30 : null,
                                         fontFamily: 'Montserrat'
@@ -80,7 +79,7 @@ export default function App() {
                         <Typography variant='h3'
                                     sx={{
                                         textAlign: 'center',
-                                        my: 0.8,
+                                        marginBottom: 0.8,
                                         fontWeight: '700',
                                         fontSize: !isBigScreen ? 30 : null,
                                         fontFamily: 'Montserrat'
@@ -192,7 +191,6 @@ export default function App() {
                                         fontWeight: '700',
                                         fontFamily: 'Montserrat',
                                         fontSize: !isBigScreen ? 25 : null,
-                                        marginBottom: 1
                                     }}
                                     style={{whiteSpace: 'pre-line'}}>
                             Curate exercises
