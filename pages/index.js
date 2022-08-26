@@ -233,7 +233,7 @@ export default function App() {
                                         fontFamily: 'Montserrat',
                                         fontSize: !isBigScreen ? 14 : null,
                                     }}>
-                            Launch your workouts to
+                            Launch your workouts
                         </Typography>
                         <Typography variant='body1'
                                     sx={{
@@ -243,7 +243,7 @@ export default function App() {
                                         fontFamily: 'Montserrat',
                                         fontSize: !isBigScreen ? 14 : null,
                                     }}>
-                            your community and have them
+                            with an improved experience
                         </Typography>
                     </View>
                     <Image
