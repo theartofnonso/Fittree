@@ -39,7 +39,7 @@ const Socials = ({profile}) => {
             {/*    <TouchableOpacity style={{marginHorizontal: 6}}><SimpleLineIcons name="social-spotify" size={24}*/}
             {/*                                                                     color="#ef7a75"/></TouchableOpacity> : null}*/}
             {profile.tiktok ?
-                <TouchableOpacity style={{marginHorizontal: 8}}>
+                <TouchableOpacity style={{marginHorizontal: 5,}}>
                     <Link target="_blank" href={TIKTOK + profile.tiktok} sx={{textDecoration: 'none'}}
                           rel="noopener">
                         <TikTokSvg/>

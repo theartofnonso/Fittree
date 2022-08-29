@@ -52,8 +52,6 @@ export default function App() {
     //     padding: theme.spacing(2),
     // }));
 
-    const downloadText = `Are you a fitness influencer\nor creator with a brand to\nbuild? Then claim your\nFittree link here`;
-
     return (
         <View>
 
