@@ -44,7 +44,7 @@ const Socials = ({profile}) => {
                           rel="noopener">
                         <TikTokSvg/>
                     </Link>
-                </TouchableOpacity> : null}
+                </TouchableOpacity> : null}t
             {profile.youtube ?
                 <TouchableOpacity style={{marginHorizontal: 8}}>
                     <Link target="_blank" href={YOUTUBE + profile.youtube} sx={{textDecoration: 'none'}}
