@@ -91,7 +91,7 @@ export default function App() {
                                     textAlign: 'center',
                                     marginBottom: 5,
                                     fontWeight: '400',
-                                    fontSize: !isBigScreen ? 14 : null,
+                                    fontSize: !isBigScreen ? 13 : null,
                                     fontFamily: 'Montserrat'
                                 }}>
                         Create, share and play workouts on any device
@@ -104,6 +104,11 @@ export default function App() {
                             START FOR FREE
                         </Typography>
                     </TouchableOpacity>
+
+                    <Image
+                        source={require('../src/components/images/screenshot2.png')}
+                        style={styles.mocksImageHero}
+                    />
                 </View>
 
 
@@ -442,6 +447,12 @@ const styles = StyleSheet.create({
         height: 700,
         width: 300,
         resizeMode: 'contain',
+    },
+    mocksImageHero: {
+        height: 700,
+        width: 300,
+        resizeMode: 'contain',
+        margin: 'auto'
     },
     btnStyle: {
         alignItems: 'center',
