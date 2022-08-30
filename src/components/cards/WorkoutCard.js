@@ -23,7 +23,7 @@ const WorkoutCard = ({workout}) => {
             />
             <View style={styles.textContainer}>
                 <ThemeProvider theme={theme}>
-                    <Typography variant="h6" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 900}}>{workout.title}</Typography>
+                    <Typography variant="h6" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 500}}>{workout.title}</Typography>
                     <Typography variant="body2" color='#ffffff' sx={{fontFamily: 'Montserrat', fontWeight: 500, fontSize: 10}}>{workout.intensityLevel}</Typography>
                 </ThemeProvider>
             </View>
