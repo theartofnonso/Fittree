@@ -41,7 +41,6 @@ const WorkoutExerciseCard = props => {
                 }}
                 resizeMode="contain"
                 shouldPlay={true}
-                isMuted={true}
             />
             <View style={styles.textContainer}>
                 <ThemeProvider theme={theme}>
