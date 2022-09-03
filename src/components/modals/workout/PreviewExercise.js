@@ -57,7 +57,6 @@ const PreviewExercise = ({exercise, close}) => {
                                         resizeMode="contain"
                                         shouldPlay={true}
                                         isLooping={true}
-                                        isMuted={true}
                                     />
                                 );
                             })}

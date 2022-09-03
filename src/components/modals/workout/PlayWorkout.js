@@ -107,7 +107,6 @@ const PlayWorkout = props => {
                             resizeMode="contain"
                             shouldPlay={true}
                             isLooping={true}
-                            isMuted={true}
                         />
                     </View>
                     <View style={[isBigScreen ? styles.playInfoContainer : styles.playInfoContainerSmall]}>
