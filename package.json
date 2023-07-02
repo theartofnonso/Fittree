@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
-    "@expo/next-adapter": "~2.1.52"
+    "@expo/next-adapter": "~5.0.2"
   },
   "scripts": {
     "start": "next dev",
